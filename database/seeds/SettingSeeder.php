@@ -11,6 +11,6 @@ class SettingSeeder extends Seeder
      */
     public function run()
     {
-        //
+        factory(App\Models\Setting::class , 1 )->create();
     }
 }

@@ -7,6 +7,20 @@ use Illuminate\Http\Request;
 
 class PostController extends Controller
 {
+
+    public function getSliderPosts(){
+        
+    }
+
+    public function getPopularPosts(){
+
+    }
+
+    public function getRelatedPosts(){
+
+    }
+
+
     /**
      * Display a listing of the resource.
      *
