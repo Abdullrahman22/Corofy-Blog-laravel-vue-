@@ -25,6 +25,7 @@
     <div id="app" class="wrap">
 
       <header role="banner">
+
         <div class="top-bar">
           <div class="container">
             <div class="row">
@@ -86,6 +87,7 @@
 
           </div>
         </nav>
+        
       </header>
 
 
