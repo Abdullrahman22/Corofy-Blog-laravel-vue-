@@ -2219,6 +2219,15 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -2240,9 +2249,9 @@ __webpack_require__.r(__webpack_exports__);
     getPosts: function getPosts() {
       var _this = this;
 
-      axios.get("/api/lastedPosts") // .then( resquest => console.log(resquest) )    
+      axios.get("/api/lastedPosts") // .then( resquest => console.log( resquest.data.data ) )    
       .then(function (resquest) {
-        _this.posts = resquest.data;
+        _this.posts = resquest.data.data;
       }).then(function (error) {
         return console.log(error);
       });
@@ -38548,11 +38557,55 @@ var render = function() {
                     "div",
                     { staticClass: "row" },
                     _vm._l(_vm.posts, function(post) {
-                      return _c("div", { staticClass: "col-md-6" }, [
-                        _vm._v(
-                          "\n                            asf\n                        "
-                        )
-                      ])
+                      return _c(
+                        "div",
+                        { key: post.id, staticClass: "col-md-6" },
+                        [
+                          _c(
+                            "a",
+                            {
+                              staticClass: "blog-entry",
+                              attrs: {
+                                href: "/post/" + post.slug,
+                                "data-animate-effect": "fadeIn"
+                              }
+                            },
+                            [
+                              _c("img", {
+                                attrs: {
+                                  src: "images/" + post.img,
+                                  alt: "Image placeholder"
+                                }
+                              }),
+                              _vm._v(" "),
+                              _c("div", { staticClass: "blog-content-body" }, [
+                                _c("div", { staticClass: "post-meta" }, [
+                                  _c("span", { staticClass: "mr-2" }, [
+                                    _vm._v(" " + _vm._s(post.added_at) + "  ")
+                                  ]),
+                                  _vm._v(
+                                    " •\n                                        "
+                                  ),
+                                  _c("span", { staticClass: "ml-2" }, [
+                                    _c("span", {
+                                      staticClass: "fa fa-comments"
+                                    }),
+                                    _vm._v(
+                                      " " + _vm._s(post.comments_count) + " "
+                                    )
+                                  ])
+                                ]),
+                                _vm._v(" "),
+                                _c("h2", [
+                                  _vm._v(
+                                    _vm._s(post.body.substring(0, 40) + "...")
+                                  )
+                                ])
+                              ])
+                            ]
+                          )
+                        ]
+                      )
                     }),
                     0
                   ),

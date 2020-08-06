@@ -15,8 +15,17 @@
                 <div class="row blog-entries">
                     <div class="col-md-12 col-lg-8 main-content">
                         <div class="row">
-                            <div class="col-md-6" v-for="post in posts" >
-                                asf
+                            <div class="col-md-6" v-for="post in posts" :key="post.id" >
+                                <a :href=" '/post/' + post.slug " class="blog-entry" data-animate-effect="fadeIn">
+                                    <img :src=" 'images/' + post.img" alt="Image placeholder">
+                                    <div class="blog-content-body">
+                                        <div class="post-meta">
+                                            <span class="mr-2"> {{ post.added_at }}  </span> &bullet;
+                                            <span class="ml-2"><span class="fa fa-comments"></span> {{ post.comments_count }} </span>
+                                        </div>
+                                        <h2>{{post.body.substring(0, 40)  + '...' }}</h2>
+                                    </div>
+                                </a>
                             </div>
                         </div>
 
@@ -58,10 +67,10 @@
         methods:{
             getPosts(){
                 axios.get("/api/lastedPosts")
-                // .then( resquest => console.log(resquest) )    
+                // .then( resquest => console.log( resquest.data.data ) )    
                 .then( 
                     resquest => {  
-                        this.posts = resquest.data   
+                        this.posts = resquest.data.data   
                     }
                 )
                 .then( error => console.log(error) )

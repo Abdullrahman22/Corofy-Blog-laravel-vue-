@@ -18,7 +18,7 @@ class PostController extends Controller
     }
 
     public function get_Lasted_Posts(){
-        $posts = Post::orderBy('id' , "desc") ->  paginate(5);
+        $posts = Post::orderBy('id' , "desc") ->  paginate(10);
         foreach( $posts as $post ){
             $post -> setAttribute("comments_count" , $post -> comments-> count() );  
             $post -> setAttribute("added_at" , $post -> created_at -> diffForHumans() ); 
