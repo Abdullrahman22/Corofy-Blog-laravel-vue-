@@ -15,7 +15,7 @@
                 <div class="row blog-entries">
                     <div class="col-md-12 col-lg-8 main-content">
                         <div class="row">
-                            <div class="col-md-6" v-for="post in posts" :key="post.id" >
+                            <div class="col-md-6" v-for="post in posts.data" :key="post.id" >
                                 <a :href=" '/post/' + post.slug " class="blog-entry" data-animate-effect="fadeIn">
                                     <img :src=" 'images/' + post.img" alt="Image placeholder">
                                     <div class="blog-content-body">
@@ -30,7 +30,7 @@
                         </div>
 
                         <!-- pagination Component -->
-                        <pagination></pagination>
+                        <pagination :data="posts" @pagination-change-page="getLatestPosts"></pagination>
 
 
                     </div>
@@ -48,13 +48,11 @@
 <script>
 
     import Slider from './Slider'
-    import Pagination from './Pagination'
     import Sidebar from './Sidebar'
     export default {
         components:{
             Sidebar,
             Slider,
-            Pagination
         },
         data(){
             return{
@@ -62,15 +60,15 @@
             }
         },
         mounted() {
-            this.getPosts();
+            this.getLatestPosts();
         },
         methods:{
-            getPosts(){
-                axios.get("/api/lastedPosts")
+            getLatestPosts( page = 1 ){
+                axios.get('api/lastedPosts?page=' + page)
                 // .then( resquest => console.log( resquest.data.data ) )    
                 .then( 
                     resquest => {  
-                        this.posts = resquest.data.data   
+                        this.posts = resquest.data 
                     }
                 )
                 .then( error => console.log(error) )
