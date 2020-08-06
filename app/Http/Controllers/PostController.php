@@ -8,18 +8,23 @@ use Illuminate\Http\Request;
 class PostController extends Controller
 {
 
-    public function getSliderPosts(){
-        
+    public function get_Random_Posts(){
+        $posts = Post::inRandomOrder()->limit(9)->with("category" , "comments")->get();
+        foreach( $posts as $post ){
+            $post -> setAttribute("comments_count" , $post -> comments-> count() ); 
+            $post -> setAttribute("added_at" , $post -> created_at -> diffForHumans() ); 
+        }
+        return $posts ;
     }
 
-    public function getPopularPosts(){
-
+    public function get_Lasted_Posts(){
+        $posts = Post::orderBy('id' , "desc") ->  paginate(5);
+        foreach( $posts as $post ){
+            $post -> setAttribute("comments_count" , $post -> comments-> count() );  
+            $post -> setAttribute("added_at" , $post -> created_at -> diffForHumans() ); 
+        }
+        return $posts ;
     }
-
-    public function getRelatedPosts(){
-
-    }
-
 
     /**
      * Display a listing of the resource.

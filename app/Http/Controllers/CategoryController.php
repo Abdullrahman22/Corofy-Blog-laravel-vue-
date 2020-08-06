@@ -7,6 +7,18 @@ use Illuminate\Http\Request;
 
 class CategoryController extends Controller
 {
+
+
+    public function get_All_Categories(){
+        $categories =  Category::whereHas("posts")->get();
+        foreach( $categories as $category ){
+            $category -> setAttribute("posts_count" , $category -> posts -> count() );  
+        }
+        return $categories;  
+    }
+
+
+
     /**
      * Display a listing of the resource.
      *

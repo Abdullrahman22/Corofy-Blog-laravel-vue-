@@ -17,3 +17,11 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+/*===============  POSTS  ==================*/
+Route::get("randPosts", "PostController@get_Random_Posts");  // ==> ("/api/randPosts")
+Route::get("lastedPosts" , "PostController@get_Lasted_Posts");  // ==> ("/api/lastedPosts")
+
+
+/*===============  Categories  ==================*/
+Route::get("allCategories", "CategoryController@get_All_Categories");  // ==> ("/api/randPosts")

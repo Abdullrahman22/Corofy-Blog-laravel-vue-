@@ -11,3 +11,10 @@ header .blog-brand{
 #contact-page{
     padding-top: 40px;
 }
+.owl-theme .owl-dots .owl-dot span{
+    display: none !important;
+}
+.owl-theme .owl-nav [class*='owl-'] ,
+.owl-theme .owl-nav [class*='owl-'] :hover{
+    background-color: transparent !important;
+}

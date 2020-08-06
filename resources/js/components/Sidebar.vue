@@ -1,5 +1,6 @@
 <template>
     <div class="col-md-12 col-lg-4 sidebar">
+
         <!---- search-form --->
         <div class="sidebar-box search-form-wrap">
             <form action="#" class="search-form">
@@ -9,79 +10,87 @@
                 </div>
             </form>
         </div>
+
         <!-- Popular Posts -->  
         <div class="sidebar-box">
             <h3 class="heading">Popular Posts</h3>
             <div class="post-entry-sidebar">
-                <ul>
-                <li>
-                    <a href="">
-                    <img src="images/img_2.jpg" alt="Image placeholder" class="mr-4">
-                    <div class="text">
-                        <h4>How to Find the Video Games of Your Youth</h4>
-                        <div class="post-meta">
-                        <span class="mr-2">March 15, 2018 </span>
-                        </div>
-                    </div>
-                    </a>
-                </li>
-                <li>
-                    <a href="">
-                    <img src="images/img_4.jpg" alt="Image placeholder" class="mr-4">
-                    <div class="text">
-                        <h4>How to Find the Video Games of Your Youth</h4>
-                        <div class="post-meta">
-                        <span class="mr-2">March 15, 2018 </span>
-                        </div>
-                    </div>
-                    </a>
-                </li>
-                <li>
-                    <a href="">
-                    <img src="images/img_12.jpg" alt="Image placeholder" class="mr-4">
-                    <div class="text">
-                        <h4>How to Find the Video Games of Your Youth</h4>
-                        <div class="post-meta">
-                        <span class="mr-2">March 15, 2018 </span>
-                        </div>
-                    </div>
-                    </a>
-                </li>
+                <ul v-if=" posts.length > 0 ">
+                    <li v-for="post in posts.slice(3,6)" :key="post.id">
+                        <a :href=" '/post/' + post.slug ">
+                            <img :src=" 'images/' + post.img " alt="Image placeholder" class="mr-4">
+                            <div class="text">
+                                <h4>{{ post.title }}</h4>
+                                <div class="post-meta">
+                                <span class="mr-2"> {{post.added_at}}  </span>
+                                </div>
+                            </div>
+                        </a>
+                    </li>
                 </ul>
             </div>
         </div>
-        <!-- Categories -->  
 
+        <!-- Categories -->  
         <div class="sidebar-box">
             <h3 class="heading">Categories</h3>
             <ul class="categories">
-                <li><a href="#">Food <span>(12)</span></a></li>
-                <li><a href="#">Travel <span>(22)</span></a></li>
-                <li><a href="#">Lifestyle <span>(37)</span></a></li>
-                <li><a href="#">Business <span>(42)</span></a></li>
-                <li><a href="#">Adventure <span>(14)</span></a></li>
+                <li v-for=" category in categories " :key="category.id" >
+                    <a :href=" '/category' + category.slug ">
+                        {{ category.title }} <span>( {{ category.posts_count }} )</span>
+                    </a>
+                </li>
             </ul>
         </div>
-        <!-- Tages -->  
 
+        <!-- Tages -->  
         <div class="sidebar-box">
             <h3 class="heading">Tags</h3>
             <ul class="tags">
-                <li><a href="#">Travel</a></li>
-                <li><a href="#">Adventure</a></li>
-                <li><a href="#">Food</a></li>
-                <li><a href="#">Lifestyle</a></li>
-                <li><a href="#">Business</a></li>
-                <li><a href="#">Freelancing</a></li>
-                <li><a href="#">Travel</a></li>
+                <li v-for=" category in categories " :key="category.id">
+                    <a :href=" '/category' + category.slug "> {{ category.title }} </a>
+                </li>
             </ul>
         </div>
+
     </div>
 </template>
 
 <script>
 export default {
-    name: "Sidebar"
+    name: "Sidebar",
+    data(){
+        return{
+            posts: {},
+            categories: {},
+        }
+    },
+    mounted() {
+        this.getPosts() ;
+        this.getCategories() ;
+    },
+    methods:{
+        getPosts(){
+            axios.get("/api/randPosts")
+            // .then( resquest => console.log(resquest) )    
+            .then( 
+                resquest => {  
+                    this.posts = resquest.data   
+                }
+            )
+            .then( error => console.log(error) )
+        },
+        getCategories(){
+            axios.get("/api/allCategories")
+            // .then( resquest => console.log(resquest) )    
+            .then( 
+                resquest => {  
+                    this.categories = resquest.data   
+                }
+            )
+            .then( error => console.log(error) )
+        },
+    } 
 }
 </script>
 
