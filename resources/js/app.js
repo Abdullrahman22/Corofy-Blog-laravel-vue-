@@ -13,11 +13,14 @@ import routes from './routes'
 Vue.component('pagination', require('laravel-vue-pagination'));
 
 
+/*=============== const router ====================*/
 const router = new VueRouter({
     mode: "history",
     routes : routes   // OR only routes 
 })
 
+
+/*=============== Vue Instance ====================*/
 const app = new Vue({
     el: '#app',
     router

@@ -18,3 +18,12 @@ header .blog-brand{
 .owl-theme .owl-nav [class*='owl-'] :hover{
     background-color: transparent !important;
 }
+.a-block .text .post-meta{
+    letter-spacing: 0 !important;
+    font-size: 12px !important;
+}
+.comment-list li .vcard img{
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+}

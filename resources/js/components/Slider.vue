@@ -17,7 +17,7 @@
                     >
 
                         <div   v-for="post in posts.slice(0, 3) " :key="post.id"> 
-                            <a :href=" '/post/'+ post.slug " class="a-block d-flex align-items-center height-lg" :style=" 'background-image: url(\' images/'+ post.img  +'  \')' ">
+                            <a :href=" '/post/'+ post.slug " class="a-block d-flex align-items-center height-lg" :style=" 'background-image: url(\' /images/'+ post.img  +'  \')' ">
                                 <div class="text half-to-full">
                                     <span class="category mb-5"> {{ post.category.title }} </span>
                                     <div class="post-meta">

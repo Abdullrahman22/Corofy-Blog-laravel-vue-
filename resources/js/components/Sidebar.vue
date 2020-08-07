@@ -18,7 +18,7 @@
                 <ul v-if=" posts.length > 0 ">
                     <li v-for="post in posts.slice(3,6)" :key="post.id">
                         <a :href=" '/post/' + post.slug ">
-                            <img :src=" 'images/' + post.img " alt="Image placeholder" class="mr-4">
+                            <img :src=" '/images/' + post.img " alt="Image placeholder" class="mr-4">
                             <div class="text">
                                 <h4>{{ post.title }}</h4>
                                 <div class="post-meta">
