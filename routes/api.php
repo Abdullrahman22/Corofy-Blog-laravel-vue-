@@ -26,3 +26,4 @@ Route::get("category/post/{slug}" , "PostController@get_Related_Posts");   // ==
 
 /*===============  Categories  ==================*/
 Route::get("allCategories", "CategoryController@get_All_Categories");  // ==> ("/api/randPosts")
+Route::get("category/{slug}/posts" , "CategoryController@get_Category_Posts" );
