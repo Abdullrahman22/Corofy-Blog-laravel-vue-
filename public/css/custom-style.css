@@ -23,7 +23,14 @@ header .blog-brand{
     font-size: 12px !important;
 }
 .comment-list li .vcard img{
-    width: 60px;
-    height: 60px;
-    border-radius: 50%;
+    width: 60px !important;
+    height: 60px !important ;
+    border-radius: 50% !important;
+    -webkit-border-radius: 50% !important;
+    -moz-border-radius: 50% !important;
+    -ms-border-radius: 50% !important;
+    -o-border-radius: 50% !important;
+}
+.post-entry-horzontal a .text h2{
+    font-size: 28px !important;
 }

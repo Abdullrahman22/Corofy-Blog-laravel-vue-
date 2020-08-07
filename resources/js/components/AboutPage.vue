@@ -22,160 +22,33 @@
                             <div class="col-md-12 mb-5">
                                 <h2>My Latest Posts</h2>
                             </div>
-                            <div class="col-md-12">
-
-                                <div class="post-entry-horzontal">
-                                <a href="blog-single.html">
-                                    <div class="image" style="background-image: url(images/img_10.jpg);"></div>
-                                    <span class="text">
-                                    <div class="post-meta">
-                                        <span class="author mr-2"><img src="images/person_1.jpg" alt="Colorlib"> Colorlib</span>&bullet;
-                                        <span class="mr-2">March 15, 2018 </span> &bullet;
-                                        <span class="ml-2"><span class="fa fa-comments"></span> 3</span>
-                                    </div>
-                                    <h2>There’s a Cool New Way for Men to Wear Socks and Sandals</h2>
-                                    </span>
-                                </a>
+                            <!-------------------- Post ---------------------->
+                            <div class="col-md-12" >
+                                <div class="post-entry-horzontal" v-for="post in posts" :key="post.id">
+                                    <a :href=" '/post/' + post.slug " style="width: 100%;">
+                                        <div class="image" :style=" 'background-image: url(\' /images/'+ post.img  +'  \')' "></div>
+                                        <span class="text">
+                                            <div class="post-meta">
+                                                <span class="mr-2"> {{ post.added_at }} </span> &bullet;
+                                                <span class="ml-2"><span class="fa fa-comments"></span> {{ post.comments_count }} </span>
+                                            </div>
+                                            <h1>{{ post.title }} </h1>
+                                        </span>
+                                    </a>
                                 </div>
-                                <!-- END post -->
-
-                                <div class="post-entry-horzontal">
-                                <a href="blog-single.html">
-                                    <div class="image" style="background-image: url(images/img_11.jpg);"></div>
-                                    <span class="text">
-                                    <div class="post-meta">
-                                        <span class="author mr-2"><img src="images/person_1.jpg" alt="Colorlib"> Colorlib</span>&bullet;
-                                        <span class="mr-2">March 15, 2018 </span> &bullet;
-                                        <span class="ml-2"><span class="fa fa-comments"></span> 3</span>
-                                    </div>
-                                    <h2>There’s a Cool New Way for Men to Wear Socks and Sandals</h2>
-                                    </span>
-                                </a>
-                                </div>
-                                <!-- END post -->
-
-                                <div class="post-entry-horzontal">
-                                <a href="blog-single.html">
-                                    <div class="image" style="background-image: url(images/img_12.jpg);"></div>
-                                    <span class="text">
-                                    <div class="post-meta">
-                                        <span class="author mr-2"><img src="images/person_1.jpg" alt="Colorlib"> Colorlib</span>&bullet;
-                                        <span class="mr-2">March 15, 2018 </span> &bullet;
-                                        <span class="ml-2"><span class="fa fa-comments"></span> 3</span>
-                                    </div>
-                                    <h2>There’s a Cool New Way for Men to Wear Socks and Sandals</h2>
-                                    </span>
-                                </a>
-                                </div>
-                                <!-- END post -->
-
-                                <div class="post-entry-horzontal">
-                                <a href="blog-single.html">
-                                    <div class="image" style="background-image: url(images/img_9.jpg);"></div>
-                                    <span class="text">
-                                    <div class="post-meta">
-                                        <span class="author mr-2"><img src="images/person_1.jpg" alt="Colorlib"> Colorlib</span>&bullet;
-                                        <span class="mr-2">March 15, 2018 </span> &bullet;
-                                        <span class="ml-2"><span class="fa fa-comments"></span> 3</span>
-                                    </div>
-                                    <h2>There’s a Cool New Way for Men to Wear Socks and Sandals</h2>
-                                    </span>
-                                </a>
-                                </div>
-                                <!-- END post -->
-
-                                <div class="post-entry-horzontal">
-                                <a href="blog-single.html">
-                                    <div class="image" style="background-image: url(images/img_8.jpg);"></div>
-                                    <span class="text">
-                                    <div class="post-meta">
-                                        <span class="author mr-2"><img src="images/person_1.jpg" alt="Colorlib"> Colorlib</span>&bullet;
-                                        <span class="mr-2">March 15, 2018 </span> &bullet;
-                                        <span class="ml-2"><span class="fa fa-comments"></span> 3</span>
-                                    </div>
-                                    <h2>There’s a Cool New Way for Men to Wear Socks and Sandals</h2>
-                                    </span>
-                                </a>
-                                </div>
-                                <!-- END post -->
-
-                                <div class="post-entry-horzontal">
-                                <a href="blog-single.html">
-                                    <div class="image" style="background-image: url(images/img_7.jpg);"></div>
-                                    <span class="text">
-                                    <div class="post-meta">
-                                        <span class="author mr-2"><img src="images/person_1.jpg" alt="Colorlib"> Colorlib</span>&bullet;
-                                        <span class="mr-2">March 15, 2018 </span> &bullet;
-                                        <span class="ml-2"><span class="fa fa-comments"></span> 3</span>
-                                    </div>
-                                    <h2>There’s a Cool New Way for Men to Wear Socks and Sandals</h2>
-                                    </span>
-                                </a>
-                                </div>
-                                <!-- END post -->
-
-                                <div class="post-entry-horzontal">
-                                <a href="blog-single.html">
-                                    <div class="image" style="background-image: url(images/img_6.jpg);"></div>
-                                    <span class="text">
-                                    <div class="post-meta">
-                                        <span class="author mr-2"><img src="images/person_1.jpg" alt="Colorlib"> Colorlib</span>&bullet;
-                                        <span class="mr-2">March 15, 2018 </span> &bullet;
-                                        <span class="ml-2"><span class="fa fa-comments"></span> 3</span>
-                                    </div>
-                                    <h2>There’s a Cool New Way for Men to Wear Socks and Sandals</h2>
-                                    </span>
-                                </a>
-                                </div>
-                                <!-- END post -->
-
-                                <div class="post-entry-horzontal">
-                                <a href="blog-single.html">
-                                    <div class="image" style="background-image: url(images/img_5.jpg);"></div>
-                                    <span class="text">
-                                    <div class="post-meta">
-                                        <span class="author mr-2"><img src="images/person_1.jpg" alt="Colorlib"> Colorlib</span>&bullet;
-                                        <span class="mr-2">March 15, 2018 </span> &bullet;
-                                        <span class="ml-2"><span class="fa fa-comments"></span> 3</span>
-                                    </div>
-                                    <h2>There’s a Cool New Way for Men to Wear Socks and Sandals</h2>
-                                    </span>
-                                </a>
-                                </div>
-                                <!-- END post -->
-
-                                <div class="post-entry-horzontal">
-                                <a href="blog-single.html">
-                                    <div class="image" style="background-image: url(images/img_4.jpg);"></div>
-                                    <span class="text">
-                                    <div class="post-meta">
-                                        <span class="author mr-2"><img src="images/person_1.jpg" alt="Colorlib"> Colorlib</span>&bullet;
-                                        <span class="mr-2">March 15, 2018 </span> &bullet;
-                                        <span class="ml-2"><span class="fa fa-comments"></span> 3</span>
-                                    </div>
-                                    <h2>There’s a Cool New Way for Men to Wear Socks and Sandals</h2>
-                                    </span>
-                                </a>
-                                </div>
-                                <!-- END post -->
 
                             </div>
                         </div>
 
-                        
-
-                        
 
                     </div>
 
-                
                     <!-- sidebar Component -->
                     <sidebar></sidebar>
 
                 </div>
-      </div>
-    </section>
-
+            </div>
+        </section>
     </div>
 </template>
 <script>
@@ -184,6 +57,26 @@
     export default {
         components:{
             Sidebar,
+        },
+        data(){
+            return{
+                posts: {}
+            }
+        },
+        mounted() {
+            this.getLatestPosts();
+        },
+        methods:{
+            getLatestPosts(){
+                axios.get('api/lastedPosts')
+                // .then( resquest => console.log( resquest.data.data ) )    
+                .then( 
+                    resquest => {  
+                        this.posts = resquest.data.data 
+                    }
+                )
+                .then( error => console.log(error) )
+            },
         }
     }
     

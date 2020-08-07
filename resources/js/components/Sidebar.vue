@@ -36,7 +36,7 @@
             <h3 class="heading">Categories</h3>
             <ul class="categories">
                 <li v-for=" category in categories " :key="category.id" >
-                    <a :href=" '/category' + category.slug ">
+                    <a :href=" '/category/' + category.slug ">
                         {{ category.title }} <span>( {{ category.posts_count }} )</span>
                     </a>
                 </li>
@@ -48,7 +48,7 @@
             <h3 class="heading">Tags</h3>
             <ul class="tags">
                 <li v-for=" category in categories " :key="category.id">
-                    <a :href=" '/category' + category.slug "> {{ category.title }} </a>
+                    <a :href=" '/category/' + category.slug "> {{ category.title }} </a>
                 </li>
             </ul>
         </div>

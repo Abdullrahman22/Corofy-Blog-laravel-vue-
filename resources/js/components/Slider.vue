@@ -17,7 +17,7 @@
                     >
 
                         <div   v-for="post in posts.slice(0, 3) " :key="post.id"> 
-                            <a :href=" '/post/'+ post.slug " class="a-block d-flex align-items-center height-lg" :style=" 'background-image: url(\' /images/'+ post.img  +'  \')' ">
+                            <router-link :to=" '/post/'+ post.slug " class="a-block d-flex align-items-center height-lg" :style=" 'background-image: url(\' /images/'+ post.img  +'  \')' ">
                                 <div class="text half-to-full">
                                     <span class="category mb-5"> {{ post.category.title }} </span>
                                     <div class="post-meta">
@@ -27,7 +27,7 @@
                                     <h3> {{post.title}} </h3>
                                     <p> {{post.body.substring(0, 100)  + '...' }} </p>
                                 </div>
-                            </a>
+                            </router-link>
                         </div>
 
 
