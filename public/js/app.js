@@ -54931,8 +54931,14 @@ Vue.component('pagination', __webpack_require__(/*! laravel-vue-pagination */ ".
 
 var router = new vue_router__WEBPACK_IMPORTED_MODULE_0__["default"]({
   mode: "history",
-  routes: _routes__WEBPACK_IMPORTED_MODULE_1__["default"] // OR only routes 
-
+  routes: _routes__WEBPACK_IMPORTED_MODULE_1__["default"],
+  // OR only routes in ES6
+  scrollBehavior: function scrollBehavior(to, from, savedPosition) {
+    return {
+      x: 0,
+      y: 0
+    }; // at click router link vuejs go top page "vue router scroll behavior"
+  }
 });
 /*=============== Vue Instance ====================*/
 

@@ -16,7 +16,10 @@ Vue.component('pagination', require('laravel-vue-pagination'));
 /*=============== const router ====================*/
 const router = new VueRouter({
     mode: "history",
-    routes : routes   // OR only routes 
+    routes : routes ,  // OR only routes in ES6
+    scrollBehavior (to, from, savedPosition) {
+        return { x: 0, y: 0 }   // at click router link vuejs go top page "vue router scroll behavior"
+    }
 })
 
 
