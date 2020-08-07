@@ -14,7 +14,7 @@ $factory->define(Post::class, function (Faker $faker) {
     return [
         "title"       => $title ,
         "slug"        => $slug  ,
-        "body"        => $faker -> sentence(50) ,
+        "body"        => $faker -> sentence(300) ,
         'img' => "img_" . rand(1,10) . ".jpg",   // img_10.jpg   
         "category_id" => rand(1,10),  // num of categories
     ];

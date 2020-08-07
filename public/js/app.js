@@ -38960,7 +38960,7 @@ var render = function() {
                   ),
                   _vm._v(" "),
                   _c("pagination", {
-                    attrs: { data: _vm.posts },
+                    attrs: { data: _vm.posts, limit: 3 },
                     on: { "pagination-change-page": _vm.getLatestPosts }
                   })
                 ],

@@ -30,7 +30,7 @@
                         </div>
 
                         <!-- pagination Component -->
-                        <pagination :data="posts" @pagination-change-page="getLatestPosts"></pagination>
+                        <pagination :data="posts" @pagination-change-page="getLatestPosts" :limit="3" ></pagination>
 
 
                     </div>

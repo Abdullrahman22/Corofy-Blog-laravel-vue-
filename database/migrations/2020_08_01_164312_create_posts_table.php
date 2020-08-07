@@ -17,7 +17,7 @@ class CreatePostsTable extends Migration
             $table->id();
             $table->string('title', 50)->charset('utf8');
             $table->string('slug', 50)->charset('utf8');
-            $table->string('body', 750)->charset('utf8');
+            $table->string('body', 5000)->charset('utf8');
             $table->string('img', 500)->charset('utf8');
             $table->unsignedBigInteger('category_id');	
             $table->timestamps();
