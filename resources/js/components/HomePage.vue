@@ -16,7 +16,7 @@
                     <div class="col-md-12 col-lg-8 main-content">
                         <div class="row">
                             <div class="col-md-6" v-for="post in posts.data" :key="post.id" >
-                                <a :href=" '/post/' + post.slug " class="blog-entry" data-animate-effect="fadeIn">
+                                <router-link :to=" '/post/' + post.slug " class="blog-entry" data-animate-effect="fadeIn">
                                     <img :src=" 'images/' + post.img" alt="Image placeholder">
                                     <div class="blog-content-body">
                                         <div class="post-meta">
@@ -25,7 +25,7 @@
                                         </div>
                                         <h2>{{post.body.substring(0, 40)  + '...' }}</h2>
                                     </div>
-                                </a>
+                                </router-link>
                             </div>
                         </div>
 

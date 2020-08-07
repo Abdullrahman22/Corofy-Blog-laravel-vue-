@@ -17,7 +17,7 @@
             <div class="post-entry-sidebar">
                 <ul v-if=" posts.length > 0 ">
                     <li v-for="post in posts.slice(3,6)" :key="post.id">
-                        <a :href=" '/post/' + post.slug ">
+                        <router-link :to=" '/post/' + post.slug ">
                             <img :src=" '/images/' + post.img " alt="Image placeholder" class="mr-4">
                             <div class="text">
                                 <h4>{{ post.title }}</h4>
@@ -25,7 +25,7 @@
                                 <span class="mr-2"> {{post.added_at}}  </span>
                                 </div>
                             </div>
-                        </a>
+                        </router-link>
                     </li>
                 </ul>
             </div>
@@ -36,9 +36,9 @@
             <h3 class="heading">Categories</h3>
             <ul class="categories">
                 <li v-for=" category in categories " :key="category.id" >
-                    <a :href=" '/category/' + category.slug ">
+                    <router-link :to=" '/category/' + category.slug ">
                         {{ category.title }} <span>( {{ category.posts_count }} )</span>
-                    </a>
+                    </router-link>
                 </li>
             </ul>
         </div>
@@ -48,7 +48,7 @@
             <h3 class="heading">Tags</h3>
             <ul class="tags">
                 <li v-for=" category in categories " :key="category.id">
-                    <a :href=" '/category/' + category.slug "> {{ category.title }} </a>
+                    <router-link :to=" '/category/' + category.slug "> {{ category.title }} </router-link>
                 </li>
             </ul>
         </div>

@@ -2269,6 +2269,12 @@ __webpack_require__.r(__webpack_exports__);
       relatedPosts: {}
     };
   },
+  watch: {
+    $route: function $route() {
+      // watch $route if any changes
+      this.getPost();
+    }
+  },
   mounted: function mounted() {
     this.getPost();
     this.getRelatedPosts(); // console.log( this.$route );  // console $route for test
@@ -38904,11 +38910,11 @@ var render = function() {
                         { key: post.id, staticClass: "col-md-6" },
                         [
                           _c(
-                            "a",
+                            "router-link",
                             {
                               staticClass: "blog-entry",
                               attrs: {
-                                href: "/post/" + post.slug,
+                                to: "/post/" + post.slug,
                                 "data-animate-effect": "fadeIn"
                               }
                             },
@@ -38946,7 +38952,8 @@ var render = function() {
                               ])
                             ]
                           )
-                        ]
+                        ],
+                        1
                       )
                     }),
                     0
@@ -39011,50 +39018,57 @@ var render = function() {
           { staticClass: "row blog-entries element-animate" },
           [
             _c("div", { staticClass: "col-md-12 col-lg-8 main-content" }, [
-              _c("div", { staticClass: "post-details" }, [
-                _c("img", {
-                  staticClass: "img-fluid mb-5",
-                  attrs: { src: "/images/" + _vm.post.img, alt: "Image" }
-                }),
-                _vm._v(" "),
-                _c("div", { staticClass: "post-meta" }, [
-                  _c("span", { staticClass: "mr-2" }, [
-                    _vm._v(" " + _vm._s(_vm.post.added_at) + " ")
-                  ]),
-                  _vm._v(" •\n                            "),
-                  _c("span", { staticClass: "ml-2" }, [
-                    _c("span", { staticClass: "fa fa-comments" }),
-                    _vm._v(" " + _vm._s(_vm.post.comments_count) + " ")
-                  ])
-                ]),
-                _vm._v(" "),
-                _c("h1", { staticClass: "mb-4" }, [
-                  _vm._v(_vm._s(_vm.post.title))
-                ]),
-                _vm._v(" "),
-                _vm.post.category
-                  ? _c(
-                      "a",
-                      {
-                        staticClass: "category mb-5",
-                        attrs: { href: "/category/" + _vm.post.category.slug }
-                      },
-                      [_vm._v("  " + _vm._s(_vm.post.category.title) + "  ")]
-                    )
-                  : _vm._e(),
-                _vm._v(" "),
-                _c("div", { staticClass: "post-content-body" }, [
-                  _c("p", [_vm._v(_vm._s(_vm.post.body))])
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "pt-5" }, [
-                  _c("h3", { staticClass: "mb-5 comments-header" }, [
-                    _vm._v(" " + _vm._s(_vm.post.comments_count) + "  Comments")
+              _c(
+                "div",
+                { staticClass: "post-details" },
+                [
+                  _c("img", {
+                    staticClass: "img-fluid mb-5",
+                    attrs: { src: "/images/" + _vm.post.img, alt: "Image" }
+                  }),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "post-meta" }, [
+                    _c("span", { staticClass: "mr-2" }, [
+                      _vm._v(" " + _vm._s(_vm.post.added_at) + " ")
+                    ]),
+                    _vm._v(" •\n                            "),
+                    _c("span", { staticClass: "ml-2" }, [
+                      _c("span", { staticClass: "fa fa-comments" }),
+                      _vm._v(" " + _vm._s(_vm.post.comments_count) + " ")
+                    ])
                   ]),
                   _vm._v(" "),
-                  _c("hr")
-                ])
-              ]),
+                  _c("h1", { staticClass: "mb-4" }, [
+                    _vm._v(_vm._s(_vm.post.title))
+                  ]),
+                  _vm._v(" "),
+                  _vm.post.category
+                    ? _c(
+                        "router-link",
+                        {
+                          staticClass: "category mb-5",
+                          attrs: { to: "/category/" + _vm.post.category.slug }
+                        },
+                        [_vm._v("  " + _vm._s(_vm.post.category.title) + "  ")]
+                      )
+                    : _vm._e(),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "post-content-body" }, [
+                    _c("p", [_vm._v(_vm._s(_vm.post.body))])
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "pt-5" }, [
+                    _c("h3", { staticClass: "mb-5 comments-header" }, [
+                      _vm._v(
+                        " " + _vm._s(_vm.post.comments_count) + "  Comments"
+                      )
+                    ]),
+                    _vm._v(" "),
+                    _c("hr")
+                  ])
+                ],
+                1
+              ),
               _vm._v(" "),
               _c(
                 "ul",
@@ -39107,13 +39121,13 @@ var render = function() {
               { key: post.id, staticClass: "col-md-6 col-lg-4" },
               [
                 _c(
-                  "a",
+                  "router-link",
                   {
                     staticClass:
                       "a-block sm d-flex align-items-center height-md",
                     style:
                       "background-image: url(' /images/" + post.img + "  ')",
-                    attrs: { href: "/post/" + post.slug }
+                    attrs: { to: "/post/" + post.slug }
                   },
                   [
                     _c("div", { staticClass: "text" }, [
@@ -39125,7 +39139,7 @@ var render = function() {
                         _c("span", { staticClass: "mr-2" }, [
                           _vm._v("  " + _vm._s(post.added_at) + "  ")
                         ]),
-                        _vm._v(" •\n                                "),
+                        _vm._v(" "),
                         _c("span", { staticClass: "ml-2" }, [
                           _c("span", { staticClass: "fa fa-comments" }),
                           _vm._v(" " + _vm._s(post.comments_count) + " ")
@@ -39136,7 +39150,8 @@ var render = function() {
                     ])
                   ]
                 )
-              ]
+              ],
+              1
             )
           }),
           0
@@ -39215,27 +39230,32 @@ var render = function() {
           ? _c(
               "ul",
               _vm._l(_vm.posts.slice(3, 6), function(post) {
-                return _c("li", { key: post.id }, [
-                  _c("a", { attrs: { href: "/post/" + post.slug } }, [
-                    _c("img", {
-                      staticClass: "mr-4",
-                      attrs: {
-                        src: "/images/" + post.img,
-                        alt: "Image placeholder"
-                      }
-                    }),
-                    _vm._v(" "),
-                    _c("div", { staticClass: "text" }, [
-                      _c("h4", [_vm._v(_vm._s(post.title))]),
+                return _c(
+                  "li",
+                  { key: post.id },
+                  [
+                    _c("router-link", { attrs: { to: "/post/" + post.slug } }, [
+                      _c("img", {
+                        staticClass: "mr-4",
+                        attrs: {
+                          src: "/images/" + post.img,
+                          alt: "Image placeholder"
+                        }
+                      }),
                       _vm._v(" "),
-                      _c("div", { staticClass: "post-meta" }, [
-                        _c("span", { staticClass: "mr-2" }, [
-                          _vm._v(" " + _vm._s(post.added_at) + "  ")
+                      _c("div", { staticClass: "text" }, [
+                        _c("h4", [_vm._v(_vm._s(post.title))]),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "post-meta" }, [
+                          _c("span", { staticClass: "mr-2" }, [
+                            _vm._v(" " + _vm._s(post.added_at) + "  ")
+                          ])
                         ])
                       ])
                     ])
-                  ])
-                ])
+                  ],
+                  1
+                )
               }),
               0
             )
@@ -39250,12 +39270,25 @@ var render = function() {
         "ul",
         { staticClass: "categories" },
         _vm._l(_vm.categories, function(category) {
-          return _c("li", { key: category.id }, [
-            _c("a", { attrs: { href: "/category/" + category.slug } }, [
-              _vm._v("\n                    " + _vm._s(category.title) + " "),
-              _c("span", [_vm._v("( " + _vm._s(category.posts_count) + " )")])
-            ])
-          ])
+          return _c(
+            "li",
+            { key: category.id },
+            [
+              _c(
+                "router-link",
+                { attrs: { to: "/category/" + category.slug } },
+                [
+                  _vm._v(
+                    "\n                    " + _vm._s(category.title) + " "
+                  ),
+                  _c("span", [
+                    _vm._v("( " + _vm._s(category.posts_count) + " )")
+                  ])
+                ]
+              )
+            ],
+            1
+          )
         }),
         0
       )
@@ -39268,11 +39301,18 @@ var render = function() {
         "ul",
         { staticClass: "tags" },
         _vm._l(_vm.categories, function(category) {
-          return _c("li", { key: category.id }, [
-            _c("a", { attrs: { href: "/category/" + category.slug } }, [
-              _vm._v(" " + _vm._s(category.title) + " ")
-            ])
-          ])
+          return _c(
+            "li",
+            { key: category.id },
+            [
+              _c(
+                "router-link",
+                { attrs: { to: "/category/" + category.slug } },
+                [_vm._v(" " + _vm._s(category.title) + " ")]
+              )
+            ],
+            1
+          )
         }),
         0
       )

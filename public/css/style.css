@@ -1279,9 +1279,9 @@ blockquote {
 .copyright {
   font-size: 14px; }
 
-.element-animate {
+/* .element-animate {
   opacity: 0;
-  visibility: hidden; }
+  visibility: hidden; } */
 
 #loader {
   position: fixed;

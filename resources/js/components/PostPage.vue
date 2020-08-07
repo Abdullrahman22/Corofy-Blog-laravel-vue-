@@ -16,7 +16,7 @@
                                 <span class="ml-2"><span class="fa fa-comments"></span> {{ post.comments_count }} </span>
                             </div>
                             <h1 class="mb-4">{{ post.title }}</h1>
-                            <a class="category mb-5"  v-if="post.category" :href=" '/category/' + post.category.slug ">  {{ post.category.title }}  </a>
+                            <router-link class="category mb-5"  v-if="post.category" :to=" '/category/' + post.category.slug ">  {{ post.category.title }}  </router-link>
                             <div class="post-content-body">
                                 <p>{{post.body}}</p>
                             </div>
@@ -73,16 +73,16 @@
                 </div>
                 <div class="row">
                     <div class="col-md-6 col-lg-4" v-for="post in relatedPosts" :key="post.id">
-                        <a :href=" '/post/' + post.slug " class="a-block sm d-flex align-items-center height-md" :style=" 'background-image: url(\' /images/'+ post.img  +'  \')' ">
+                        <router-link :to=" '/post/' + post.slug " class="a-block sm d-flex align-items-center height-md" :style=" 'background-image: url(\' /images/'+ post.img  +'  \')' ">
                             <div class="text">
                                 <div class="post-meta">
                                     <span class="category"> {{ post.category_title }} </span>
-                                    <span class="mr-2">  {{ post.added_at }}  </span> &bullet;
+                                    <span class="mr-2">  {{ post.added_at }}  </span> 
                                     <span class="ml-2"><span class="fa fa-comments"></span> {{ post.comments_count }} </span>
                                 </div>
                                 <h3> {{ post.title }} </h3>
                             </div>
-                        </a>
+                        </router-link>
                     </div>
                 </div>
             </div>
@@ -105,6 +105,11 @@
                 post: {},
                 comments: {},
                 relatedPosts: {}
+            }
+        },
+        watch: {
+            $route: function() {  // watch $route if any changes
+                this.getPost();
             }
         },
         mounted() {
