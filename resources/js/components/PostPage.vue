@@ -6,8 +6,11 @@
                     
                 <div class="row blog-entries element-animate">
 
+                    <!------------ searching Posts ----------------->
+                    <searching :searchVal="searchVal" v-if="searchVal"></searching>
+
                     <!----------------- post-details ---------------------->
-                    <div class="col-md-12 col-lg-8 main-content">
+                    <div class="col-md-12 col-lg-8 main-content" v-else >
                         <!----------------- post-body ---------------------->
                         <div class="post-details">
                             <img :src=" '/images/' + post.img " alt="Image" class="img-fluid mb-5">
@@ -95,16 +98,23 @@
 
 <script>
     import Sidebar from './Sidebar'
+    import Searching from './Searching'
 
     export default {
         components:{
             Sidebar,
+            Searching
         },
         data(){
             return{
                 post: {},
                 comments: {},
                 relatedPosts: {}
+            }
+        },
+        computed: {
+            searchVal: function() {
+                return this.$store.state.searchVal;
             }
         },
         watch: {
@@ -134,7 +144,7 @@
                 .then( 
                     resquest => {  
                         this.relatedPosts = resquest.data 
-                        console.log(resquest.data);
+                        // console.log(resquest.data);
                     }
                 )
                 .then( error => console.log(error) )

@@ -22,7 +22,8 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 Route::get("randPosts", "PostController@get_Random_Posts");  // ==> ("/api/randPosts")
 Route::get("lastedPosts" , "PostController@get_Lasted_Posts");  // ==> ("/api/lastedPosts")
 Route::get("post/{slug}", "PostController@show");  // ==> ("api/post/{slug}")
-Route::get("category/post/{slug}" , "PostController@get_Related_Posts");   // ==> ("category/post/{slug}")
+Route::get("category/post/{slug}" , "PostController@get_Related_Posts");   // ==> ("api/category/post/{slug}")
+Route::get("search/posts/{searchVal}" , "PostController@search_Posts");    // ==> ("api/search/posts/{searchVal}")
 
 /*===============  Categories  ==================*/
 Route::get("allCategories", "CategoryController@get_All_Categories");  // ==> ("/api/randPosts")

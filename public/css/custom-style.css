@@ -46,3 +46,26 @@ header .blog-brand{
     color: #fff;
     background: #6610f2;
 }
+.search-form .form-group{
+    overflow: hidden;
+}
+.fa.fa-search{
+    float: right;
+    background-color: #fff;
+    padding: 5px 7px;
+    right: 4px;
+}
+#search-posts{
+    padding-right: 40px;
+}
+.no-resultes{
+    margin: 30px auto;
+}
+.no-resultes img{
+    max-width: 400px
+}
+.no-resultes > p{
+    font-weight: bolder;
+    color: #000;
+    font-size: 24px;
+}

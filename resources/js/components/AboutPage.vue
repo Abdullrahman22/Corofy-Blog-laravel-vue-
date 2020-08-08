@@ -5,7 +5,12 @@
             <div class="container">
                 
                 <div class="row blog-entries">
-                    <div class="col-md-12 col-lg-8 main-content">
+
+                    <!------------ searching Posts ----------------->
+                    <searching :searchVal="searchVal" v-if="searchVal"></searching>
+
+                    <!------------ About Content ----------------->
+                    <div class="col-md-12 col-lg-8 main-content" v-else>
                         
                         <div class="row">
                             <div class="col-md-12">
@@ -54,13 +59,20 @@
 <script>
 
     import Sidebar from './Sidebar'
+    import Searching from './Searching'
     export default {
         components:{
             Sidebar,
+            Searching,
         },
         data(){
             return{
                 posts: {}
+            }
+        },
+        computed: {
+            searchVal: function() {
+                return this.$store.state.searchVal;
             }
         },
         mounted() {

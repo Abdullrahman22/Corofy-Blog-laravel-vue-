@@ -3,15 +3,16 @@
 
 
 
-        <section class="site-section py-sm">
+        <section class="site-section py-sm mt-4">
             <div class="container">
-                <div class="row">
-                    <div class="col-md-6">
-                        <h4 class="mb-4 mt-4 category-title"> {{ categoryTitle() }} </h4>
-                    </div>
-                </div>
                 <div class="row blog-entries">
-                    <div class="col-md-12 col-lg-8 main-content">
+
+                    <!------------ searching Posts ----------------->
+                    <searching :searchVal="searchVal" v-if="searchVal"></searching>
+
+                    <!------------ Category Posts ----------------->
+                    <div class="col-md-12 col-lg-8 main-content" v-else >
+                        <h4 class="mb-4 mt-4 category-title"> {{ categoryTitle() }} </h4>
                         <div class="row">
                             <div class="col-md-6" v-for="post in posts.data" :key="post.id" >
                                 <router-link :to=" '/post/' + post.slug " class="blog-entry" data-animate-effect="fadeIn">
@@ -46,13 +47,20 @@
 <script>
 
     import Sidebar from './Sidebar'
+    import Searching from './Searching'
     export default {
         components:{
             Sidebar,
+            Searching
         },
         data(){
             return{
                 posts: {},
+            }
+        },
+        computed: {
+            searchVal: function() {
+                return this.$store.state.searchVal;
             }
         },
         watch: {

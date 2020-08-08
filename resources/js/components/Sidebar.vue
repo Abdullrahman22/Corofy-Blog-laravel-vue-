@@ -3,10 +3,10 @@
 
         <!---- search-form --->
         <div class="sidebar-box search-form-wrap">
-            <form action="#" class="search-form">
+            <form class="search-form" @submit.prevent="searchNow" disabled>
                 <div class="form-group">
-                    <span class="icon fa fa-search"></span>
-                    <input type="text" class="form-control" id="s" placeholder="Search Posts.....">
+                    <span class="icon fa fa-search" @click.prevent="searchNow" ></span>
+                    <input type="text" class="form-control" id="search-posts" placeholder="Search Posts....." v-model="queryVal" >
                 </div>
             </form>
         </div>
@@ -63,11 +63,13 @@ export default {
         return{
             posts: {},
             categories: {},
+            queryVal: ''  // 
         }
     },
     mounted() {
         this.getPosts() ;
         this.getCategories() ;
+        this.emptySearchVal() ;  // for empty searchVal at reload
     },
     methods:{
         getPosts(){
@@ -90,6 +92,12 @@ export default {
             )
             .then( error => console.log(error) )
         },
+        emptySearchVal(){
+            this.$store.commit('updateSearchVal', '')
+        },
+        searchNow(){
+            this.$store.commit('updateSearchVal', this.queryVal) // qual $store.state.searchVal ==  this.queryVal
+        }
     } 
 }
 </script>

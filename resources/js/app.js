@@ -8,12 +8,7 @@ import VueRouter from 'vue-router'
 Vue.use(VueRouter)
 import routes from './routes'
 
-
-/*=============== Pagination ====================*/
-Vue.component('pagination', require('laravel-vue-pagination'));
-
-
-/*=============== const router ====================*/
+//  const router 
 const router = new VueRouter({
     mode: "history",
     routes : routes ,  // OR only routes in ES6
@@ -23,8 +18,19 @@ const router = new VueRouter({
 })
 
 
+/*=============== VueX ====================*/
+import store from './store'
+
+
+/*=============== Pagination ====================*/
+Vue.component('pagination', require('laravel-vue-pagination'));
+
+
+
+
 /*=============== Vue Instance ====================*/
 const app = new Vue({
     el: '#app',
-    router
+    router,
+    store  
 });

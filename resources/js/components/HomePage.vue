@@ -7,17 +7,18 @@
 
         <section class="site-section py-sm">
             <div class="container">
-                <div class="row">
-                    <div class="col-md-6">
-                    <h2 class="mb-4">Latest Posts</h2>
-                    </div>
-                </div>
                 <div class="row blog-entries">
-                    <div class="col-md-12 col-lg-8 main-content">
+
+                    <!------------ searching Posts ----------------->
+                    <searching :searchVal="searchVal" v-if="searchVal"></searching>
+
+                    <!------------ Latest Posts ----------------->
+                    <div class="col-md-12 col-lg-8 main-content" v-else>
+                        <h2 class="mb-4">Latest Posts</h2>
                         <div class="row">
                             <div class="col-md-6" v-for="post in posts.data" :key="post.id" >
                                 <router-link :to=" '/post/' + post.slug " class="blog-entry" data-animate-effect="fadeIn">
-                                    <img :src=" 'images/' + post.img" alt="Image placeholder">
+                                    <img :src=" '/images/' + post.img" alt="Image placeholder">
                                     <div class="blog-content-body">
                                         <div class="post-meta">
                                             <span class="mr-2"> {{ post.added_at }}  </span> &bullet;
@@ -31,7 +32,6 @@
 
                         <!-- pagination Component -->
                         <pagination :data="posts" @pagination-change-page="getLatestPosts" :limit="3" ></pagination>
-
 
                     </div>
 
@@ -49,10 +49,12 @@
 
     import Slider from './Slider'
     import Sidebar from './Sidebar'
+    import Searching from './Searching'
     export default {
         components:{
             Sidebar,
             Slider,
+            Searching,
         },
         data(){
             return{
@@ -61,6 +63,11 @@
         },
         mounted() {
             this.getLatestPosts();
+        },
+        computed: {
+            searchVal: function() {
+                return this.$store.state.searchVal;
+            }
         },
         methods:{
             getLatestPosts( page = 1 ){
