@@ -15,7 +15,7 @@
                         <div class="row">
                             <div class="col-md-12">
                                 <h2 class="mb-4">Hi There! I'm Craig David</h2>
-                                <p class="mb-5"><img src="images/img_6.jpg" alt="Image placeholder" class="img-fluid"></p>
+                                <p class="mb-5"><img src="/images/about_img.jpg" alt="Image placeholder" class="img-fluid"></p>
                                 <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ipsum minima eveniet recusandae suscipit eum laboriosam fugit amet deleniti iste et. Ad dolores, necessitatibus non saepe tenetur impedit commodi quibusdam natus repellat, exercitationem accusantium perferendis officiis. Laboriosam impedit quia minus pariatur!</p>
                                 <p>Dignissimos iste consectetur, nemo magnam nulla suscipit eius quibusdam, quo aperiam quia quae est explicabo nostrum ab aliquid vitae obcaecati tenetur beatae animi fugiat officia id ipsam sint? Obcaecati ea nisi fugit assumenda error totam molestiae saepe fugiat officiis quam?</p>
                                 <p>Culpa porro quod doloribus dolore sint. Distinctio facilis ullam voluptas nemo voluptatum saepe repudiandae adipisci officiis, explicabo eaque itaque sed necessitatibus, fuga, ea eius et aliquam dignissimos repellendus impedit pariatur voluptates. Dicta perferendis assumenda, nihil placeat, illum quibusdam. Vel, incidunt?</p>
@@ -31,7 +31,7 @@
                             <div class="col-md-12" >
                                 <div class="post-entry-horzontal" v-for="post in posts" :key="post.id">
                                     <a :href=" '/post/' + post.slug " style="width: 100%;">
-                                        <div class="image" :style=" 'background-image: url(\' /images/'+ post.img  +'  \')' "></div>
+                                        <div class="image" :style=" 'background-image: url(\' /images/posts/'+ post.img  +'  \')' "></div>
                                         <span class="text">
                                             <div class="post-meta">
                                                 <span class="mr-2"> {{ post.added_at }} </span> &bullet;
@@ -58,8 +58,8 @@
 </template>
 <script>
 
-    import Sidebar from './Sidebar'
-    import Searching from './Searching'
+    import Sidebar from './../Sidebar'
+    import Searching from './../Searching'
     export default {
         components:{
             Sidebar,

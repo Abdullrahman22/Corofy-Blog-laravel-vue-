@@ -13,7 +13,7 @@
                     <div class="col-md-12 col-lg-8 main-content" v-else >
                         <!----------------- post-body ---------------------->
                         <div class="post-details">
-                            <img :src=" '/images/' + post.img " alt="Image" class="img-fluid mb-5">
+                            <img :src=" '/images/posts/' + post.img " alt="Image" class="img-fluid mb-5">
                             <div class="post-meta">
                                 <span class="mr-2"> {{ post.added_at }} </span> &bullet;
                                 <span class="ml-2"><span class="fa fa-comments"></span> {{ post.comments_count }} </span>
@@ -32,7 +32,7 @@
                         <ul class="comment-list">
                             <li class="comment" v-for="comment in comments" :key="comment.id">
                                 <div class="vcard">
-                                    <img :src=" '/images/' + comment.user.img " alt="Image placeholder">
+                                    <img :src=" '/images/users/' + comment.user.img " alt="Image placeholder">
                                     </div>
                                     <div class="comment-body">
                                     <h3> {{ comment.user.name }} </h3>
@@ -76,7 +76,7 @@
                 </div>
                 <div class="row">
                     <div class="col-md-6 col-lg-4" v-for="post in relatedPosts" :key="post.id">
-                        <router-link :to=" '/post/' + post.slug " class="a-block sm d-flex align-items-center height-md" :style=" 'background-image: url(\' /images/'+ post.img  +'  \')' ">
+                        <router-link :to=" '/post/' + post.slug " class="a-block sm d-flex align-items-center height-md" :style=" 'background-image: url(\' /images/posts/'+ post.img  +'  \')' ">
                             <div class="text">
                                 <div class="post-meta">
                                     <span class="category"> {{ post.category_title }} </span>
@@ -97,8 +97,8 @@
 </template>
 
 <script>
-    import Sidebar from './Sidebar'
-    import Searching from './Searching'
+    import Sidebar from './../Sidebar'
+    import Searching from './../Searching'
 
     export default {
         components:{

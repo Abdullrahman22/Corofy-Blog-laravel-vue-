@@ -6,7 +6,7 @@
         <div class="posts-resulte row" v-if=" posts.length > 0  ">
             <div class="col-md-6" v-for="post in posts" :key="post.id" >
                 <router-link :to=" '/post/' + post.slug " class="blog-entry" data-animate-effect="fadeIn">
-                    <img :src=" '/images/' + post.img" alt="Image placeholder">
+                    <img :src=" '/images/posts/' + post.img" alt="Image placeholder">
                     <div class="blog-content-body">
                         <div class="post-meta">
                             <span class="mr-2"> {{ post.added_at }}  </span> &bullet;
