@@ -16,5 +16,6 @@ class DatabaseSeeder extends Seeder
         $this->call(PostSeeder::class);      // 50 Posts
         $this->call(CommentSeeder::class);   // 100 Comments 
         $this->call(SettingSeeder::class);
+        $this->call(MessegeSeeder::class);   // 50 Messeges 
     }
 }

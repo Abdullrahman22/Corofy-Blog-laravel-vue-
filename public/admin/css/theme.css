@@ -3506,6 +3506,7 @@ section {
 
 .au-message__item:hover {
     background: #f7f7f7;
+    position: relative;
 }
 
 .au-message__item-inner {
@@ -3616,20 +3617,6 @@ section {
     overflow: hidden;
 }
 
-.avatar::after {
-    content: '';
-    display: block;
-    height: 15px;
-    width: 15px;
-    background: #ccc;
-    border: 2px solid #fff;
-    -webkit-border-radius: 100%;
-    -moz-border-radius: 100%;
-    border-radius: 100%;
-    position: absolute;
-    bottom: 0;
-    right: 0;
-}
 
 .avatar--small {
     height: 50px;

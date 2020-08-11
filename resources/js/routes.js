@@ -22,7 +22,7 @@ const routes = [
     { path: '/category/:slug' , component: CategoryPage },
 
     /*================ Admin Routes ==================*/
-    { path: '/admin/dashboard' , component: DashboardPage },
+    { path: '/admin/' , component: DashboardPage },
     { path: '/admin/account' , component: AccountPage },
     { path: '/admin/setting' , component: SettingPage },
 
