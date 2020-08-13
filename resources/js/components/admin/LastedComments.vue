@@ -16,7 +16,7 @@
                             <div class="au-message__item-text">
                                 <div class="avatar-wrap">
                                     <div class="avatar">
-                                        <img :src=" 'images/users/' + comment.user.img " alt="John Smith">
+                                        <img :src=" '/images/users/' + comment.user.img " alt="John Smith">
                                     </div>
                                 </div>
                                 <div class="text">

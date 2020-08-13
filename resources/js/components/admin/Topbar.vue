@@ -13,7 +13,7 @@
                         <div class="account-wrap">
                             <div class="account-item clearfix js-item-menu">
                                 <div class="image">
-                                    <img src="admin/images/icon/avatar-01.jpg" alt="John Doe" />
+                                    <img src="/admin_assets/images/icon/avatar-01.jpg" alt="John Doe" />
                                 </div>
                                 <div class="content">
                                     <a class="js-acc-btn" href="admin/#">john doe</a>
@@ -22,7 +22,7 @@
                                     <div class="info clearfix">
                                         <div class="image">
                                             <a href="admin/#">
-                                                <img src="admin/images/icon/avatar-01.jpg" alt="John Doe" />
+                                                <img src="/admin_assets/images/icon/avatar-01.jpg" alt="John Doe" />
                                             </a>
                                         </div>
                                         <div class="content">

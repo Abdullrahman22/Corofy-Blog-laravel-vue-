@@ -17,13 +17,17 @@ use Illuminate\Support\Facades\Auth;
 
 Auth::routes();
 
+
+
 /*=========== admin Routes =========*/
-Route::get('/admin', function () {
+Route::get("/admin/{any}", function () {
     return view('admin');
-});
+})->where([ "any" => ".*" ]); 
+
+
+
 
 /*=========== Web Routes ===========*/
 Route::get('/{any}', function () {
     return view('app');
 })->where([ "any" => ".*" ]); 
-

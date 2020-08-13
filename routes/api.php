@@ -33,7 +33,11 @@ Route::get("category/{slug}/posts" , "CategoryController@get_Category_Posts" );
 
 /*============= Admin APIs =============*/
 Route::namespace("admin")->group( function (){
+
+    //  Dashboard  
     Route::get("admin/statistics" , "DashboardController@site_Statistics");
     Route::get("admin/lasted-comments" , "DashboardController@lasted_Comments");
     Route::get("admin/lasted-messeges" , "DashboardController@lasted_Messeges");    
+
+    //  Site Setting 
 });
