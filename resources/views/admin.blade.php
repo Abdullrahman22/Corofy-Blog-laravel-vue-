@@ -35,7 +35,7 @@
 
 </head>
 
-<body class="animsition">
+<body>
     <div id="app" class="page-wrapper">
         <!-- HEADER MOBILE -->
         <header class="header-mobile d-block d-lg-none">
@@ -57,43 +57,43 @@
                 <div class="container-fluid">
                     <ul class="navbar-mobile__list list-unstyled">
                         <li>
-                            <router-link to="/">
+                            <router-link to="/admin/overview">
                                 <i class="fas fa-tachometer-alt"></i>
                                 Dashboard
                             </router-link>
                         </li>
                         <li>
-                            <router-link to="/admin_assets/users">
+                            <router-link to="/admin/users">
                                 <i class="fas fa-users"></i>
                                 Users
                             </router-link>
                         </li>
                         <li>
-                            <router-link to="/admin_assets/categories">
+                            <router-link to="/admin/categories">
                                 <i class="fas fa-sitemap"></i>
                                 Categories
                             </router-link>
                         </li>
                         <li>
-                            <router-link to="/admin_assets/posts">
+                            <router-link to="/admin/posts">
                                 <i class="far fa-clipboard"></i>
                                 Posts
                             </router-link>
                         </li>
                         <li>
-                            <router-link to="/admin_assets/comments">
+                            <router-link to="/admin/comments">
                                 <i class="zmdi zmdi-comment-text"></i>
                                 Comments
                             </router-link>
                         </li>
                         <li>
-                            <router-link to="/admin_assets/messeges">
+                            <router-link to="/admin/messeges">
                                 <i class="far fa-envelope"></i>
                                 Messeges
                             </router-link>
                         </li>
                         <li>
-                            <router-link to="/admin_assets/setting">
+                            <router-link to="/admin/setting">
                                 <i class="fas fa-cog"></i>
                                 Setting
                             </router-link>
@@ -115,43 +115,43 @@
                 <nav class="navbar-sidebar">
                     <ul class="list-unstyled navbar__list">
                         <li>
-                            <router-link to="/">
+                            <router-link to="/admin/overview">
                                 <i class="fas fa-tachometer-alt"></i>
                                 Dashboard
                             </router-link>
                         </li>
                         <li>
-                            <router-link to="/admin_assets/users">
+                            <router-link to="/admin/users">
                                 <i class="fas fa-users"></i>
                                 Users
                             </router-link>
                         </li>
                         <li>
-                            <router-link to="/admin_assets/categories">
+                            <router-link to="/admin/categories">
                                 <i class="fas fa-sitemap"></i>
                                 Categories
                             </router-link>
                         </li>
                         <li>
-                            <router-link to="/admin_assets/posts">
+                            <router-link to="/admin/posts">
                                 <i class="far fa-clipboard"></i>
                                 Posts
                             </router-link>
                         </li>
                         <li>
-                            <router-link to="/admin_assets/comments">
+                            <router-link to="/admin/comments">
                                 <i class="zmdi zmdi-comment-text"></i>
                                 Comments
                             </router-link>
                         </li>
                         <li>
-                            <router-link to="/admin_assets/messeges">
+                            <router-link to="/admin/messeges">
                                 <i class="far fa-envelope"></i>
                                 Messeges
                             </router-link>
                         </li>
                         <li>
-                            <router-link to="/admin_assets/setting">
+                            <router-link to="/admin/setting">
                                 <i class="fas fa-cog"></i>
                                 Setting
                             </router-link>
@@ -161,7 +161,6 @@
             </div>
         </aside>
         <!-- END MENU SIDEBAR-->
-
 
    
         <router-view></router-view>

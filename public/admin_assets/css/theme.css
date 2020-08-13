@@ -4627,7 +4627,7 @@ section {
 }
 
 .table-data-feature .item i {
-    font-size: 20px;
+    font-size: 24px;
     color: #808080;
     position: absolute;
     top: 50%;
@@ -4638,7 +4638,15 @@ section {
     -o-transform: translate(-50%, -50%);
     transform: translate(-50%, -50%);
 }
-
+.user-img{
+    width: 45px;
+    height: 40px;
+    border-radius: 50%;
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    -ms-border-radius: 50%;
+    -o-border-radius: 50%;
+}
 .block-email {
     font-size: 14px;
     color: #808080;

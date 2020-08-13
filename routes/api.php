@@ -38,6 +38,10 @@ Route::namespace("admin")->group( function (){
     Route::get("admin/statistics" , "DashboardController@site_Statistics");
     Route::get("admin/lasted-comments" , "DashboardController@lasted_Comments");
     Route::get("admin/lasted-messeges" , "DashboardController@lasted_Messeges");    
+    //  Users  
+    Route::get("admin/users" , "UserController@index");
+
+
 
     //  Site Setting 
 });
