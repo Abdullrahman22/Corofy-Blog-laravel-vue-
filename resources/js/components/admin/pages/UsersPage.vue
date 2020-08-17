@@ -25,7 +25,7 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr v-for=" (user , index ) in users.data " :key="user.id">
+                                    <tr v-for=" user in users.data " :key="user.id">
                                         <td> #{{ user.id }} </td>
                                         <td> {{ user.name }} </td>
                                         <td> <img :src=" '/images/users/' + user.img " alt="user-img" class="user-img" > </td>
@@ -68,7 +68,7 @@
     </div>
 </template>
 <script>
-    import Topbar from './../Topbar'
+    import Topbar from './../components/Topbar'
 
     export default {
         components:{

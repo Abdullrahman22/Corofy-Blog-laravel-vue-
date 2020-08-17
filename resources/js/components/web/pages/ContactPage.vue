@@ -52,8 +52,8 @@
 </template>
 <script>
 
-    import Sidebar from './../Sidebar'
-    import Searching from './../Searching'
+    import Sidebar from './../components/Sidebar'
+    import Searching from './../components/Searching'
 
     export default {
         components:{

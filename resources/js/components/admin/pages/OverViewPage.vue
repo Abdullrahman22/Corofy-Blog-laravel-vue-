@@ -53,10 +53,12 @@
 </template>
 
 <script>
-    import Topbar from './../Topbar'
-    import Statistics from './../Statistics'
-    import LastedMesseges from './../LastedMesseges'
-    import LastedComments from './../LastedComments'
+
+    import Topbar from './../components/Topbar'
+    import Statistics from './../components/Statistics'
+    import LastedMesseges from './../components/LastedMesseges'
+    import LastedComments from './../components/LastedComments'
+
     export default {
         components:{
             Statistics,

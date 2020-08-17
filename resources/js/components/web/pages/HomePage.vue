@@ -46,10 +46,10 @@
     </div>
 </template>
 <script>
-
-    import Slider from './../Slider'
-    import Sidebar from './../Sidebar'
-    import Searching from './../Searching'
+    import Sidebar from './../components/Sidebar'
+    import Searching from './../components/Searching'
+    import Slider from './../components/Slider'
+    
     export default {
         components:{
             Sidebar,
