@@ -1,5 +1,5 @@
 
-
+/*======= import Vue & Bootstrap =======*/
 require('./bootstrap');
 window.Vue = require('vue');
 
@@ -11,6 +11,11 @@ import store from './store'
 
 /*======= pagination =======*/
 Vue.component('pagination', require('laravel-vue-pagination'));
+
+/*======= Sweetalert2 =======*/
+import VueSweetalert2 from 'vue-sweetalert2';
+Vue.use(VueSweetalert2);;
+
 
 /*======= Vue Instance =======*/
 const app = new Vue({

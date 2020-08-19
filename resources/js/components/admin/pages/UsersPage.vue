@@ -91,7 +91,7 @@
                         // console.log(resquest.data);
                     }
                 )
-                .then( error => console.log(error) )
+                .catch( error => console.log(error) )
             }
         }
     }

@@ -140,7 +140,7 @@
                         // console.log(response.data);
                     }
                 )
-                .then( error => console.log(error) )
+                .catch( error => console.log(error) )
             },
 
 
@@ -165,10 +165,19 @@
                             this.getCategories(); // reload getCategories()
                             this.errors = {},  // empty error var
                             this.category = {} // empty category var
+                            /*======== Sweet Alert ============*/
+                            Vue.swal({
+                                position: 'top-end',
+                                icon: 'success',
+                                text: 'Category Created Successfully',
+                                showConfirmButton: false,
+                                timer: 1500
+                            });
+                            
                         }
                     }
                 )
-                .then( error => console.log(error) ); // to show error in console
+                .catch( error => console.log(error) ); 
             },
 
 
@@ -193,10 +202,18 @@
                             this.getCategories(); // reload getCategories()
                             this.errors = {},  // empty error var
                             this.category = {} // empty category var
+                            /*======== Sweet Alert ============*/
+                            Vue.swal({
+                                position: 'top-end',
+                                icon: 'success',
+                                text: 'Category Updated Successfully',
+                                showConfirmButton: false,
+                                timer: 1500
+                            });
                         }
                     }
                 )
-                .then( error => console.log(error) ); // to show error in console
+                .catch( error => console.log(error) ); 
             },
 
             
@@ -206,24 +223,51 @@
 
             /*======= Delete Category =======*/
             deleteCategory(category){
-                if( confirm("Are You Sure ?") ){
-                    axios.delete("/api/admin/categories/" + category.id  )
-                    .then( 
-                        response => {  // if there success request 
-                            if( response.data.status == "deleted" ){
-                                this.getCategories(); // reload getCategories()
+
+
+                Vue.swal({
+
+                    text: 'Are you sure delete category ?',
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Yes, delete it!'
+
+                    }).then((result) => {
+                    if (result.value) {
+
+                        // do delete response
+                        axios.delete("/api/admin/categories/" + category.id  )
+                        .then( 
+                            response => {  // if there success request 
+                                if( response.data.status == "deleted" ){
+                                    this.getCategories(); // reload getCategories()
+                                }
                             }
-                        }
-                    )
-                    .then( error => console.log(error) ); // to show error in console
-                }
-            }
+                        )
+                        .catch( error => console.log(error) ); 
+
+                        // if Deleted
+                        Vue.swal({
+                            position: 'top-end',
+                            icon: 'success',
+                            text: 'Category Deleted Successfully',
+                            showConfirmButton: false,
+                            timer: 1500
+                        });
+
+                    }
+                })
 
 
 
 
 
 
+
+
+            },
             
         }
     }
