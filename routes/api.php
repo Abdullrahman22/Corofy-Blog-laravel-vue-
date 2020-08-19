@@ -40,6 +40,8 @@ Route::namespace("admin")->group( function (){
     Route::get("admin/lasted-messeges" , "DashboardController@lasted_Messeges");    
     //  Users  
     Route::get("admin/users" , "UserController@index");
+    //  Categories  
+    Route::resource("admin/categories","CategoryController")->except("create" , "edit" , "show");
 
 
 

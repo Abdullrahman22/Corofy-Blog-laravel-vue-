@@ -9,6 +9,10 @@
     <meta name="author" content="Hau Nguyen">
     <meta name="keywords" content="au theme template">
 
+    <!-- CSRF Token -->
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+
+
     <!-- Title Page-->
     <title>Dashboard</title>
 
@@ -32,6 +36,9 @@
 
     <!-- Main CSS-->
     <link href="{{ asset("admin_assets/css/theme.css")}}" rel="stylesheet" media="all">
+
+    <!-- custom style CSS-->
+    <link href="{{ asset("admin_assets/css/custom-style.css")}}" rel="stylesheet" media="all">
 
 </head>
 

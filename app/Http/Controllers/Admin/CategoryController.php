@@ -6,6 +6,7 @@ use App\Models\Category;
 use App\Models\Post;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Validator;
 
 class CategoryController extends Controller
 {
@@ -18,17 +19,11 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
+        $categories = Category::orderBy("id","desc")->withCount('posts')->paginate(50);
+        foreach( $categories as $category ){
+            $category -> setAttribute("added_at" , $category -> created_at -> diffForHumans() ); 
+        }
+        return response()->json($categories);
     }
 
     /**
@@ -39,30 +34,33 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $rules = [
+            "title"    => " required | min:4 | max:28  " ,
+        ];
+        $validator = Validator::make(  $request->all() , $rules  ); 
+
+        if( $validator -> fails()) { 
+            
+            return response() -> json([
+                "status" => "error",
+                "errors" => $validator->errors()  // return errors validator in array 
+            ]);
+            
+        }else{
+            // vars 
+            $title = $request -> title;
+            $slug = str_replace(" " , "-" , $title);
+            Category::create([  
+                'title'      => $title ,  
+                'slug'       => $slug , 
+            ]);
+
+            return response() -> json([
+                "status" => "saved"
+            ]);       
+        }
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Category  $category
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Category $category)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Category  $category
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Category $category)
-    {
-        //
-    }
 
     /**
      * Update the specified resource in storage.
@@ -71,9 +69,39 @@ class CategoryController extends Controller
      * @param  \App\Models\Category  $category
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Category $category)
+    public function update(Request $request, $id )
     {
-        //
+        
+        $rules = [
+            "title"    => " required | min:4 | max:28  " ,
+        ];
+        $validator = Validator::make(  $request->all() , $rules  ); 
+
+        if( $validator -> fails()) { 
+            
+            return response() -> json([
+                "status" => "error",
+                "errors" => $validator->errors()  // return errors validator in array 
+            ]);
+            
+        }
+
+        $category = Category::find($id);
+        
+        // vars 
+        $title = $request -> title;
+        $slug = str_replace(" " , "-" , $title);
+
+        
+        $category-> update([
+            'title'      => $title ,  
+            'slug'       => $slug , 
+        ]);
+
+        return response() -> json([
+            "status" => "updated"
+        ]);    
+
     }
 
     /**
@@ -82,8 +110,12 @@ class CategoryController extends Controller
      * @param  \App\Models\Category  $category
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Category $category)
+    public function destroy($id)
     {
-        //
+        $category = Category::find($id);
+        $category-> delete();
+        return response() -> json([
+            "status" => "deleted"
+        ]); 
     }
 }

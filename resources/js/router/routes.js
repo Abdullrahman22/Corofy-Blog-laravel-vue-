@@ -10,6 +10,7 @@ import NotFoundPage  from './../components/web/pages/NotFoundPage.vue'
 /*================ Admin Components ==================*/
 import OverViewPage  from './../components/admin/pages/OverViewPage'
 import UsersPage  from './../components/admin/pages/UsersPage.vue'
+import CategoriesPage  from './../components/admin/pages/CategoriesPage.vue'
 import AccountPage  from './../components/admin/pages/AccountPage'
 import SettingPage  from './../components/admin/pages/SettingPage'
 
@@ -30,6 +31,8 @@ const routes = [
     { path: '/admin/overview' , component: OverViewPage },
     // Users Routes
     { path: '/admin/users' , component: UsersPage },
+    // Categories Routes
+    { path: '/admin/categories' , component: CategoriesPage },
 
     { path: '/admin/account' , component: AccountPage },
     { path: '/admin/setting' , component: SettingPage },

@@ -1,0 +1,7 @@
+#category-page .table-header{
+    position: relative;
+}
+#category-page .table-header .au-btn-plus{
+    bottom: -10px;
+    right: 10px;
+}
