@@ -43,7 +43,7 @@ const routes = [
     // posts Routes
     { path: '/admin/posts' , component: PostsPage , children:[
         { path: '' , component: PostsHomePage },
-        { path: ':id' , component: PostViewPage },
+        { path: ':id' , component: PostViewPage , props: true },
     ]},
 
 

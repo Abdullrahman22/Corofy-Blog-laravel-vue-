@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Models\Post;
 use App\Models\Category;
+use App\Models\Comment;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
@@ -107,9 +108,20 @@ class PostController extends Controller
      * @param  \App\Models\Post  $post
      * @return \Illuminate\Http\Response
     */
-    public function show( Post $post )   // if is not $id not add Post Model in params
+    public function show( $id )   // if is not $id not add Post Model in params
     {
-        
+
+        $post = Post::where("id" , $id )->with(["category", "comments"]) -> withCount('comments') -> first();
+        $post -> setAttribute("added_at" , $post -> created_at -> diffForHumans() );
+
+        $comments = $post -> comments;
+        foreach( $comments as $comment ){
+            $comment -> setAttribute("user" , $comment -> user );
+            $comment -> setAttribute("added_at" , $post -> created_at -> diffForHumans() );
+        }
+
+        return response() -> json( $post );
+
     }
 
     

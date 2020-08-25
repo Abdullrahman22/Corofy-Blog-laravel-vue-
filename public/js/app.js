@@ -2682,6 +2682,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _components_Topbar__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./../../components/Topbar */ "./resources/js/components/admin/components/Topbar.vue");
 //
 //
 //
@@ -2699,7 +2700,83 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-/* harmony default export */ __webpack_exports__["default"] = ({});
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  components: {
+    Topbar: _components_Topbar__WEBPACK_IMPORTED_MODULE_0__["default"]
+  },
+  props: ["id"],
+  data: function data() {
+    return {
+      post: {},
+      comments: {}
+    };
+  },
+  mounted: function mounted() {
+    this.getPost();
+  },
+  methods: {
+    getPost: function getPost() {
+      var _this = this;
+
+      axios.get('/api/admin/posts/' + this.$route.params.id) // start link( (/) -> to start link from begianing) 
+      // .then( resquest => console.log( resquest.data ) )    
+      .then(function (resquest) {
+        _this.post = resquest.data;
+        _this.comments = resquest.data.comments;
+      }).then(function (error) {
+        return console.log(error);
+      });
+    }
+  }
+});
 
 /***/ }),
 
@@ -3731,6 +3808,8 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_Sidebar__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./../components/Sidebar */ "./resources/js/components/web/components/Sidebar.vue");
 /* harmony import */ var _components_Searching__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./../components/Searching */ "./resources/js/components/web/components/Searching.vue");
+//
+//
 //
 //
 //
@@ -44258,9 +44337,115 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", [
-    _vm._v(
-      "\n    Post View Page // Post View Page // Post View Page // Post View Page // Post View Page // \n    Post View Page // Post View Page // Post View Page // Post View Page // Post View Page // \n    Post View Page // Post View Page // Post View Page // Post View Page // Post View Page // \n    Post View Page // Post View Page // Post View Page // Post View Page // Post View Page // \n    Post View Page // Post View Page // Post View Page // Post View Page // Post View Page // \n    Post View Page // Post View Page // Post View Page // Post View Page // Post View Page // \n    Post View Page // Post View Page // Post View Page // Post View Page // Post View Page // \n    Post View Page // Post View Page // Post View Page // Post View Page // Post View Page // \n    Post View Page // Post View Page // Post View Page // Post View Page // Post View Page // \n    Post View Page // Post View Page // Post View Page // Post View Page // Post View Page // \n    Post View Page // Post View Page // Post View Page // Post View Page // Post View Page // \n    Post View Page // Post View Page // Post View Page // Post View Page // Post View Page // \n"
+  return _c("div", { attrs: { id: "post-page" } }, [
+    _c(
+      "div",
+      { staticClass: "page-container" },
+      [
+        _c("topbar"),
+        _vm._v(" "),
+        _c("div", { staticClass: "main-content container" }, [
+          _c("div", { staticClass: "row blog-entries element-animate" }, [
+            _c("div", { staticClass: "col-md-12 col-lg-10" }, [
+              _c(
+                "div",
+                { staticClass: "post-details" },
+                [
+                  _c("img", {
+                    staticClass: "img-fluid mb-5",
+                    attrs: {
+                      src: "/images/posts/" + _vm.post.img,
+                      alt: "Image"
+                    }
+                  }),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "post-meta" }, [
+                    _c("span", { staticClass: "mr-2" }, [
+                      _vm._v(" " + _vm._s(_vm.post.added_at) + " ")
+                    ]),
+                    _vm._v(" •\n                            "),
+                    _c("span", { staticClass: "ml-2" }, [
+                      _c("span", { staticClass: "fa fa-comments" }),
+                      _vm._v(" " + _vm._s(_vm.post.comments_count) + " ")
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c("h1", { staticClass: "mb-4" }, [
+                    _vm._v(_vm._s(_vm.post.title))
+                  ]),
+                  _vm._v(" "),
+                  _vm.post.category
+                    ? _c(
+                        "router-link",
+                        {
+                          staticClass: "category mb-5",
+                          attrs: { to: "/category/" + _vm.post.category.slug }
+                        },
+                        [_vm._v("  " + _vm._s(_vm.post.category.title) + "  ")]
+                      )
+                    : _vm._e(),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "post-content-body" }, [
+                    _c("p", [_vm._v(_vm._s(_vm.post.body))])
+                  ])
+                ],
+                1
+              ),
+              _vm._v(" "),
+              _vm.post.comments_count > 0
+                ? _c("div", { staticClass: "comments-section" }, [
+                    _c("div", { staticClass: "pt-5" }, [
+                      _c("h3", { staticClass: "mb-5 comments-header" }, [
+                        _vm._v(
+                          " " + _vm._s(_vm.post.comments_count) + "  Comments"
+                        )
+                      ]),
+                      _vm._v(" "),
+                      _c("hr")
+                    ]),
+                    _vm._v(" "),
+                    _c(
+                      "ul",
+                      { staticClass: "comment-list" },
+                      _vm._l(_vm.comments, function(comment) {
+                        return _c(
+                          "li",
+                          { key: comment.id, staticClass: "comment" },
+                          [
+                            _c("div", { staticClass: "vcard" }, [
+                              _c("img", {
+                                attrs: {
+                                  src: "/images/users/" + comment.user.img,
+                                  alt: "Image placeholder"
+                                }
+                              })
+                            ]),
+                            _vm._v(" "),
+                            _c("div", { staticClass: "comment-body" }, [
+                              _c("h3", [
+                                _vm._v(" " + _vm._s(comment.user.name) + " ")
+                              ]),
+                              _vm._v(" "),
+                              _c("div", { staticClass: "meta" }, [
+                                _vm._v(" " + _vm._s(comment.added_at) + " ")
+                              ]),
+                              _vm._v(" "),
+                              _c("p", [
+                                _vm._v(" " + _vm._s(comment.body) + "  ")
+                              ])
+                            ])
+                          ]
+                        )
+                      }),
+                      0
+                    )
+                  ])
+                : _vm._e()
+            ])
+          ])
+        ])
+      ],
+      1
     )
   ])
 }
@@ -44523,10 +44708,18 @@ var render = function() {
                     _c("div", { staticClass: "form-group upload-input" }, [
                       _c("p", [
                         _vm._v(" Post Image:     "),
-                        _vm.edit ? _vm._m(3) : _vm._e()
+                        _vm.edit
+                          ? _c("img", {
+                              staticClass: "img-post",
+                              attrs: {
+                                src: "/images/posts/" + _vm.post.img,
+                                alt: "img-post"
+                              }
+                            })
+                          : _vm._e()
                       ]),
                       _vm._v(" "),
-                      _vm._m(4),
+                      _vm._m(3),
                       _vm._v(" "),
                       _c("input", {
                         staticClass: "form-control custom-file-input ",
@@ -44733,15 +44926,6 @@ var staticRenderFns = [
       },
       [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
     )
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("img", {
-      staticClass: "img-post",
-      attrs: { src: "/images/posts/" + _vm.post.img, alt: "img-post" }
-    })
   },
   function() {
     var _vm = this
@@ -45763,54 +45947,64 @@ var render = function() {
                       _vm._v(" "),
                       _c("div", { staticClass: "post-content-body" }, [
                         _c("p", [_vm._v(_vm._s(_vm.post.body))])
-                      ]),
-                      _vm._v(" "),
-                      _c("div", { staticClass: "pt-5" }, [
-                        _c("h3", { staticClass: "mb-5 comments-header" }, [
-                          _vm._v(
-                            " " + _vm._s(_vm.post.comments_count) + "  Comments"
-                          )
-                        ]),
-                        _vm._v(" "),
-                        _c("hr")
                       ])
                     ],
                     1
                   ),
                   _vm._v(" "),
-                  _c(
-                    "ul",
-                    { staticClass: "comment-list" },
-                    _vm._l(_vm.comments, function(comment) {
-                      return _c(
-                        "li",
-                        { key: comment.id, staticClass: "comment" },
-                        [
-                          _c("div", { staticClass: "vcard" }, [
-                            _c("img", {
-                              attrs: {
-                                src: "/images/users/" + comment.user.img,
-                                alt: "Image placeholder"
-                              }
-                            })
+                  _vm.post.comments_count > 0
+                    ? _c("div", { staticClass: "comments-section" }, [
+                        _c("div", { staticClass: "pt-5" }, [
+                          _c("h3", { staticClass: "mb-5 comments-header" }, [
+                            _vm._v(
+                              " " +
+                                _vm._s(_vm.post.comments_count) +
+                                "  Comments"
+                            )
                           ]),
                           _vm._v(" "),
-                          _c("div", { staticClass: "comment-body" }, [
-                            _c("h3", [
-                              _vm._v(" " + _vm._s(comment.user.name) + " ")
-                            ]),
-                            _vm._v(" "),
-                            _c("div", { staticClass: "meta" }, [
-                              _vm._v(" " + _vm._s(comment.added_at) + " ")
-                            ]),
-                            _vm._v(" "),
-                            _c("p", [_vm._v(" " + _vm._s(comment.body) + "  ")])
-                          ])
-                        ]
-                      )
-                    }),
-                    0
-                  ),
+                          _c("hr")
+                        ]),
+                        _vm._v(" "),
+                        _c(
+                          "ul",
+                          { staticClass: "comment-list" },
+                          _vm._l(_vm.comments, function(comment) {
+                            return _c(
+                              "li",
+                              { key: comment.id, staticClass: "comment" },
+                              [
+                                _c("div", { staticClass: "vcard" }, [
+                                  _c("img", {
+                                    attrs: {
+                                      src: "/images/users/" + comment.user.img,
+                                      alt: "Image placeholder"
+                                    }
+                                  })
+                                ]),
+                                _vm._v(" "),
+                                _c("div", { staticClass: "comment-body" }, [
+                                  _c("h3", [
+                                    _vm._v(
+                                      " " + _vm._s(comment.user.name) + " "
+                                    )
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("div", { staticClass: "meta" }, [
+                                    _vm._v(" " + _vm._s(comment.added_at) + " ")
+                                  ]),
+                                  _vm._v(" "),
+                                  _c("p", [
+                                    _vm._v(" " + _vm._s(comment.body) + "  ")
+                                  ])
+                                ])
+                              ]
+                            )
+                          }),
+                          0
+                        )
+                      ])
+                    : _vm._e(),
                   _vm._v(" "),
                   _c("div", { staticClass: "comment-form-wrap pt-5" }, [
                     _c("h3", { staticClass: "mb-5" }, [
@@ -63926,7 +64120,8 @@ var routes = [
     component: _components_admin_pages_posts_PostsHomePage_vue__WEBPACK_IMPORTED_MODULE_10__["default"]
   }, {
     path: ':id',
-    component: _components_admin_pages_posts_PostViewPage_vue__WEBPACK_IMPORTED_MODULE_11__["default"]
+    component: _components_admin_pages_posts_PostViewPage_vue__WEBPACK_IMPORTED_MODULE_11__["default"],
+    props: true
   }]
 }];
 /* harmony default export */ __webpack_exports__["default"] = (routes);

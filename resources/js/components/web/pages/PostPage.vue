@@ -23,24 +23,26 @@
                             <div class="post-content-body">
                                 <p>{{post.body}}</p>
                             </div>
+                        </div>
+                        <!----------------- Comments ---------------------->
+                        <div class="comments-section" v-if=" post.comments_count > 0 ">
                             <div class="pt-5">
                                 <h3 class="mb-5 comments-header"> {{ post.comments_count }}  Comments</h3>
                                 <hr>
                             </div>
-                        </div>
-                        <!----------------- Comments ---------------------->
-                        <ul class="comment-list">
-                            <li class="comment" v-for="comment in comments" :key="comment.id">
-                                <div class="vcard">
-                                    <img :src=" '/images/users/' + comment.user.img " alt="Image placeholder">
+                            <ul class="comment-list">
+                                <li class="comment" v-for="comment in comments" :key="comment.id">
+                                    <div class="vcard">
+                                        <img :src=" '/images/users/' + comment.user.img " alt="Image placeholder">
+                                        </div>
+                                        <div class="comment-body">
+                                        <h3> {{ comment.user.name }} </h3>
+                                        <div class="meta"> {{ comment.added_at }} </div>
+                                        <p> {{ comment.body }}  </p>
                                     </div>
-                                    <div class="comment-body">
-                                    <h3> {{ comment.user.name }} </h3>
-                                    <div class="meta"> {{ comment.added_at }} </div>
-                                    <p> {{ comment.body }}  </p>
-                                </div>
-                            </li>
-                        </ul>
+                                </li>
+                            </ul>
+                        </div>
                         <!----------------- Type Comment ---------------------->
                         <div class="comment-form-wrap pt-5">
                             <h3 class="mb-5">Leave a comment</h3>

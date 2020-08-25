@@ -98,7 +98,7 @@
                             </div>
                             <!------ Post Image ------>
                             <div class="form-group upload-input">
-                                <p> Post Image: &nbsp; &nbsp; <img v-once :src=" '/images/posts/' + post.img " class="img-post" alt="img-post"  v-if="edit" > </p>
+                                <p> Post Image: &nbsp; &nbsp; <img :src=" '/images/posts/' + post.img " class="img-post" alt="img-post"  v-if="edit" > </p>
                                 <label for="post-img" >  <i class="fas fa-cloud-upload-alt"></i> &nbsp; <span> Choose image... </span> </label> 
                                 <input type="file" id="post-img" class="form-control custom-file-input " name="img" @change="getImageName($event)">
                                 <small class="text-danger" v-if="errors.img"> {{errors.img[0] }} </small> 

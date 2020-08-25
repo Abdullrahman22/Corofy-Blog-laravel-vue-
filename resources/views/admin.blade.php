@@ -49,7 +49,7 @@
             <div class="header-mobile__bar">
                 <div class="container-fluid">
                     <div class="header-mobile-inner">
-                        <router-link class="logo" to="../">
+                        <router-link class="logo" to="../../">
                             <h4> Corofy Blog </h4>
                         </router-link>
                         <button class="hamburger hamburger--slider" type="button">
@@ -114,7 +114,7 @@
         <!-- MENU SIDEBAR-->
         <aside class="menu-sidebar d-none d-lg-block">
             <div class="logo">
-                <router-link class="logo" to="../">
+                <router-link class="logo" to="../../">
                     <h4> Corofy Blog </h4>
                 </router-link>
             </div>
