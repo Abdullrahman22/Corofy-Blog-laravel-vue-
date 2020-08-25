@@ -5,82 +5,44 @@ namespace App\Http\Controllers\Admin;
 use App\Models\Setting;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Validator;
 
 class SettingController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        //
+    public function getSiteInfo(){
+        $setting = Setting::find(1);
+        return response()->json($setting) ;
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
+    public function update(Request $request){
+
+        /*====== Form Validation =====*/
+        $rules = [
+            "site_name"       => " required | min:4 | max:50 " ,
+            "contact_email"   => " required | email | min:4 | max:50 " ,
+            "address"         => " required | min:20 | max:200  " ,
+        ];
+
+        $validator = Validator::make(  $request->all() , $rules  ); 
+
+        if( $validator -> fails()) {  
+            return response() -> json([
+                "status" => "error",
+                "errors" => $validator->errors()  // return errors validator in array 
+            ]); 
+        }
+
+        $setting = Setting::find(1);
+        $setting -> update([
+            "site_name"     => $request -> site_name , 
+            "contact_email" => $request -> contact_email , 
+            "address"       => $request -> address , 
+        ]);
+
+        return response() -> json([
+            "status" => 'updated'
+        ]);
+
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Setting  $setting
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Setting $setting)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Setting  $setting
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Setting $setting)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Setting  $setting
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Setting $setting)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Setting  $setting
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Setting $setting)
-    {
-        //
-    }
 }

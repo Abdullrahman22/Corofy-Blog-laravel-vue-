@@ -16,7 +16,7 @@
                                     <img src="/admin_assets/images/icon/avatar-01.jpg" alt="John Doe" />
                                 </div>
                                 <div class="content">
-                                    <a class="js-acc-btn" href="admin/#">john doe</a>
+                                    <a class="js-acc-btn" href="">john doe</a>
                                 </div>
                                 <div class="account-dropdown js-dropdown">
                                     <div class="info clearfix">
@@ -35,16 +35,22 @@
                                     <div class="account-dropdown__body">
                                         <div class="account-dropdown__item">
                                             <a href="admin/#">
-                                                <i class="zmdi zmdi-account"></i>Account</a>
+                                                <i class="zmdi zmdi-account"></i>
+                                                Account
+                                            </a>
                                         </div>
                                         <div class="account-dropdown__item">
-                                            <a href="admin/#">
-                                                <i class="zmdi zmdi-settings"></i>Setting</a>
+                                            <router-link to="/admin/setting">
+                                                <i class="zmdi zmdi-settings"></i>
+                                                Setting
+                                            </router-link>
                                         </div>
                                     </div>
                                     <div class="account-dropdown__footer">
                                         <a href="admin/#">
-                                            <i class="zmdi zmdi-power"></i>Logout</a>
+                                            <i class="zmdi zmdi-power"></i>
+                                            Logout
+                                        </a>
                                     </div>
                                 </div>
                             </div>

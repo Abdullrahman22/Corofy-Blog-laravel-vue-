@@ -44,7 +44,10 @@ Route::namespace("admin")->group( function (){
     Route::resource("admin/categories","CategoryController")->except("create" , "edit" , "show");
     //  Posts  
     Route::resource("admin/posts","PostController")->except("create" , "edit");
-
+    //  Setting  
+    Route::get("admin/setting" , "SettingController@getSiteInfo");    
+    Route::put("admin/setting/update" , "SettingController@update");    
+    
 
 
     //  Site Setting 
