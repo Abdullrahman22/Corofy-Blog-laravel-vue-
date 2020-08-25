@@ -42,6 +42,8 @@ Route::namespace("admin")->group( function (){
     Route::get("admin/users" , "UserController@index");
     //  Categories  
     Route::resource("admin/categories","CategoryController")->except("create" , "edit" , "show");
+    //  Posts  
+    Route::resource("admin/posts","PostController")->except("create" , "edit");
 
 
 

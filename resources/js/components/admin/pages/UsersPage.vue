@@ -55,7 +55,7 @@
                     </div>
                 </div>
 
-                <div class="text-center">
+                <div class="pagination-container">
                     <!-- pagination Component -->
                     <pagination :data="users" @pagination-change-page="getUsers" :limit="1" ></pagination>
                 </div>

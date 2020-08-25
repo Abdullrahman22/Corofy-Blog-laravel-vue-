@@ -11,13 +11,17 @@ import NotFoundPage  from './../components/web/pages/NotFoundPage.vue'
 import OverViewPage  from './../components/admin/pages/OverViewPage'
 import UsersPage  from './../components/admin/pages/UsersPage.vue'
 import CategoriesPage  from './../components/admin/pages/CategoriesPage.vue'
-import AccountPage  from './../components/admin/pages/AccountPage'
-import SettingPage  from './../components/admin/pages/SettingPage'
+// Posts components
+import PostsPage  from './../components/admin/pages/posts/PostsPage.vue'
+import PostsHomePage  from './../components/admin/pages/posts/PostsHomePage.vue'
+import PostViewPage  from './../components/admin/pages/posts/PostViewPage.vue'
 
 
 
 
 const routes = [
+
+
 
     /*================ Web Routes ==================*/
     { path: '/' , component: HomePage },
@@ -27,16 +31,22 @@ const routes = [
     { path: '/category/:slug' , component: CategoryPage },
     { path: '*', component: NotFoundPage },
 
+
+
+
     /*================ Admin Routes ==================*/
     { path: '/admin/overview' , component: OverViewPage },
     // Users Routes
     { path: '/admin/users' , component: UsersPage },
     // Categories Routes
     { path: '/admin/categories' , component: CategoriesPage },
+    // posts Routes
+    { path: '/admin/posts' , component: PostsPage , children:[
+        { path: '' , component: PostsHomePage },
+        { path: ':id' , component: PostViewPage },
+    ]},
 
-    { path: '/admin/account' , component: AccountPage },
-    { path: '/admin/setting' , component: SettingPage },
-    { path: '/admin/*', component: NotFoundPage },
+
 
 
 ]

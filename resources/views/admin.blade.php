@@ -197,6 +197,9 @@
     <!-- Main JS-->
     <script src="{{ asset("admin_assets/js/main.js")}}"></script>
 
+    <!-- Main JS-->
+    <script src="{{ asset("admin_assets/js/custom-file.js")}}"></script>
+
 </body>
 
 </html>

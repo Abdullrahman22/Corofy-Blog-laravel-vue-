@@ -1,7 +1,82 @@
-#category-page .table-header{
+.modal-title{
+  font-size: 24px;
+  font-weight: 400;
+}
+.table-header{
     position: relative;
 }
-#category-page .table-header .au-btn-plus{
+.table-header .au-btn-plus{
     bottom: -10px;
     right: 10px;
+}
+#post-page .img-post{
+    width: 60px;
+    border-radius: 3px;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    -ms-border-radius: 3px;
+    -o-border-radius: 3px;
+}
+#post-page textarea{
+  font-size: 12px;
+  color: #000;
+}
+.table-data3 tbody td{
+  border-bottom: 1px solid #e7e7e7 !important ;
+}
+/*==== Admin Pagination ====*/
+.pagination-container{
+    display: table;
+    margin: 0 auto;
+}
+.pagination {
+    margin-bottom: 5em;
+    text-align: center !important;
+    display: block; }
+    .pagination li {
+      margin-right: 2px;
+      margin-bottom: 3px;
+      display: inline-block; }
+      .pagination li a {
+        border-radius: 50% !important;
+        width: 40px;
+        height: 40px;
+        line-height: 40px;
+        padding: 0;
+        margin: 0;
+        display: inline-block;
+        text-align: center; }
+        .pagination li a:focus, .pagination li a:active {
+          -webkit-box-shadow: none !important;
+          box-shadow: none !important; }
+        .pagination li a:hover {
+          background: #6610f2 !important; 
+          color: #fff;
+          border: 1px solid transparent; }
+      .pagination li.active a {
+        border: 1px solid transparent !important; }
+/*==== custom style Input file  ====*/
+.upload-input{
+  margin-top: 20px;
+  margin-bottom: 20px;
+  overflow: hidden;
+}
+.upload-input input{
+  visibility: hidden;
+}
+.upload-input label{
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  color: #84757d;
+  display: block;
+  border: 1px solid #4d648d;
+  border-radius: 5px;
+  padding-top: 7px;
+  padding-bottom: 7px;
+  padding-left: 10px;
+  margin-bottom: -30px;
+  cursor: pointer;
+  margin-top: 10px;
+  padding-right: 15px;
 }
