@@ -17,6 +17,8 @@ import PostsHomePage  from './../components/admin/pages/posts/PostsHomePage.vue'
 import PostViewPage  from './../components/admin/pages/posts/PostViewPage.vue'
 // Comments Component
 import CommentsPage  from './../components/admin/pages/CommentsPage.vue'
+// Messeges Component
+import MessegesPage  from './../components/admin/pages/MessegesPage.vue'
 // Setting component
 import SettingPage  from './../components/admin/pages/SettingPage.vue'
 
@@ -51,6 +53,8 @@ const routes = [
     ]},
     // Comments Routes
     { path: '/admin/comments' , component: CommentsPage },
+    // Messeges Routes
+    { path: '/admin/messeges' , component: MessegesPage },
     // Setting Route
     { path: '/admin/setting' , component: SettingPage },
 

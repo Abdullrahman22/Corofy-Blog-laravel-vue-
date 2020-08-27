@@ -15,29 +15,13 @@ class MessegeController extends Controller
      */
     public function index()
     {
-        //
+        $messeges = Messege::orderBy("id","desc")->paginate(50);
+        foreach( $messeges as $messege ){
+            $messege -> setAttribute("added_at" , $messege -> created_at -> diffForHumans() ); 
+        }
+        return response()->json($messeges);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
 
     /**
      * Display the specified resource.
@@ -45,33 +29,13 @@ class MessegeController extends Controller
      * @param  \App\Models\Messege  $messege
      * @return \Illuminate\Http\Response
      */
-    public function show(Messege $messege)
+    public function show($id)
     {
-        //
+        $messege = Messege::where("id" , $id ) -> first();
+        $messege -> setAttribute("added_at" , $messege -> created_at -> diffForHumans() );
+        return response() -> json( $messege );
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Messege  $messege
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Messege $messege)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Messege  $messege
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Messege $messege)
-    {
-        //
-    }
 
     /**
      * Remove the specified resource from storage.
@@ -79,8 +43,12 @@ class MessegeController extends Controller
      * @param  \App\Models\Messege  $messege
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Messege $messege)
+    public function destroy($id)
     {
-        //
+        $messege = Messege::find($id);
+        $messege-> delete();
+        return response() -> json([
+            "status" => "deleted"
+        ]);
     }
 }

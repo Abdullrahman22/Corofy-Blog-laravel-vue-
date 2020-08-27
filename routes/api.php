@@ -45,6 +45,8 @@ Route::namespace("admin")->group( function (){
     Route::resource("admin/posts","PostController")->except("create" , "edit");
     //  Comments  
     Route::resource("admin/comments","CommentController")->except("create" , "store" , "edit" , "update" );
+    //  Messeges  
+    Route::resource("admin/messeges","MessegeController")->except("create" , "store" , "edit" , "update" );
     //  Setting  
     Route::get("admin/setting" , "SettingController@getSiteInfo");    
     Route::put("admin/setting/update" , "SettingController@update");    
