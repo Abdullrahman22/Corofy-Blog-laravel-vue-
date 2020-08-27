@@ -49,9 +49,9 @@
             <div class="header-mobile__bar">
                 <div class="container-fluid">
                     <div class="header-mobile-inner">
-                        <router-link class="logo" to="../../">
+                        <a class="logo" href="../../">
                             <h4> Corofy Blog </h4>
-                        </router-link>
+                        </a>
                         <button class="hamburger hamburger--slider" type="button">
                             <span class="hamburger-box">
                                 <span class="hamburger-inner"></span>
@@ -114,9 +114,9 @@
         <!-- MENU SIDEBAR-->
         <aside class="menu-sidebar d-none d-lg-block">
             <div class="logo">
-                <router-link class="logo" to="../../">
+                <a class="logo" href="../../">
                     <h4> Corofy Blog </h4>
-                </router-link>
+                </a>
             </div>
             <div class="menu-sidebar__content js-scrollbar1">
                 <nav class="navbar-sidebar">

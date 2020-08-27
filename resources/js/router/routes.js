@@ -15,6 +15,8 @@ import CategoriesPage  from './../components/admin/pages/CategoriesPage.vue'
 import PostsPage  from './../components/admin/pages/posts/PostsPage.vue'
 import PostsHomePage  from './../components/admin/pages/posts/PostsHomePage.vue'
 import PostViewPage  from './../components/admin/pages/posts/PostViewPage.vue'
+// Comments Component
+import CommentsPage  from './../components/admin/pages/CommentsPage.vue'
 // Setting component
 import SettingPage  from './../components/admin/pages/SettingPage.vue'
 
@@ -47,6 +49,8 @@ const routes = [
         { path: '' , component: PostsHomePage },
         { path: ':id' , component: PostViewPage , props: true },
     ]},
+    // Comments Routes
+    { path: '/admin/comments' , component: CommentsPage },
     // Setting Route
     { path: '/admin/setting' , component: SettingPage },
 

@@ -15,6 +15,15 @@
 .table-data3 tbody tr td:last-child {
   text-align: center !important;
 }
+.user-img{
+  width: 45px;
+  height: 47px;
+  border-radius: 50%;
+  -webkit-border-radius: 50%;
+  -moz-border-radius: 50%;
+  -ms-border-radius: 50%;
+  -o-border-radius: 50%;
+}
 /*==== comments sytle ====*/
 #post-page .img-post{
     width: 60px;

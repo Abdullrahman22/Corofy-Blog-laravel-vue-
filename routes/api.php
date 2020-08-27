@@ -33,7 +33,6 @@ Route::get("category/{slug}/posts" , "CategoryController@get_Category_Posts" );
 
 /*============= Admin APIs =============*/
 Route::namespace("admin")->group( function (){
-
     //  Dashboard  
     Route::get("admin/statistics" , "DashboardController@site_Statistics");
     Route::get("admin/lasted-comments" , "DashboardController@lasted_Comments");
@@ -44,11 +43,9 @@ Route::namespace("admin")->group( function (){
     Route::resource("admin/categories","CategoryController")->except("create" , "edit" , "show");
     //  Posts  
     Route::resource("admin/posts","PostController")->except("create" , "edit");
+    //  Comments  
+    Route::resource("admin/comments","CommentController")->except("create" , "store" , "edit" , "update" );
     //  Setting  
     Route::get("admin/setting" , "SettingController@getSiteInfo");    
     Route::put("admin/setting/update" , "SettingController@update");    
-    
-
-
-    //  Site Setting 
 });

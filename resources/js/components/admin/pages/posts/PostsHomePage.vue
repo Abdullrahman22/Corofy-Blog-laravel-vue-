@@ -120,7 +120,7 @@
                             </div>
                             <!------ Buttons ------>
                             <div class="buttons float-right">
-                                <button class="btn btn-danger " data-dismiss="modal"> Close </button>
+                                <button class="btn btn-info " data-dismiss="modal"> Close </button>
                                 <button type="submit" class="btn btn-primary ">  {{ edit ? 'Edit' : 'Save'}}  </button>
                             </div>
                         </form>
