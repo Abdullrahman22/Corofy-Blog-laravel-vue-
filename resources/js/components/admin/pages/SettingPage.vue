@@ -76,7 +76,7 @@
                         if( response.data.status == "error" ){
                             this.errors = response.data.errors  // equale it with var errors in data
                         }else if( response.data.status == "updated" ){
-                            this.errors = {},   // empty error var
+                            this.errors = {} ,   // empty error var
                             /*======== Sweet Alert ============*/
                             Vue.swal({
                                 position: 'top-end',

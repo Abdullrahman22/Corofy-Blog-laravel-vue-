@@ -164,20 +164,22 @@
                         .then( 
                             response => {  // if there success request 
                                 if( response.data.status == "deleted" ){
-                                    this.getComments(); // reload getComments()
+                                    $("#commentModel").modal('hide');  // close Model
+                                    $(".modal-backdrop.fade.show").remove();
+                                    this.getComments();    // reload getPosts()
+                                    this.comment = {}      // empty post var
+                                    /*======== Sweet Alert ============*/
+                                    Vue.swal({
+                                        position: 'top-end',
+                                        icon: 'success',
+                                        text: 'Comment Deleted Successfully',
+                                        showConfirmButton: false,
+                                        timer: 1500
+                                    });
                                 }
                             }
                         )
                         .catch( error => console.log(error) ); 
-
-                        // if Deleted
-                        Vue.swal({
-                            position: 'top-end',
-                            icon: 'success',
-                            text: 'Comment Deleted Successfully',
-                            showConfirmButton: false,
-                            timer: 1500
-                        });
 
                     }
                 })

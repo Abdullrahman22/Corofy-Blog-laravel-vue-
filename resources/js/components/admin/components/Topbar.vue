@@ -16,28 +16,31 @@
                                     <img src="/admin_assets/images/icon/avatar-01.jpg" alt="John Doe" />
                                 </div>
                                 <div class="content">
-                                    <a class="js-acc-btn" href="">john doe</a>
+                                    <p> 
+                                        john doe
+                                        <i class="fas fa-chevron-down"></i>
+                                    </p>
                                 </div>
                                 <div class="account-dropdown js-dropdown">
                                     <div class="info clearfix">
                                         <div class="image">
-                                            <a href="admin/#">
+                                            <span>
                                                 <img src="/admin_assets/images/icon/avatar-01.jpg" alt="John Doe" />
-                                            </a>
+                                            </span>
                                         </div>
                                         <div class="content">
                                             <h5 class="name">
-                                                <a href="admin/#">john doe</a>
+                                                <span>john doe</span>
                                             </h5>
                                             <span class="email">johndoe@example.com</span>
                                         </div>
                                     </div>
                                     <div class="account-dropdown__body">
                                         <div class="account-dropdown__item">
-                                            <a href="admin/#">
+                                            <router-link to="/admin/account">
                                                 <i class="zmdi zmdi-account"></i>
                                                 Account
-                                            </a>
+                                            </router-link>
                                         </div>
                                         <div class="account-dropdown__item">
                                             <router-link to="/admin/setting">

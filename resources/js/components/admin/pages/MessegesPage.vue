@@ -93,7 +93,7 @@
                 </div>
             </div>
         </div>
-        <!----- End Post Model ----->
+        <!----- End Messege Model ----->
 
 
 
@@ -160,13 +160,13 @@
                                 if( response.data.status == "deleted" ){
                                     $("#messegeModel").modal('hide');  // close Model
                                     $(".modal-backdrop.fade.show").remove();
-                                    this.getMesseges();    // reload getPosts()
-                                    this.post = {}      // empty post var
+                                    this.getMesseges();    // reload getMesseges()
+                                    this.messege = {}      // empty messege var
                                     /*======== Sweet Alert ============*/
                                     Vue.swal({
                                         position: 'top-end',
                                         icon: 'success',
-                                        text: 'Post Deleted Successfully',
+                                        text: 'Messege Deleted Successfully',
                                         showConfirmButton: false,
                                         timer: 1500
                                     });
@@ -174,8 +174,6 @@
                             }
                         )
                         .catch( error => console.log(error) ); 
-
-                        
                     }
                 })
             }

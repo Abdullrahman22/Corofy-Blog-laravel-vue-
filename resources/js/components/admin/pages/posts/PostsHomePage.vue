@@ -299,20 +299,23 @@
                         .then( 
                             response => {  // if there success request 
                                 if( response.data.status == "deleted" ){
+                                    $("#postModel").modal('hide');  // close Model
+                                    $(".modal-backdrop.fade.show").remove();
                                     this.getPosts(); // reload getPosts()
+                                    this.post = {}      // empty post var
+                                    /*======== Sweet Alert ============*/
+                                    Vue.swal({
+                                        position: 'top-end',
+                                        icon: 'success',
+                                        text: 'Post Deleted Successfully',
+                                        showConfirmButton: false,
+                                        timer: 1500
+                                    });
                                 }
                             }
                         )
                         .catch( error => console.log(error) ); 
 
-                        // if Deleted
-                        Vue.swal({
-                            position: 'top-end',
-                            icon: 'success',
-                            text: 'Post Deleted Successfully',
-                            showConfirmButton: false,
-                            timer: 1500
-                        });
 
                     }
                 })
