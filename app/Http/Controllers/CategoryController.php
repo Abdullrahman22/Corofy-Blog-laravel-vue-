@@ -20,11 +20,10 @@ class CategoryController extends Controller
 
     public function get_Category_Posts($slug){
         $category = Category::where("slug" , $slug) -> first();
-        $posts = Post::where("category_id" , $category-> id ) -> orderBy('id' , "desc") ->  paginate(10);
+        $posts = Post::where("category_id" , $category-> id ) -> orderBy('id' , "desc") -> withCount("comments") -> paginate(10);
         
         foreach( $posts as $post ){
             $post -> setAttribute("added_at" , $post -> created_at -> diffForHumans() ); 
-            $post -> setAttribute("comments_count" , $post -> comments -> count() ); 
         } 
 
         return response()-> json( $posts );

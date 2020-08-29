@@ -10,18 +10,16 @@ class PostController extends Controller
 {
 
     public function get_Random_Posts(){
-        $posts = Post::inRandomOrder()->limit(9)->with("category" , "comments")->get();
+        $posts = Post::inRandomOrder()->limit(9)->with("category" , "comments")-> withCount("comments") -> get();
         foreach( $posts as $post ){
-            $post -> setAttribute("comments_count" , $post -> comments-> count() ); 
             $post -> setAttribute("added_at" , $post -> created_at -> diffForHumans() ); 
         }
         return response() -> json( $posts );
     }
 
     public function get_Lasted_Posts(){
-        $posts = Post::orderBy('id' , "desc") ->  paginate(10);
+        $posts = Post::orderBy('id' , "desc") -> withCount("comments") -> paginate(10);
         foreach( $posts as $post ){
-            $post -> setAttribute("comments_count" , $post -> comments-> count() );  
             $post -> setAttribute("added_at" , $post -> created_at -> diffForHumans() ); 
         }
         return response() -> json( $posts );
@@ -39,9 +37,8 @@ class PostController extends Controller
     }
 
     public function search_Posts($searchVal){
-        $posts = Post::where("title" ,"like" , '%'.$searchVal.'%' ) -> orderBy('id' , "desc") ->  get();
+        $posts = Post::where("title" ,"like" , '%'.$searchVal.'%' ) -> orderBy('id' , "desc") -> withCount("comments") -> get();
         foreach( $posts as $post ){
-            $post -> setAttribute("comments_count" , $post -> comments-> count() );  
             $post -> setAttribute("added_at" , $post -> created_at -> diffForHumans() ); 
         }
         return response() -> json( $posts );
@@ -51,9 +48,8 @@ class PostController extends Controller
     public function show( $slug )   // if is not $id not add Post Model in params
     {
         
-        $post = Post::where("slug" , $slug )->with(["category", "comments"]) -> first();
+        $post = Post::where("slug" , $slug )->with(["category", "comments"]) -> withCount("comments") -> first();
         $post -> setAttribute("added_at" , $post -> created_at -> diffForHumans() );
-        $post -> setAttribute("comments_count" , $post -> comments -> count() );
 
 
         $comments = $post -> comments;

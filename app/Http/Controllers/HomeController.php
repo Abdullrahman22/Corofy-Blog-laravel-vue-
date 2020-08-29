@@ -28,7 +28,7 @@ class HomeController extends Controller
     public function index()
     {
         /*========== Posts ============*/
-        $posts = Post::orderby('id','desc')-> limit(3)->  get();
+        $posts = Post::orderby('id','desc')-> limit(3)-> withCount("comments") -> get();
         foreach( $posts as $post ){
             $post -> setAttribute("added_at" , $post -> created_at -> diffForHumans() ); 
         }
@@ -39,7 +39,6 @@ class HomeController extends Controller
         /*========== Site Name ============*/
         $setting = Setting::find(1);
         $site_name = $setting -> site_name;
-
         return view('app' , compact( 'posts', 'categories' , 'site_name' ) );
     }
 }

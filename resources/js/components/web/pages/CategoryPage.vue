@@ -77,14 +77,14 @@
         methods:{
             getCategoryPosts( page = 1 ){
                 axios.get('/api/category/' + this.$route.params.slug + '/posts?page=' + page)
-                // .then( resquest => console.log( resquest.data.data ) )    
                 .then( 
-                    resquest => {  
-                        this.posts = resquest.data 
-                        // console.log(resquest.data);
+                    resquest => { 
+                        this.posts = resquest.data  
                     }
                 )
-                .then( error => console.log(error) )
+                .catch( error => {
+                    this.$router.push({ name: 'NotFoundPage' }) ; // if category not has posts direct to not found page
+                })
             },
             categoryTitle(){
                 return this.$route.params.slug

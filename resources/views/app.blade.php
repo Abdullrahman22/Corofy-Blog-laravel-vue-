@@ -122,7 +122,7 @@
                               <h4>{{ substr($post->body, 0, 40) . '...' }}</h4>
                               <div class="post-meta">
                                 <span class="mr-2">{{$post->added_at}} </span> &bullet;
-                                <span class="ml-2"><span class="fa fa-comments"></span> {{$post->comments_count}} </span>
+                                <span class="ml-2"><span class="fa fa-comments"></span> {{ $post-> comments_count}} </span>
                               </div>
                             </div>
                           </router-link>

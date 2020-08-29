@@ -35,7 +35,7 @@ const routes = [
     { path: '/contact' , component: ContactPage },
     { path: '/post/:slug' , component: PostPage },
     { path: '/category/:slug' , component: CategoryPage },
-    { path: '*', component: NotFoundPage },
+    { path: '*', component: NotFoundPage , name: 'NotFoundPage'  },
 
 
 

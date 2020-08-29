@@ -133,14 +133,15 @@
         methods:{
             getPost(){
                 axios.get('/api/post/' + this.$route.params.slug) // start link( (/) -> to start link from begianing) 
-                // .then( resquest => console.log( resquest.data ) )    
                 .then( 
                     resquest => {  
                         this.post = resquest.data 
                         this.comments = resquest.data.comments 
                     }
                 )
-                .then( error => console.log(error) )
+                .catch( error => {
+                    this.$router.push({ name: 'NotFoundPage' }) ; // if category not has posts direct to not found page
+                })
             },
             getRelatedPosts(){
                 axios.get("/api/category/post/" + this.$route.params.slug)

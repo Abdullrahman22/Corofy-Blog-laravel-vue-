@@ -69,3 +69,7 @@ header .blog-brand{
     color: #000;
     font-size: 24px;
 }
+/*===================*/
+#notFound-page .notFound-img{
+    max-width: 450px ;
+}

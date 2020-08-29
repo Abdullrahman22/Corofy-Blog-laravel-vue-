@@ -4013,11 +4013,13 @@ __webpack_require__.r(__webpack_exports__);
       var _this = this;
 
       var page = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 1;
-      axios.get('/api/category/' + this.$route.params.slug + '/posts?page=' + page) // .then( resquest => console.log( resquest.data.data ) )    
-      .then(function (resquest) {
-        _this.posts = resquest.data; // console.log(resquest.data);
-      }).then(function (error) {
-        return console.log(error);
+      axios.get('/api/category/' + this.$route.params.slug + '/posts?page=' + page).then(function (resquest) {
+        _this.posts = resquest.data;
+      })["catch"](function (error) {
+        _this.$router.push({
+          name: 'NotFoundPage'
+        }); // if category not has posts direct to not found page
+
       });
     },
     categoryTitle: function categoryTitle() {
@@ -4226,9 +4228,11 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-/* harmony default export */ __webpack_exports__["default"] = ({});
+/* harmony default export */ __webpack_exports__["default"] = ({
+  mounted: function mounted() {
+    console.clear();
+  }
+});
 
 /***/ }),
 
@@ -4377,12 +4381,14 @@ __webpack_require__.r(__webpack_exports__);
       var _this = this;
 
       axios.get('/api/post/' + this.$route.params.slug) // start link( (/) -> to start link from begianing) 
-      // .then( resquest => console.log( resquest.data ) )    
       .then(function (resquest) {
         _this.post = resquest.data;
         _this.comments = resquest.data.comments;
-      }).then(function (error) {
-        return console.log(error);
+      })["catch"](function (error) {
+        _this.$router.push({
+          name: 'NotFoundPage'
+        }); // if category not has posts direct to not found page
+
       });
     },
     getRelatedPosts: function getRelatedPosts() {
@@ -47081,13 +47087,25 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", [
-    _vm._v(
-      "\n    Error 404 Page Not Found\n    Error 404 Page Not Found\n    Error 404 Page Not Found\n    Error 404 Page Not Found\n    Error 404 Page Not Found\n    Error 404 Page Not Found\n    Error 404 Page Not Found\n    Error 404 Page Not Found\n    Error 404 Page Not Found\n    Error 404 Page Not Found\n"
-    )
-  ])
+  return _vm._m(0)
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { attrs: { id: "notFound-page" } }, [
+      _c("div", { staticClass: "container text-center pt-5 pb-5" }, [
+        _c("img", {
+          staticClass: "notFound-img",
+          attrs: { src: "/images/page_not_found.png", alt: "notFound-img" }
+        }),
+        _vm._v(" "),
+        _c("h2", { attrs: { "ml-1": "" } }, [_vm._v(" Page not found! ")])
+      ])
+    ])
+  }
+]
 render._withStripped = true
 
 
@@ -64918,14 +64936,15 @@ __webpack_require__.r(__webpack_exports__);
 /*!************************************************************!*\
   !*** ./resources/js/components/web/pages/CategoryPage.vue ***!
   \************************************************************/
-/*! exports provided: default */
+/*! no static exports found */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _CategoryPage_vue_vue_type_template_id_351d7b44___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./CategoryPage.vue?vue&type=template&id=351d7b44& */ "./resources/js/components/web/pages/CategoryPage.vue?vue&type=template&id=351d7b44&");
 /* harmony import */ var _CategoryPage_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./CategoryPage.vue?vue&type=script&lang=js& */ "./resources/js/components/web/pages/CategoryPage.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _CategoryPage_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _CategoryPage_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__[key]; }) }(__WEBPACK_IMPORT_KEY__));
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
 
 
@@ -64955,7 +64974,7 @@ component.options.__file = "resources/js/components/web/pages/CategoryPage.vue"
 /*!*************************************************************************************!*\
   !*** ./resources/js/components/web/pages/CategoryPage.vue?vue&type=script&lang=js& ***!
   \*************************************************************************************/
-/*! exports provided: default */
+/*! no static exports found */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -65324,7 +65343,8 @@ var routes = [
   component: _components_web_pages_CategoryPage_vue__WEBPACK_IMPORTED_MODULE_4__["default"]
 }, {
   path: '*',
-  component: _components_web_pages_NotFoundPage_vue__WEBPACK_IMPORTED_MODULE_5__["default"]
+  component: _components_web_pages_NotFoundPage_vue__WEBPACK_IMPORTED_MODULE_5__["default"],
+  name: 'NotFoundPage'
 },
 /*================ Admin Routes ==================*/
 {

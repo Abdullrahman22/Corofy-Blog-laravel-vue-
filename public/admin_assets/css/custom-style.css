@@ -1,3 +1,6 @@
+.page-wrapper{
+  overflow: hidden;
+}
 .modal-title{
   font-size: 24px;
   font-weight: 400;
