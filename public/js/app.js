@@ -1969,14 +1969,18 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
-  name: 'Topbar'
+  name: 'Topbar',
+  data: function data() {
+    return {
+      dropdownMenu: false
+    };
+  },
+  methods: {
+    addClassDropdownMenu: function addClassDropdownMenu() {
+      this.dropdownMenu = !this.dropdownMenu;
+    }
+  }
 });
 
 /***/ }),
@@ -3604,8 +3608,7 @@ __webpack_require__.r(__webpack_exports__);
 
       if (this.searchVal.length > 0) {
         axios.get("/api/search/posts/" + this.searchVal).then(function (resquest) {
-          _this.posts = resquest.data;
-          console.log(resquest.data);
+          _this.posts = resquest.data; // console.log( resquest.data )   
         }).then(function (error) {
           return console.log(error);
         });
@@ -43726,84 +43729,80 @@ var render = function() {
     _c("div", { staticClass: "section__content section__content--p30" }, [
       _c("div", { staticClass: "container-fluid" }, [
         _c("div", { staticClass: "header-wrap" }, [
-          _vm._m(0),
-          _vm._v(" "),
-          _c("div", { staticClass: "header-button" }, [
-            _c("div", { staticClass: "account-wrap" }, [
-              _c("div", { staticClass: "account-item clearfix js-item-menu" }, [
-                _vm._m(1),
-                _vm._v(" "),
-                _vm._m(2),
-                _vm._v(" "),
-                _c("div", { staticClass: "account-dropdown js-dropdown" }, [
-                  _vm._m(3),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "account-dropdown__body" }, [
-                    _c(
-                      "div",
-                      { staticClass: "account-dropdown__item" },
-                      [
-                        _c("router-link", { attrs: { to: "/admin/account" } }, [
-                          _c("i", { staticClass: "zmdi zmdi-account" }),
-                          _vm._v(
-                            "\n                                            Account\n                                        "
-                          )
-                        ])
-                      ],
-                      1
-                    ),
+          _c(
+            "div",
+            {
+              staticClass: "header-button",
+              staticStyle: { "margin-left": "auto" }
+            },
+            [
+              _c("div", { staticClass: "account-wrap" }, [
+                _c(
+                  "div",
+                  {
+                    staticClass: "account-item clearfix js-item-menu",
+                    class: { "show-dropdown": _vm.dropdownMenu },
+                    on: { click: _vm.addClassDropdownMenu }
+                  },
+                  [
+                    _vm._m(0),
                     _vm._v(" "),
-                    _c(
-                      "div",
-                      { staticClass: "account-dropdown__item" },
-                      [
-                        _c("router-link", { attrs: { to: "/admin/setting" } }, [
-                          _c("i", { staticClass: "zmdi zmdi-settings" }),
-                          _vm._v(
-                            "\n                                            Setting\n                                        "
-                          )
-                        ])
-                      ],
-                      1
-                    )
-                  ]),
-                  _vm._v(" "),
-                  _vm._m(4)
-                ])
+                    _vm._m(1),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "account-dropdown js-dropdown" }, [
+                      _vm._m(2),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "account-dropdown__body" }, [
+                        _c(
+                          "div",
+                          { staticClass: "account-dropdown__item" },
+                          [
+                            _c(
+                              "router-link",
+                              { attrs: { to: "/admin/account" } },
+                              [
+                                _c("i", { staticClass: "zmdi zmdi-account" }),
+                                _vm._v(
+                                  "\n                                            Account\n                                        "
+                                )
+                              ]
+                            )
+                          ],
+                          1
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "div",
+                          { staticClass: "account-dropdown__item" },
+                          [
+                            _c(
+                              "router-link",
+                              { attrs: { to: "/admin/setting" } },
+                              [
+                                _c("i", { staticClass: "zmdi zmdi-settings" }),
+                                _vm._v(
+                                  "\n                                            Setting\n                                        "
+                                )
+                              ]
+                            )
+                          ],
+                          1
+                        )
+                      ]),
+                      _vm._v(" "),
+                      _vm._m(3)
+                    ])
+                  ]
+                )
               ])
-            ])
-          ])
+            ]
+          )
         ])
       ])
     ])
   ])
 }
 var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c(
-      "form",
-      { staticClass: "form-header", attrs: { action: "", method: "POST" } },
-      [
-        _c("input", {
-          staticClass: "au-input au-input--xl",
-          attrs: {
-            type: "text",
-            name: "search",
-            placeholder: "Search for datas & reports..."
-          }
-        }),
-        _vm._v(" "),
-        _c(
-          "button",
-          { staticClass: "au-btn--submit", attrs: { type: "submit" } },
-          [_c("i", { staticClass: "zmdi zmdi-search" })]
-        )
-      ]
-    )
-  },
   function() {
     var _vm = this
     var _h = _vm.$createElement
@@ -63969,15 +63968,14 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 /*!*************************************************************!*\
   !*** ./resources/js/components/admin/components/Topbar.vue ***!
   \*************************************************************/
-/*! no static exports found */
+/*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Topbar_vue_vue_type_template_id_add7cdc8___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Topbar.vue?vue&type=template&id=add7cdc8& */ "./resources/js/components/admin/components/Topbar.vue?vue&type=template&id=add7cdc8&");
 /* harmony import */ var _Topbar_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Topbar.vue?vue&type=script&lang=js& */ "./resources/js/components/admin/components/Topbar.vue?vue&type=script&lang=js&");
-/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _Topbar_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _Topbar_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__[key]; }) }(__WEBPACK_IMPORT_KEY__));
-/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
 
 
@@ -64007,7 +64005,7 @@ component.options.__file = "resources/js/components/admin/components/Topbar.vue"
 /*!**************************************************************************************!*\
   !*** ./resources/js/components/admin/components/Topbar.vue?vue&type=script&lang=js& ***!
   \**************************************************************************************/
-/*! no static exports found */
+/*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";

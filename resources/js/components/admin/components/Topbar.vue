@@ -3,22 +3,16 @@
         <div class="section__content section__content--p30">
             <div class="container-fluid">
                 <div class="header-wrap">
-                    <form class="form-header" action="" method="POST">
-                        <input class="au-input au-input--xl" type="text" name="search" placeholder="Search for datas &amp; reports..." />
-                        <button class="au-btn--submit" type="submit">
-                            <i class="zmdi zmdi-search"></i>
-                        </button>
-                    </form>
-                    <div class="header-button">
+                    <div class="header-button" style=" margin-left: auto;">
                         <div class="account-wrap">
-                            <div class="account-item clearfix js-item-menu">
+                            <div class="account-item clearfix js-item-menu" :class="{ 'show-dropdown' : dropdownMenu}"  @click="addClassDropdownMenu"  >
                                 <div class="image">
                                     <img src="/admin_assets/images/icon/avatar-01.jpg" alt="John Doe" />
                                 </div>
                                 <div class="content">
                                     <p> 
                                         john doe
-                                        <i class="fas fa-chevron-down"></i>
+                                        <i class="fas fa-chevron-down" ></i>
                                     </p>
                                 </div>
                                 <div class="account-dropdown js-dropdown">
@@ -67,6 +61,16 @@
 
 <script>
     export default {
-        name: 'Topbar'
+        name: 'Topbar',
+        data(){
+            return{
+                dropdownMenu: false ,
+            }
+        },
+        methods:{
+            addClassDropdownMenu(){
+                this.dropdownMenu =! this.dropdownMenu
+            },
+        }
     }
 </script>

@@ -14,7 +14,7 @@
 
 
     <!-- Title Page-->
-    <title>Dashboard</title>
+    <title>Admin Panal</title>
 
     <!-- Fontfaces CSS-->
     <link href="{{ asset("admin_assets/css/font-face.css")}}" rel="stylesheet" media="all">
@@ -50,7 +50,7 @@
                 <div class="container-fluid">
                     <div class="header-mobile-inner">
                         <a class="logo" href="../../">
-                            <h4> Corofy Blog </h4>
+                            <h4> {{ $site_name }} </h4>
                         </a>
                         <button class="hamburger hamburger--slider" type="button">
                             <span class="hamburger-box">
@@ -115,7 +115,7 @@
         <aside class="menu-sidebar d-none d-lg-block">
             <div class="logo">
                 <a class="logo" href="../../">
-                    <h4> Corofy Blog </h4>
+                    <h4> {{ $site_name }} </h4>
                 </a>
             </div>
             <div class="menu-sidebar__content js-scrollbar1">

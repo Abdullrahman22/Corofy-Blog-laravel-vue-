@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="en">
   <head>
-    <title> Corofy  Blog </title>
+    <title> {{ $site_name }} </title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
@@ -48,7 +48,7 @@
           <div class="row pt-5">
             <div class="col-12 text-center">
               <a class="absolute-toggle d-block d-md-none" data-toggle="collapse" href="#navbarMenu" role="button" aria-expanded="false" aria-controls="navbarMenu"><span class="burger-lines"></span></a>
-              <h1 class="site-logo"><router-link to="/">Corofy </router-link></h1>
+              <h1 class="site-logo"><router-link to="/"> {{ $site_name }}   </router-link></h1>
             </div>
           </div>
         </div>
@@ -66,11 +66,9 @@
                 <li class="nav-item dropdown">
                   <a class="nav-link dropdown-toggle" href="category.html" id="dropdown05" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Categories</a>
                   <div class="dropdown-menu" aria-labelledby="dropdown05">
-                    <a class="dropdown-item" href="category.html">Lifestyle</a>
-                    <a class="dropdown-item" href="category.html">Food</a>
-                    <a class="dropdown-item" href="category.html">Adventure</a>
-                    <a class="dropdown-item" href="category.html">Travel</a>
-                    <a class="dropdown-item" href="category.html">Business</a>
+                    @foreach ( $categories as $category )
+                      <router-link class="dropdown-item" to="/category/{{$category->slug}}">{{ $category-> title }}</router-link>
+                    @endforeach
                   </div>
 
                 </li>
@@ -98,14 +96,14 @@
 
 
 
-
+      <!-------- Footer -------->
       <footer class="site-footer">
         <div class="container">
           <div class="row mb-5">
             <div class="col-md-4">
               <h3>About Us</h3>
               <p class="mb-4">
-                <img src="{{ asset("images/img_1.jpg") }}" alt="Image placeholder" class="img-fluid">
+                <img src="{{ asset("images/person_testimonial_1.jpg") }}" alt="Image placeholder" class="img-fluid">
               </p>
 
               <p>Lorem ipsum dolor sit amet sa ksal sk sa, consectetur adipisicing elit. Ipsa harum inventore reiciendis.
@@ -116,42 +114,20 @@
                   <h3>Latest Post</h3>
                   <div class="post-entry-sidebar">
                     <ul>
-                      <li>
-                        <a href="">
-                          <img src="{{ asset("images/img_6.jpg") }}" alt="Image placeholder" class="mr-4">
-                          <div class="text">
-                            <h4>How to Find the Video Games of Your Youth</h4>
-                            <div class="post-meta">
-                              <span class="mr-2">March 15, 2018 </span> &bullet;
-                              <span class="ml-2"><span class="fa fa-comments"></span> 3</span>
+                      @foreach ( $posts as $post )
+                        <li>
+                          <router-link to="/post/{{$post->slug}}">
+                            <img src="{{ asset("/images/posts/" . $post->img) }}" alt="Image placeholder" class="mr-4">
+                            <div class="text">
+                              <h4>{{ substr($post->body, 0, 40) . '...' }}</h4>
+                              <div class="post-meta">
+                                <span class="mr-2">{{$post->added_at}} </span> &bullet;
+                                <span class="ml-2"><span class="fa fa-comments"></span> {{$post->comments_count}} </span>
+                              </div>
                             </div>
-                          </div>
-                        </a>
-                      </li>
-                      <li>
-                        <a href="">
-                          <img src="{{ asset("images/img_3.jpg") }}" alt="Image placeholder" class="mr-4">
-                          <div class="text">
-                            <h4>How to Find the Video Games of Your Youth</h4>
-                            <div class="post-meta">
-                              <span class="mr-2">March 15, 2018 </span> &bullet;
-                              <span class="ml-2"><span class="fa fa-comments"></span> 3</span>
-                            </div>
-                          </div>
-                        </a>
-                      </li>
-                      <li>
-                        <a href="">
-                          <img src="{{ asset("images/img_4.jpg") }}" alt="Image placeholder" class="mr-4">
-                          <div class="text">
-                            <h4>How to Find the Video Games of Your Youth</h4>
-                            <div class="post-meta">
-                              <span class="mr-2">March 15, 2018 </span> &bullet;
-                              <span class="ml-2"><span class="fa fa-comments"></span> 3</span>
-                            </div>
-                          </div>
-                        </a>
-                      </li>
+                          </router-link>
+                        </li>
+                      @endforeach
                     </ul>
                   </div>
                 </div>
@@ -162,11 +138,9 @@
                   <div class="mb-5">
                     <h3>Quick Links</h3>
                     <ul class="list-unstyled">
-                      <li><a href="#">About Us</a></li>
-                      <li><a href="#">Travel</a></li>
-                      <li><a href="#">Adventure</a></li>
-                      <li><a href="#">Courses</a></li>
-                      <li><a href="#">Categories</a></li>
+                      <li><router-link to="/"> Home </router-link></li>
+                      <li><router-link to="/about"> About </router-link></li>
+                      <li><router-link to="/contact"> Contact </router-link></li>
                     </ul>
                   </div>
                   

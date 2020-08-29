@@ -30,11 +30,10 @@ class PostController extends Controller
     public function get_Related_Posts( $slug )   // if is not $id not add Post Model in params
     {
         $post  = Post::where('slug', $slug ) -> first();
-        $posts = Post::where('category_id', $post -> category_id ) -> inRandomOrder()->limit(3)->get(); 
+        $posts = Post::where('category_id', $post -> category_id ) -> inRandomOrder()-> withCount('comments') -> limit(3)->get(); 
         foreach( $posts as $post ){
             $post -> setAttribute("added_at" , $post -> created_at -> diffForHumans() ); 
             $post -> setAttribute("category_title" , $post -> category -> title ); 
-            $post -> setAttribute("comments_count" , $post -> comments -> count() ); 
         } 
         return response() -> json( $posts );
     }

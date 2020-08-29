@@ -20,14 +20,7 @@ Auth::routes();
 
 
 /*=========== admin Routes =========*/
-Route::get("/admin/{any}", function () {
-    return view('admin');
-})->where([ "any" => ".*" ]); 
-
-
-
+Route::get("/admin/{any}", "Admin\AdminController@index") -> where([ "any" => ".*" ]); 
 
 /*=========== Web Routes ===========*/
-Route::get('/{any}', function () {
-    return view('app');
-})->where([ "any" => ".*" ]); 
+Route::get("/{any}", "HomeController@index") -> where([ "any" => ".*" ]); 

@@ -46,7 +46,7 @@
                     .then( 
                         resquest => {  
                             this.posts = resquest.data 
-                            console.log( resquest.data )   
+                            // console.log( resquest.data )   
                         }
                     )
                     .then( error => console.log(error) )

@@ -15,6 +15,11 @@
 .table-data3 tbody tr td:last-child {
   text-align: center !important;
 }
+.menu-sidebar div.logo{
+  box-shadow: none !important ;
+  -webkit-box-shadow: none !important; 
+  border-right: 0px !important
+}
 .user-img{
   width: 45px;
   height: 44px;
