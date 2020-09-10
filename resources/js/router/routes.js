@@ -1,26 +1,26 @@
 /*================ Web Components ==================*/
-import HomePage  from './../components/web/pages/HomePage.vue'
-import AboutPage  from './../components/web/pages/AboutPage.vue'
-import ContactPage  from './../components/web/pages/ContactPage.vue'
-import PostPage  from './../components/web/pages/PostPage.vue'
-import CategoryPage  from './../components/web/pages/CategoryPage.vue'
-import NotFoundPage  from './../components/web/pages/NotFoundPage.vue'
+import HomePage  from './../pages/web/HomePage.vue'
+import AboutPage  from './../pages/web/AboutPage.vue'
+import ContactPage  from './../pages/web/ContactPage.vue'
+import PostPage  from './../pages/web/PostPage.vue'
+import CategoryPage  from './../pages/web/CategoryPage.vue'
+import NotFoundPage  from './../pages/web/NotFoundPage.vue'
 
 
 /*================ Admin Components ==================*/
-import OverViewPage  from './../components/admin/pages/OverViewPage'
-import UsersPage  from './../components/admin/pages/UsersPage.vue'
-import CategoriesPage  from './../components/admin/pages/CategoriesPage.vue'
+import OverViewPage  from './../pages/admin/OverViewPage'
+import UsersPage  from './../pages/admin/UsersPage.vue'
+import CategoriesPage  from './../pages/admin/CategoriesPage.vue'
 // Posts components
-import PostsPage  from './../components/admin/pages/posts/PostsPage.vue'
-import PostsHomePage  from './../components/admin/pages/posts/PostsHomePage.vue'
-import PostViewPage  from './../components/admin/pages/posts/PostViewPage.vue'
+import PostsPage  from './../pages/admin/posts/PostsPage.vue'
+import PostsHomePage  from './../pages/admin/posts/PostsHomePage.vue'
+import PostViewPage  from './../pages/admin/posts/PostViewPage.vue'
 // Comments Component
-import CommentsPage  from './../components/admin/pages/CommentsPage.vue'
+import CommentsPage  from './../pages/admin/CommentsPage.vue'
 // Messeges Component
-import MessegesPage  from './../components/admin/pages/MessegesPage.vue'
+import MessegesPage  from './../pages/admin/MessegesPage.vue'
 // Setting component
-import SettingPage  from './../components/admin/pages/SettingPage.vue'
+import SettingPage  from './../pages/admin/SettingPage.vue'
 
 
 

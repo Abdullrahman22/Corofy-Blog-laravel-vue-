@@ -1,5 +1,5 @@
 <template>
-    <div class="comment-page">
+    <div class="messeges-page">
         
         <!-- PAGE CONTAINER-->
         <div class="page-container">
@@ -17,24 +17,24 @@
                                 <thead>
                                     <tr>
                                         <th>#ID</th>
-                                        <th>Comment</th>
-                                        <th>User</th>
+                                        <th>Messege</th>
+                                        <th>email</th>
                                         <th>Created at</th>
                                         <th>action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr v-for=" comment in comments.data " :key="comment.id">
-                                        <td> #{{ comment.id }} </td>
-                                        <td> {{ comment.body.substring(0, 30)  + '...' }} </td>
-                                        <td> <img :src=" '/images/users/' + comment.user.img " alt="user-img" class="user-img" > </td>
-                                        <td> {{ comment.added_at }} </td>
+                                    <tr v-for=" messege in messeges.data " :key="messege.id">
+                                        <td> #{{ messege.id }} </td>
+                                        <td> {{ messege.body.substring(0, 20)  + '...' }} </td>
+                                        <td> {{ messege.email.substring(0, 20)  + '...'  }} </td>
+                                        <td> {{ messege.added_at }} </td>
                                         <td>
                                             <div class="table-data-feature">
-                                                <button class="item" data-placement="top" title="Show" data-original-title="Show" data-toggle="modal" data-target="#commentModel" @click="showComment(comment)">
+                                                <button class="item" data-placement="top" title="Show" data-original-title="Show" data-toggle="modal" data-target="#messegeModel" @click="showMessege(messege)">
                                                     <i class="zmdi zmdi-eye"></i>
                                                 </button>
-                                                <button class="item" data-toggle="tooltip" data-placement="top" title="Delete" data-original-title="Delete" @click="deleteComment(comment)">
+                                                <button class="item" data-toggle="tooltip" data-placement="top" title="Delete" data-original-title="Delete" @click="deleteMessege(messege)">
                                                     <i class="zmdi zmdi-delete"></i>
                                                 </button>
                                             </div>
@@ -51,7 +51,7 @@
 
                 <div class="pagination-container">
                     <!-- pagination Component -->
-                    <pagination :data="comments" @pagination-change-page="getComments" :limit="1" ></pagination>
+                    <pagination :data="messeges" @pagination-change-page="getMesseges" :limit="1" ></pagination>
                 </div>
 
             </div>
@@ -60,41 +60,40 @@
         <!-- END PAGE CONTAINER-->
 
 
-        <!----- Comment Model ----->
-        <div class="modal fade" id="commentModel" tabindex="-1" role="dialog" aria-labelledby="commentModelLabel" aria-hidden="true">
+        <!----- Messege Model ----->
+        <div class="modal fade" id="messegeModel" tabindex="-1" role="dialog" aria-labelledby="messegeModelLabel" aria-hidden="true">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     
                     <div class="modal-header">
-                        <h5 class="modal-title" id="commentModelLabel"> Show Comment </h5>
+                        <h5 class="modal-title" id="messegeModelLabel"> The Messege </h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
                     <div class="modal-body">
-                        <!----------------- Comments ---------------------->
-                        <ul class="comment-list" >
-                            <li class="comment">
-                                <div class="vcard">
-                                    <img v-if="comment.user" :src=" '/images/users/' + comment.user.img " alt="Image placeholder">
-                                </div>
-                                <div class="comment-body">
-                                    <h3 v-if="comment.user" > {{ comment.user.name }} </h3>
-                                    <div class="meta"> {{ comment.added_at }} </div>
-                                    <p> {{ comment.body }}  </p>
-                                </div>
+                        <!----------------- Messeges ---------------------->
+                        <ul class="messege-list" >
+                            <li class="messege">
+                                <p>  <u class=" h5"> @Email:</u>  {{ messege.email }}   </p>
+                                <hr>
+                                <p> <u class=" h5"> ender Name:</u> {{ messege.name }} </p>
+                                <hr>
+                                <p> <u class=" h5"> Sender Phone:</u> {{ messege.phone }} </p>
+                                <hr>
+                                <p> <u class=" h5"> Messege:</u> {{ messege.body }} </p>
                             </li>
                         </ul>
                         <!------ Buttons ------>
                         <div class="buttons float-right">
-                            <button type="submit" class="btn btn-danger" @click="deleteComment(comment)">  Delete  </button>
+                            <button type="submit" class="btn btn-danger" @click="deleteMessege(messege)">  Delete  </button>
                             <button class="btn btn-info" data-dismiss="modal"> Close </button>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        <!----- End Post Model ----->
+        <!----- End Messege Model ----->
 
 
 
@@ -104,7 +103,7 @@
     </div>
 </template>
 <script>
-    import Topbar from './../components/Topbar'
+    import Topbar from './../../components/admin/Topbar'
 
     export default {
         components:{
@@ -112,44 +111,39 @@
         },
         data(){
             return{
-                comments:{},
-                comment: {}
-            }
-        },
-        watch: {
-            comment(){
-                return this.comment
+                messeges:{},
+                messege: {}
             }
         },
         mounted(){
-            this.getComments();
+            this.getMesseges();
         },
         methods:{
-            getComments( page = 1 ){
-                axios.get('/api/admin/comments?page=' + page)  
+            getMesseges( page = 1 ){
+                axios.get('/api/admin/messeges?page=' + page)  
                 .then( 
                     resquest => {  
-                        this.comments = resquest.data 
+                        this.messeges = resquest.data 
                         // console.log(resquest.data);
                     }
                 )
                 .catch( error => console.log(error) )
             },
-            showComment(comment){
-                axios.get('/api/admin/comments/' + comment.id )  
+            showMessege(messege){
+                axios.get('/api/admin/messeges/' + messege.id )  
                 .then( 
                     resquest => {  
-                        this.comment = resquest.data 
+                        this.messege = resquest.data 
                         // console.log(resquest.data);
                     }
                 )
                 .catch( error => console.log(error) )
             },
-            deleteComment(comment){
+            deleteMessege(messege){
 
                 Vue.swal({
 
-                    text: 'Are you sure delete this Comment ?',
+                    text: 'Are you sure delete this Messege ?',
                     icon: 'warning',
                     showCancelButton: true,
                     confirmButtonColor: '#3085d6',
@@ -160,19 +154,19 @@
                     if (result.value) {
 
                         // do delete response
-                        axios.delete("/api/admin/comments/" + comment.id  )
+                        axios.delete("/api/admin/messeges/" + messege.id  )
                         .then( 
                             response => {  // if there success request 
                                 if( response.data.status == "deleted" ){
-                                    $("#commentModel").modal('hide');  // close Model
+                                    $("#messegeModel").modal('hide');  // close Model
                                     $(".modal-backdrop.fade.show").remove();
-                                    this.getComments();    // reload getPosts()
-                                    this.comment = {}      // empty post var
+                                    this.getMesseges();    // reload getMesseges()
+                                    this.messege = {}      // empty messege var
                                     /*======== Sweet Alert ============*/
                                     Vue.swal({
                                         position: 'top-end',
                                         icon: 'success',
-                                        text: 'Comment Deleted Successfully',
+                                        text: 'Messege Deleted Successfully',
                                         showConfirmButton: false,
                                         timer: 1500
                                     });
@@ -180,7 +174,6 @@
                             }
                         )
                         .catch( error => console.log(error) ); 
-
                     }
                 })
             }

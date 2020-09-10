@@ -37,8 +37,10 @@
                     <a href="#"><span class="fa fa-facebook"></span></a>
                     <a href="#"><span class="fa fa-instagram"></span></a>
                 </div>
-                <div class="col-6 blog-brand">
-                    +214 2346 1255
+                <div class="col-6 blog-brand" style="color: #fff">
+                    <a href="#" data-toggle="modal" data-target="#loginModal" >Login</a>
+                    /
+                    <a href="#" data-toggle="modal" data-target="#signUpModal" >SignUp</a>
                 </div>
             </div>
           </div>
@@ -58,27 +60,27 @@
             
            
             <div class="collapse navbar-collapse" id="navbarMenu">
-              <ul class="navbar-nav mx-auto">
-                <li class="nav-item">
-                  <router-link class="nav-link active" to="/">Home</router-link>
-                </li>
-                
-                <li class="nav-item dropdown">
-                  <a class="nav-link dropdown-toggle" href="category.html" id="dropdown05" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Categories</a>
-                  <div class="dropdown-menu" aria-labelledby="dropdown05">
-                    @foreach ( $categories as $category )
-                      <router-link class="dropdown-item" to="/category/{{$category->slug}}">{{ $category-> title }}</router-link>
-                    @endforeach
-                  </div>
+                <ul class="navbar-nav mx-auto">
+                    <li class="nav-item">
+                        <router-link class="nav-link active" to="/">Home</router-link>
+                    </li>
+                    
+                    <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="category.html" id="dropdown05" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Categories</a>
+                    <div class="dropdown-menu" aria-labelledby="dropdown05">
+                        @foreach ( $categories as $category )
+                        <router-link class="dropdown-item" to="/category/{{$category->slug}}">{{ $category-> title }}</router-link>
+                        @endforeach
+                    </div>
 
-                </li>
-                <li class="nav-item">
-                  <router-link class="nav-link" to="/about">About</router-link>
-                </li>
-                <li class="nav-item">
-                  <router-link class="nav-link" to="/contact">Contact</router-link>
-                </li>
-              </ul>
+                    </li>
+                    <li class="nav-item">
+                    <router-link class="nav-link" to="/about">About</router-link>
+                    </li>
+                    <li class="nav-item">
+                    <router-link class="nav-link" to="/contact">Contact</router-link>
+                    </li>
+                </ul>
               
             </div>
 

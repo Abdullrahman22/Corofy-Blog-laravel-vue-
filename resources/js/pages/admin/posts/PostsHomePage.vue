@@ -136,7 +136,7 @@
     </div>
 </template>
 <script>
-    import Topbar from './../../components/Topbar'
+    import Topbar from './../../../components/admin/Topbar'
 
     export default {
         components:{

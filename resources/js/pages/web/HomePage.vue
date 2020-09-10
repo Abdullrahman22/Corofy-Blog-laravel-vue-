@@ -1,18 +1,20 @@
 <template>
-    <div id="category-page">
+    <div id="home-page">
+
+        <slider></slider>
+        
 
 
-
-        <section class="site-section py-sm mt-4">
+        <section class="site-section py-sm">
             <div class="container">
                 <div class="row blog-entries">
 
                     <!------------ searching Posts ----------------->
                     <searching :searchVal="searchVal" v-if="searchVal"></searching>
 
-                    <!------------ Category Posts ----------------->
-                    <div class="col-md-12 col-lg-8 main-content" v-else >
-                        <h4 class="mb-4 mt-4 category-title"> {{ categoryTitle() }} </h4>
+                    <!------------ Latest Posts ----------------->
+                    <div class="col-md-12 col-lg-8 main-content" v-else>
+                        <h2 class="mb-4">Latest Posts</h2>
                         <div class="row">
                             <div class="col-md-6" v-for="post in posts.data" :key="post.id" >
                                 <router-link :to=" '/post/' + post.slug " class="blog-entry" data-animate-effect="fadeIn">
@@ -29,8 +31,7 @@
                         </div>
 
                         <!-- pagination Component -->
-                        <pagination :data="posts" @pagination-change-page="getCategoryPosts" :limit="3" ></pagination>
-
+                        <pagination :data="posts" @pagination-change-page="getLatestPosts" :limit="3" ></pagination>
 
                     </div>
 
@@ -41,54 +42,48 @@
             </div>
         </section>
 
+        <!------ Register Modals ------>
+        <register-modals></register-modals>
 
     </div>
 </template>
 <script>
-
-    import Sidebar from './../components/Sidebar'
-    import Searching from './../components/Searching'
-
-
+    import RegisterModals from './../../components/web/RegisterModals'
+    import Sidebar from './../../components/web/Sidebar'
+    import Searching from './../../components/web/Searching'
+    import Slider from './../../components/web/Slider'
+    
     export default {
         components:{
+            RegisterModals,
             Sidebar,
-            Searching
+            Slider,
+            Searching,
         },
         data(){
             return{
-                posts: {},
+                posts: {}
             }
+        },
+        mounted() {
+            this.getLatestPosts();
         },
         computed: {
             searchVal: function() {
                 return this.$store.state.searchVal;
             }
         },
-        watch: {
-            $route: function() {  // watch $route if any changes
-                this.getCategoryPosts();
-                this.categoryTitle();
-            },
-        },
-        mounted() {
-            this.getCategoryPosts();
-        },
         methods:{
-            getCategoryPosts( page = 1 ){
-                axios.get('/api/category/' + this.$route.params.slug + '/posts?page=' + page)
+            getLatestPosts( page = 1 ){
+                axios.get('api/lastedPosts?page=' + page)
+                // .then( resquest => console.log( resquest.data.data ) )    
                 .then( 
-                    resquest => { 
-                        this.posts = resquest.data  
+                    resquest => {  
+                        this.posts = resquest.data 
                     }
                 )
-                .catch( error => {
-                    this.$router.push({ name: 'NotFoundPage' }) ; // if category not has posts direct to not found page
-                })
+                .then( error => console.log(error) )
             },
-            categoryTitle(){
-                return this.$route.params.slug
-            }
         }
     }
     
