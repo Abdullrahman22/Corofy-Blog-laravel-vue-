@@ -17,9 +17,14 @@ import VueSweetalert2 from 'vue-sweetalert2';
 Vue.use(VueSweetalert2);;
 
 
+/*======= Components =======*/
+Vue.component('Topbar', require('./components/web/Topbar.vue').default);
+
+
+
 /*======= Vue Instance =======*/
 const app = new Vue({
     el: '#app',
     router,
-    store  
+    store ,
 });

@@ -1,9 +1,15 @@
 .comments-header{
     margin-bottom:0px !important;
 }
-header .blog-brand{
-    color: #fff;
+header .register-links{
+    color: #fff !important;
     text-align: right;
+}
+header .register-links a{
+    color: #fff !important;
+}
+header .register-links a:hover{
+    color: #c8adf5 !important;
 }
 .icon.fa-search{
     cursor: pointer;
