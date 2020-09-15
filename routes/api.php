@@ -13,10 +13,14 @@ use Illuminate\Support\Facades\Route;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
-
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+/*================= Register Apis =====================*/
+Route::post('/register', 'AuthAPI\AuthController@register');
+Route::post('/login', 'AuthAPI\AuthController@login');
+
 
 /*============= Web APIs =============*/
 //  POSTS  
@@ -51,3 +55,5 @@ Route::namespace("admin")->group( function (){
     Route::get("admin/setting" , "SettingController@getSiteInfo");    
     Route::put("admin/setting/update" , "SettingController@update");    
 });
+
+
