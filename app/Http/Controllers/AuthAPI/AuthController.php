@@ -14,57 +14,81 @@ class AuthController extends Controller
     
     public function register(Request $request)
     {
-
+        // Register Rules 
         $rules = [
-            'name' => 'required|string|max:50',
+            'name' => 'required|string|min:6|max:50',
             'email' => 'required|string|email|max:55|unique:users',
             'password' => 'required|min:8|confirmed',
         ];
+        // Validate Register
         $validator = Validator::make( $request->all() , $rules  ); 
+        // Error Response If Validate Fail
         if( $validator -> fails()) {  
             return response() -> json([
                 "status" => "error",
-                "errors" => $validator->errors()  // return errors validator in array 
-            ], 422 ); 
+                "msg" => "validation error",
+                "errors" => $validator->errors()  
+            ], 422); 
         }
-
-        $request['password'] = Hash::make($request['password']);
+        // Customize Requests
+        $request['password'] = Hash::make($request['password']); 
         $request['remember_token'] = Str::random(10);
-        $user = User::create($request->toArray());
+        // Save User In DB
+        $user = User::create( $request->toArray() );
+        // Genrate Token For New User
         $token = $user->createToken('Laravel Password Grant Client')->accessToken;
-        $response = ['token' => $token];
-        return response($response, 200);
+        // Success Response
+        return response()-> json([
+            'status' => 'success' ,
+            "msg" => "register successfully",
+            'token' => $token,
+        ], 200);
 
     }
 
     public function login(Request $request)
     {
-
+        // Login Rules 
         $rules = [
             'email' => 'required|string|email|max:55',
             'password' => 'required|min:8',
         ];
+        // Validate Login
         $validator = Validator::make( $request->all() , $rules  ); 
+        // Error Response If Validate Fail
         if( $validator -> fails()) {  
             return response() -> json([
                 "status" => "error",
-                "errors" => $validator->errors()  // return errors validator in array 
+                "msg" => "validation error",
+                "errors" => $validator->errors()  
             ], 422 ); 
         }
-
+        // Check if User Email Exist
         $user = User::where('email', $request->email)->first();
         if ($user) {
-            if (Hash::check($request->password, $user->password)) {
+            // Check if Same Password
+            if (Hash::check( $request->password , $user->password )) {
+                // Genrate Token For Login User
                 $token = $user->createToken('Laravel Password Grant Client')->accessToken;
-                $response = ['token' => $token];
-                return response($response, 200);
+                return response()-> json([
+                    'status' => 'success' ,
+                    "msg" => "login successfully",
+                    'token' => $token
+                ], 200);
             } else {
-                $response = ["message" => "Password mismatch"];
-                return response($response, 422);
+                return response() -> json([
+                    "status" => "error",
+                    "msg" => "validation error",
+                    "errors" => $validator->getMessageBag()->add('password', "password isn't correct")
+                ], 422 );
             }
-        } else {
-            $response = ["message" =>'User does not exist'];
-            return response($response, 422);
+        }else{
+            // if Email Not Exist
+            return response() -> json([
+                "status" => "error",
+                "msg" => "validation error",
+                "errors" => $validator->getMessageBag()->add('email', "user isn't exist")
+            ], 422 );
         }
 
     }

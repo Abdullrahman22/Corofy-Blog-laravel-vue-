@@ -64606,7 +64606,7 @@ Vue.component('pagination', __webpack_require__(/*! laravel-vue-pagination */ ".
 
 Vue.use(vue_sweetalert2__WEBPACK_IMPORTED_MODULE_2__["default"]);
 ;
-/*======= Components =======*/
+/*======= register Components in Blade File =======*/
 
 Vue.component('Topbar', __webpack_require__(/*! ./components/web/Topbar.vue */ "./resources/js/components/web/Topbar.vue")["default"]);
 /*======= Vue Instance =======*/
