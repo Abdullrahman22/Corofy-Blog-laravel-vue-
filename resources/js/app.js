@@ -17,8 +17,11 @@ import VueSweetalert2 from 'vue-sweetalert2';
 Vue.use(VueSweetalert2);;
 
 
-/*======= register Components in Blade File =======*/
-Vue.component('Topbar', require('./components/web/Topbar.vue').default);
+/*======= Register Components in Blade File =======*/
+Vue.component('header-component', require('./components/web/Header.vue').default);
+Vue.component('footer-component', require('./components/web/Footer.vue').default);
+Vue.component('register-model', require('./components/web/RegisterModal.vue').default);
+Vue.component('login-model', require('./components/web/LoginModal.vue').default);
 
 
 

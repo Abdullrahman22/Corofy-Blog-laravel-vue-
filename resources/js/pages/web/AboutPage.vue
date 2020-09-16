@@ -54,10 +54,7 @@
                 </div>
             </div>
         </section>
-
-        <!------ Register Modals ------>
-        <register-modals></register-modals>
-
+        
 
     </div>
 </template>
@@ -65,13 +62,11 @@
 
     import Sidebar from './../../components/web/Sidebar'
     import Searching from './../../components/web/Searching'
-    import RegisterModals from './../../components/web/RegisterModals'
     
     export default {
         components:{
             Sidebar,
             Searching,
-            RegisterModals,
         },
         data(){
             return{

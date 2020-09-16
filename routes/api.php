@@ -23,14 +23,16 @@ Route::post('/login', 'AuthAPI\AuthController@login');
 
 
 /*============= Web APIs =============*/
+//  Header & Footer Info  
+Route::get("home-info", "HomeController@index"); 
 //  POSTS  
-Route::get("randPosts", "PostController@get_Random_Posts");  // ==> ("/api/randPosts")
-Route::get("lastedPosts" , "PostController@get_Lasted_Posts");  // ==> ("/api/lastedPosts")
-Route::get("post/{slug}", "PostController@show");  // ==> ("api/post/{slug}")
-Route::get("category/post/{slug}" , "PostController@get_Related_Posts");   // ==> ("api/category/post/{slug}")
-Route::get("search/posts/{searchVal}" , "PostController@search_Posts");    // ==> ("api/search/posts/{searchVal}")
+Route::get("randPosts", "PostController@get_Random_Posts"); 
+Route::get("lastedPosts" , "PostController@get_Lasted_Posts"); 
+Route::get("post/{slug}", "PostController@show");  
+Route::get("category/post/{slug}" , "PostController@get_Related_Posts");  
+Route::get("search/posts/{searchVal}" , "PostController@search_Posts");    
 //  Categories  
-Route::get("allCategories", "CategoryController@get_All_Categories");  // ==> ("/api/randPosts")
+Route::get("allCategories", "CategoryController@get_All_Categories"); 
 Route::get("category/{slug}/posts" , "CategoryController@get_Category_Posts" );
 
 

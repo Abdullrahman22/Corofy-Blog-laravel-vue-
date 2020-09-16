@@ -42,20 +42,16 @@
             </div>
         </section>
 
-        <!------ Register Modals ------>
-        <register-modals></register-modals>
 
     </div>
 </template>
 <script>
-    import RegisterModals from './../../components/web/RegisterModals'
     import Sidebar from './../../components/web/Sidebar'
     import Searching from './../../components/web/Searching'
     import Slider from './../../components/web/Slider'
     
     export default {
         components:{
-            RegisterModals,
             Sidebar,
             Slider,
             Searching,
@@ -75,14 +71,14 @@
         },
         methods:{
             getLatestPosts( page = 1 ){
-                axios.get('api/lastedPosts?page=' + page)
+                axios.get('/api/lastedPosts?page=' + page)
                 // .then( resquest => console.log( resquest.data.data ) )    
                 .then( 
                     resquest => {  
                         this.posts = resquest.data 
                     }
                 )
-                .then( error => console.log(error) )
+                .catch( error => console.log(error) )
             },
         }
     }
