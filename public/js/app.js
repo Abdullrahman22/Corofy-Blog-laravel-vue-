@@ -2260,8 +2260,62 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
-  name: "LoginModal"
+  name: "LoginModal",
+  data: function data() {
+    return {
+      user: {
+        email: '',
+        password: ''
+      },
+      errors: {}
+    };
+  },
+  methods: {
+    submitForm: function submitForm() {
+      var _this = this;
+
+      axios.post('/api/login', this.user).then(function (response) {
+        // if there success request 
+        console.log(response.data);
+
+        if (response.data.status == "error") {
+          _this.errors = response.data.errors; // equale it with var errors in data
+        } else if (response.data.status == "success") {
+          _this.errors = {}; // empty error var
+
+          _this.user = {}; // empty user var
+
+          $("#loginModal").modal('hide'); // close Model
+
+          $(".modal-backdrop.fade.show").remove();
+          /*======== Sweet Alert ============*/
+
+          Vue.swal({
+            position: 'top-end',
+            icon: 'success',
+            title: 'Login Successfully!',
+            showConfirmButton: false,
+            timer: 2500
+          });
+          /*======== Save User In Locastorage ========*/
+
+          localStorage.setItem('token', response.data.token);
+        }
+      }).then(function (error) {
+        return console.log(error);
+      });
+    }
+  }
 });
 
 /***/ }),
@@ -2324,8 +2378,66 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
-  name: "RegisterModal"
+  name: "RegisterModal",
+  data: function data() {
+    return {
+      user: {
+        name: '',
+        email: '',
+        password: '',
+        password_confirmation: ''
+      },
+      errors: {}
+    };
+  },
+  methods: {
+    submitForm: function submitForm() {
+      var _this = this;
+
+      axios.post('/api/register', this.user).then(function (response) {
+        // if there success request 
+        console.log(response.data);
+
+        if (response.data.status == "error") {
+          _this.errors = response.data.errors; // equale it with var errors in data
+        } else {
+          _this.errors = {}; // empty error var
+
+          _this.user = {}; // empty user var
+
+          $("#signUpModal").modal('hide'); // close Model
+
+          $(".modal-backdrop.fade.show").remove();
+          /*======== Sweet Alert ============*/
+
+          Vue.swal({
+            position: 'top-end',
+            icon: 'success',
+            text: 'Congratulations Account Created Successfully!',
+            showConfirmButton: false,
+            timer: 2500
+          });
+        }
+      }).then(function (error) {
+        return console.log(error);
+      });
+    }
+  }
 });
 
 /***/ }),
@@ -44707,151 +44819,203 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
+  return _c(
+    "div",
+    {
+      staticClass: "modal fade register",
+      attrs: {
+        id: "loginModal",
+        tabindex: "-1",
+        role: "dialog",
+        "aria-labelledby": "loginModalLabel",
+        "aria-hidden": "true"
+      }
+    },
+    [
+      _c("div", { staticClass: "modal-dialog", attrs: { role: "document" } }, [
+        _c("div", { staticClass: "modal-content" }, [
+          _vm._m(0),
+          _vm._v(" "),
+          _c("div", { staticClass: "modal-body" }, [
+            _c("h2", { staticClass: "text-center" }, [_vm._v("Login")]),
+            _vm._v(" "),
+            _c("div", { staticClass: "login-form" }, [
+              _c("form", [
+                _c(
+                  "div",
+                  { staticClass: "wrap-input100 validate-input m-b-23" },
+                  [
+                    _c("span", { staticClass: "label-input100" }, [
+                      _vm._v("Email")
+                    ]),
+                    _vm._v(" "),
+                    _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.user.email,
+                          expression: "user.email"
+                        }
+                      ],
+                      staticClass: "input100",
+                      attrs: {
+                        type: "text",
+                        name: "email",
+                        placeholder: "Type your email..",
+                        autocomplete: "off"
+                      },
+                      domProps: { value: _vm.user.email },
+                      on: {
+                        input: function($event) {
+                          if ($event.target.composing) {
+                            return
+                          }
+                          _vm.$set(_vm.user, "email", $event.target.value)
+                        }
+                      }
+                    })
+                  ]
+                ),
+                _vm._v(" "),
+                _vm.errors.email
+                  ? _c("small", { staticClass: "text-danger" }, [
+                      _vm._v(" " + _vm._s(_vm.errors.email[0]) + " ")
+                    ])
+                  : _vm._e(),
+                _vm._v(" "),
+                _c("br"),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  { staticClass: "wrap-input100 validate-input m-b-23" },
+                  [
+                    _c("span", { staticClass: "label-input100" }, [
+                      _vm._v("Password")
+                    ]),
+                    _vm._v(" "),
+                    _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.user.password,
+                          expression: "user.password"
+                        }
+                      ],
+                      staticClass: "input100",
+                      attrs: {
+                        type: "password",
+                        name: "password",
+                        placeholder: "Type your password.."
+                      },
+                      domProps: { value: _vm.user.password },
+                      on: {
+                        input: function($event) {
+                          if ($event.target.composing) {
+                            return
+                          }
+                          _vm.$set(_vm.user, "password", $event.target.value)
+                        }
+                      }
+                    })
+                  ]
+                ),
+                _vm._v(" "),
+                _vm.errors.password
+                  ? _c("small", { staticClass: "text-danger" }, [
+                      _vm._v(" " + _vm._s(_vm.errors.password[0]) + " ")
+                    ])
+                  : _vm._e(),
+                _vm._v(" "),
+                _c("br"),
+                _vm._v(" "),
+                _c("div", { staticClass: "container-login100-form-btn" }, [
+                  _c("div", { staticClass: "wrap-login100-form-btn" }, [
+                    _c("div", { staticClass: "login100-form-bgbtn" }),
+                    _vm._v(" "),
+                    _c(
+                      "button",
+                      {
+                        staticClass: "login100-form-btn",
+                        on: {
+                          click: function($event) {
+                            $event.preventDefault()
+                            return _vm.submitForm($event)
+                          }
+                        }
+                      },
+                      [
+                        _vm._v(
+                          "\n                                    Login\n                                "
+                        )
+                      ]
+                    )
+                  ])
+                ])
+              ])
+            ]),
+            _vm._v(" "),
+            _vm._m(1)
+          ])
+        ])
+      ])
+    ]
+  )
 }
 var staticRenderFns = [
   function() {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c(
-      "div",
-      {
-        staticClass: "modal fade register",
-        attrs: {
-          id: "loginModal",
-          tabindex: "-1",
-          role: "dialog",
-          "aria-labelledby": "loginModalLabel",
-          "aria-hidden": "true"
-        }
-      },
-      [
+    return _c("div", { staticClass: "modal-header" }, [
+      _c(
+        "button",
+        {
+          staticClass: "close",
+          attrs: {
+            type: "button",
+            "data-dismiss": "modal",
+            "aria-label": "Close"
+          }
+        },
+        [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
+      )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "login-social-media" }, [
+      _c("div", { staticClass: "txt1 text-center p-t-54 p-b-20" }, [
+        _c("span", [
+          _vm._v(
+            "\n                            OR LogIn Using\n                        "
+          )
+        ])
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "flex-c-m" }, [
         _c(
-          "div",
-          { staticClass: "modal-dialog", attrs: { role: "document" } },
-          [
-            _c("div", { staticClass: "modal-content" }, [
-              _c("div", { staticClass: "modal-header" }, [
-                _c(
-                  "button",
-                  {
-                    staticClass: "close",
-                    attrs: {
-                      type: "button",
-                      "data-dismiss": "modal",
-                      "aria-label": "Close"
-                    }
-                  },
-                  [
-                    _c("span", { attrs: { "aria-hidden": "true" } }, [
-                      _vm._v("×")
-                    ])
-                  ]
-                )
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "modal-body" }, [
-                _c("h2", { staticClass: "text-center" }, [_vm._v("Login")]),
-                _vm._v(" "),
-                _c("div", { staticClass: "login-form" }, [
-                  _c("form", [
-                    _c(
-                      "div",
-                      { staticClass: "wrap-input100 validate-input m-b-23" },
-                      [
-                        _c("span", { staticClass: "label-input100" }, [
-                          _vm._v("Email")
-                        ]),
-                        _vm._v(" "),
-                        _c("input", {
-                          staticClass: "input100",
-                          attrs: {
-                            type: "text",
-                            name: "email",
-                            placeholder: "Type your email.."
-                          }
-                        })
-                      ]
-                    ),
-                    _vm._v(" "),
-                    _c(
-                      "div",
-                      { staticClass: "wrap-input100 validate-input m-b-23" },
-                      [
-                        _c("span", { staticClass: "label-input100" }, [
-                          _vm._v("Password")
-                        ]),
-                        _vm._v(" "),
-                        _c("input", {
-                          staticClass: "input100",
-                          attrs: {
-                            type: "password",
-                            name: "password",
-                            placeholder: "Type your password.."
-                          }
-                        })
-                      ]
-                    ),
-                    _vm._v(" "),
-                    _c("div", { staticClass: "container-login100-form-btn" }, [
-                      _c("div", { staticClass: "wrap-login100-form-btn" }, [
-                        _c("div", { staticClass: "login100-form-bgbtn" }),
-                        _vm._v(" "),
-                        _c("button", { staticClass: "login100-form-btn" }, [
-                          _vm._v(
-                            "\n                                    Login\n                                "
-                          )
-                        ])
-                      ])
-                    ])
-                  ])
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "login-social-media" }, [
-                  _c("div", { staticClass: "txt1 text-center p-t-54 p-b-20" }, [
-                    _c("span", [
-                      _vm._v(
-                        "\n                            OR LogIn Using\n                        "
-                      )
-                    ])
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "flex-c-m" }, [
-                    _c(
-                      "a",
-                      {
-                        staticClass: "login100-social-item bg1",
-                        attrs: { href: "#" }
-                      },
-                      [_c("i", { staticClass: "fa fa-facebook" })]
-                    ),
-                    _vm._v(" "),
-                    _c(
-                      "a",
-                      {
-                        staticClass: "login100-social-item bg2",
-                        attrs: { href: "#" }
-                      },
-                      [_c("i", { staticClass: "fa fa-twitter" })]
-                    ),
-                    _vm._v(" "),
-                    _c(
-                      "a",
-                      {
-                        staticClass: "login100-social-item bg3",
-                        attrs: { href: "#" }
-                      },
-                      [_c("i", { staticClass: "fa fa-google" })]
-                    )
-                  ])
-                ])
-              ])
-            ])
-          ]
+          "a",
+          { staticClass: "login100-social-item bg1", attrs: { href: "#" } },
+          [_c("i", { staticClass: "fa fa-facebook" })]
+        ),
+        _vm._v(" "),
+        _c(
+          "a",
+          { staticClass: "login100-social-item bg2", attrs: { href: "#" } },
+          [_c("i", { staticClass: "fa fa-twitter" })]
+        ),
+        _vm._v(" "),
+        _c(
+          "a",
+          { staticClass: "login100-social-item bg3", attrs: { href: "#" } },
+          [_c("i", { staticClass: "fa fa-google" })]
         )
-      ]
-    )
+      ])
+    ])
   }
 ]
 render._withStripped = true
@@ -44875,150 +45039,262 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
+  return _c(
+    "div",
+    {
+      staticClass: "modal fade register",
+      attrs: {
+        id: "signUpModal",
+        tabindex: "-1",
+        role: "dialog",
+        "aria-labelledby": "signUpModalLabel",
+        "aria-hidden": "true"
+      }
+    },
+    [
+      _c("div", { staticClass: "modal-dialog", attrs: { role: "document" } }, [
+        _c("div", { staticClass: "modal-content" }, [
+          _vm._m(0),
+          _vm._v(" "),
+          _c("div", { staticClass: "modal-body" }, [
+            _c("h2", { staticClass: "text-center" }, [_vm._v("SignUp")]),
+            _vm._v(" "),
+            _c("div", { staticClass: "login-form" }, [
+              _c("form", [
+                _c(
+                  "div",
+                  { staticClass: "wrap-input100 validate-input m-b-23" },
+                  [
+                    _c("span", { staticClass: "label-input100" }, [
+                      _vm._v("Username")
+                    ]),
+                    _vm._v(" "),
+                    _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.user.name,
+                          expression: "user.name"
+                        }
+                      ],
+                      staticClass: "input100",
+                      attrs: {
+                        type: "text",
+                        name: "username",
+                        placeholder: "Type your username..",
+                        autocomplete: "off"
+                      },
+                      domProps: { value: _vm.user.name },
+                      on: {
+                        input: function($event) {
+                          if ($event.target.composing) {
+                            return
+                          }
+                          _vm.$set(_vm.user, "name", $event.target.value)
+                        }
+                      }
+                    })
+                  ]
+                ),
+                _vm._v(" "),
+                _vm.errors.name
+                  ? _c("small", { staticClass: "text-danger" }, [
+                      _vm._v(" " + _vm._s(_vm.errors.name[0]) + " ")
+                    ])
+                  : _vm._e(),
+                _vm._v(" "),
+                _c("br"),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  { staticClass: "wrap-input100 validate-input m-b-23" },
+                  [
+                    _c("span", { staticClass: "label-input100" }, [
+                      _vm._v("Email")
+                    ]),
+                    _vm._v(" "),
+                    _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.user.email,
+                          expression: "user.email"
+                        }
+                      ],
+                      staticClass: "input100",
+                      attrs: {
+                        type: "text",
+                        name: "email",
+                        placeholder: "Type your email..",
+                        autocomplete: "off"
+                      },
+                      domProps: { value: _vm.user.email },
+                      on: {
+                        input: function($event) {
+                          if ($event.target.composing) {
+                            return
+                          }
+                          _vm.$set(_vm.user, "email", $event.target.value)
+                        }
+                      }
+                    })
+                  ]
+                ),
+                _vm._v(" "),
+                _vm.errors.email
+                  ? _c("small", { staticClass: "text-danger" }, [
+                      _vm._v(" " + _vm._s(_vm.errors.email[0]) + " ")
+                    ])
+                  : _vm._e(),
+                _vm._v(" "),
+                _c("br"),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  { staticClass: "wrap-input100 validate-input m-b-23" },
+                  [
+                    _c("span", { staticClass: "label-input100" }, [
+                      _vm._v("Password")
+                    ]),
+                    _vm._v(" "),
+                    _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.user.password,
+                          expression: "user.password"
+                        }
+                      ],
+                      staticClass: "input100",
+                      attrs: {
+                        type: "password",
+                        name: "password",
+                        placeholder: "Type your password.."
+                      },
+                      domProps: { value: _vm.user.password },
+                      on: {
+                        input: function($event) {
+                          if ($event.target.composing) {
+                            return
+                          }
+                          _vm.$set(_vm.user, "password", $event.target.value)
+                        }
+                      }
+                    })
+                  ]
+                ),
+                _vm._v(" "),
+                _vm.errors.password
+                  ? _c("small", { staticClass: "text-danger" }, [
+                      _vm._v(" " + _vm._s(_vm.errors.password[0]) + " ")
+                    ])
+                  : _vm._e(),
+                _vm._v(" "),
+                _c("br"),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  { staticClass: "wrap-input100 validate-input m-b-23" },
+                  [
+                    _c("span", { staticClass: "label-input100" }, [
+                      _vm._v("Password Again")
+                    ]),
+                    _vm._v(" "),
+                    _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.user.password_confirmation,
+                          expression: "user.password_confirmation"
+                        }
+                      ],
+                      staticClass: "input100",
+                      attrs: {
+                        type: "password",
+                        name: "password_confirmation",
+                        placeholder: "Type your password Again.."
+                      },
+                      domProps: { value: _vm.user.password_confirmation },
+                      on: {
+                        input: function($event) {
+                          if ($event.target.composing) {
+                            return
+                          }
+                          _vm.$set(
+                            _vm.user,
+                            "password_confirmation",
+                            $event.target.value
+                          )
+                        }
+                      }
+                    })
+                  ]
+                ),
+                _vm._v(" "),
+                _vm.errors.password_confirmation
+                  ? _c("small", { staticClass: "text-danger" }, [
+                      _vm._v(
+                        " " + _vm._s(_vm.errors.password_confirmation[0]) + " "
+                      )
+                    ])
+                  : _vm._e(),
+                _vm._v(" "),
+                _c("br"),
+                _vm._v(" "),
+                _c("div", { staticClass: "container-login100-form-btn" }, [
+                  _c("div", { staticClass: "wrap-login100-form-btn" }, [
+                    _c("div", { staticClass: "login100-form-bgbtn" }),
+                    _vm._v(" "),
+                    _c(
+                      "button",
+                      {
+                        staticClass: "login100-form-btn",
+                        on: {
+                          click: function($event) {
+                            $event.preventDefault()
+                            return _vm.submitForm($event)
+                          }
+                        }
+                      },
+                      [
+                        _vm._v(
+                          "\n                                    Login\n                                "
+                        )
+                      ]
+                    )
+                  ])
+                ])
+              ])
+            ])
+          ])
+        ])
+      ])
+    ]
+  )
 }
 var staticRenderFns = [
   function() {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c(
-      "div",
-      {
-        staticClass: "modal fade register",
-        attrs: {
-          id: "signUpModal",
-          tabindex: "-1",
-          role: "dialog",
-          "aria-labelledby": "signUpModalLabel",
-          "aria-hidden": "true"
-        }
-      },
-      [
-        _c(
-          "div",
-          { staticClass: "modal-dialog", attrs: { role: "document" } },
-          [
-            _c("div", { staticClass: "modal-content" }, [
-              _c("div", { staticClass: "modal-header" }, [
-                _c(
-                  "button",
-                  {
-                    staticClass: "close",
-                    attrs: {
-                      type: "button",
-                      "data-dismiss": "modal",
-                      "aria-label": "Close"
-                    }
-                  },
-                  [
-                    _c("span", { attrs: { "aria-hidden": "true" } }, [
-                      _vm._v("×")
-                    ])
-                  ]
-                )
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "modal-body" }, [
-                _c("h2", { staticClass: "text-center" }, [_vm._v("SignUp")]),
-                _vm._v(" "),
-                _c("div", { staticClass: "login-form" }, [
-                  _c("form", [
-                    _c(
-                      "div",
-                      { staticClass: "wrap-input100 validate-input m-b-23" },
-                      [
-                        _c("span", { staticClass: "label-input100" }, [
-                          _vm._v("Username")
-                        ]),
-                        _vm._v(" "),
-                        _c("input", {
-                          staticClass: "input100",
-                          attrs: {
-                            type: "text",
-                            name: "username",
-                            placeholder: "Type your username.."
-                          }
-                        })
-                      ]
-                    ),
-                    _vm._v(" "),
-                    _c(
-                      "div",
-                      { staticClass: "wrap-input100 validate-input m-b-23" },
-                      [
-                        _c("span", { staticClass: "label-input100" }, [
-                          _vm._v("Email")
-                        ]),
-                        _vm._v(" "),
-                        _c("input", {
-                          staticClass: "input100",
-                          attrs: {
-                            type: "text",
-                            name: "email",
-                            placeholder: "Type your email.."
-                          }
-                        })
-                      ]
-                    ),
-                    _vm._v(" "),
-                    _c(
-                      "div",
-                      { staticClass: "wrap-input100 validate-input m-b-23" },
-                      [
-                        _c("span", { staticClass: "label-input100" }, [
-                          _vm._v("Password")
-                        ]),
-                        _vm._v(" "),
-                        _c("input", {
-                          staticClass: "input100",
-                          attrs: {
-                            type: "password",
-                            name: "password",
-                            placeholder: "Type your password.."
-                          }
-                        })
-                      ]
-                    ),
-                    _vm._v(" "),
-                    _c(
-                      "div",
-                      { staticClass: "wrap-input100 validate-input m-b-23" },
-                      [
-                        _c("span", { staticClass: "label-input100" }, [
-                          _vm._v("Password Again")
-                        ]),
-                        _vm._v(" "),
-                        _c("input", {
-                          staticClass: "input100",
-                          attrs: {
-                            type: "password",
-                            name: "password",
-                            placeholder: "Type your password Again.."
-                          }
-                        })
-                      ]
-                    ),
-                    _vm._v(" "),
-                    _c("div", { staticClass: "container-login100-form-btn" }, [
-                      _c("div", { staticClass: "wrap-login100-form-btn" }, [
-                        _c("div", { staticClass: "login100-form-bgbtn" }),
-                        _vm._v(" "),
-                        _c("button", { staticClass: "login100-form-btn" }, [
-                          _vm._v(
-                            "\n                                    Login\n                                "
-                          )
-                        ])
-                      ])
-                    ])
-                  ])
-                ])
-              ])
-            ])
-          ]
-        )
-      ]
-    )
+    return _c("div", { staticClass: "modal-header" }, [
+      _c(
+        "button",
+        {
+          staticClass: "close",
+          attrs: {
+            type: "button",
+            "data-dismiss": "modal",
+            "aria-label": "Close"
+          }
+        },
+        [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
+      )
+    ])
   }
 ]
 render._withStripped = true
@@ -66866,8 +67142,10 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_1__
 var store = new vuex__WEBPACK_IMPORTED_MODULE_1__["default"].Store({
   strict: true,
   state: {
-    searchVal: ""
+    searchVal: "",
+    loggedIn: false
   },
+  getters: {},
   mutations: {
     updateSearchVal: function updateSearchVal(state, queryVal) {
       state.searchVal = queryVal;

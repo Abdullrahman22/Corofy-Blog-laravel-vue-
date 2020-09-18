@@ -18,7 +18,8 @@ class AuthController extends Controller
         $rules = [
             'name' => 'required|string|min:6|max:50',
             'email' => 'required|string|email|max:55|unique:users',
-            'password' => 'required|min:8|confirmed',
+            'password' => 'required|min:8', // OR  |confirmed 
+            'password_confirmation' => 'required|min:8|same:password',
         ];
         // Validate Register
         $validator = Validator::make( $request->all() , $rules  ); 
@@ -28,7 +29,7 @@ class AuthController extends Controller
                 "status" => "error",
                 "msg" => "validation error",
                 "errors" => $validator->errors()  
-            ], 422); 
+            ]);
         }
         // Customize Requests
         $request['password'] = Hash::make($request['password']); 
@@ -42,7 +43,7 @@ class AuthController extends Controller
             'status' => 'success' ,
             "msg" => "register successfully",
             'token' => $token,
-        ], 200);
+        ]);
 
     }
 
@@ -61,7 +62,7 @@ class AuthController extends Controller
                 "status" => "error",
                 "msg" => "validation error",
                 "errors" => $validator->errors()  
-            ], 422 ); 
+            ]); 
         }
         // Check if User Email Exist
         $user = User::where('email', $request->email)->first();
@@ -74,21 +75,21 @@ class AuthController extends Controller
                     'status' => 'success' ,
                     "msg" => "login successfully",
                     'token' => $token
-                ], 200);
+                ]);
             } else {
                 return response() -> json([
                     "status" => "error",
                     "msg" => "validation error",
-                    "errors" => $validator->getMessageBag()->add('password', "password isn't correct")
-                ], 422 );
+                    "errors" => $validator->getMessageBag()->add('password', "password is not correct")
+                ]);
             }
         }else{
             // if Email Not Exist
             return response() -> json([
                 "status" => "error",
                 "msg" => "validation error",
-                "errors" => $validator->getMessageBag()->add('email', "user isn't exist")
-            ], 422 );
+                "errors" => $validator->getMessageBag()->add('email', "this email is not exist")
+            ]);
         }
 
     }
@@ -96,8 +97,10 @@ class AuthController extends Controller
     public function logout (Request $request) {
         $token = $request->user()->token();
         $token->revoke();
-        $response = ['message' => 'You have been successfully logged out!'];
-        return response($response, 200);
+        return response()-> json([
+            'status' => 'success' ,
+            "msg" => "logged out successfully",
+        ]);
     }
 
 }

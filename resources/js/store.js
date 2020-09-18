@@ -6,12 +6,16 @@ Vue.use(Vuex)
 const store = new Vuex.Store({
     strict: true,
     state: {
-        searchVal: ""
+        searchVal: "",
+        loggedIn: false,
+    },
+    getters: {
+
     },
     mutations: {
         updateSearchVal (state, queryVal) {
             state.searchVal = queryVal
-        }
+        },
     }
 })
 export default store;

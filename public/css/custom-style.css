@@ -109,7 +109,6 @@ header .register-links a:hover{
     width: 100%;
     position: relative;
     border-bottom: 2px solid #d9d9d9;
-    margin-bottom: 30px;
 }
 .register .label-input100 {
     font-size: 20px;
@@ -128,6 +127,7 @@ header .register-links a:hover{
     outline: none;
     border: none;
     margin-top: -15px;
+    margin-bottom: -10px;
 }
 .register .focus-input100 {
     position: absolute;
@@ -244,4 +244,8 @@ header .register-links a:hover{
     outline: none !important;
     border: none;
     background: transparent;
+}
+.register small,
+.register.small{
+    text-shadow: 1px 1px 10px #ff0018;
 }

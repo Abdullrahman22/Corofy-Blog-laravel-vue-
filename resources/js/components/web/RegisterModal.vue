@@ -15,30 +15,44 @@
                     <h2 class="text-center">SignUp</h2>
                     <div class="login-form">
                         <form>
+
                             <div class="wrap-input100 validate-input m-b-23">
                                 <span class="label-input100">Username</span>
-                                <input class="input100" type="text" name="username" placeholder="Type your username..">
+                                <input class="input100" type="text" name="username" placeholder="Type your username.." v-model="user.name" autocomplete="off">
                             </div>
+                            <small class="text-danger" v-if="errors.name"> {{errors.name[0] }} </small> 
+                            <br>
+
                             <div class="wrap-input100 validate-input m-b-23">
                                 <span class="label-input100">Email</span>
-                                <input class="input100" type="text" name="email" placeholder="Type your email..">
+                                <input class="input100" type="text" name="email" placeholder="Type your email.." v-model="user.email" autocomplete="off">
                             </div>
+                            <small class="text-danger" v-if="errors.email"> {{errors.email[0] }} </small> 
+                            <br>
+
                             <div class="wrap-input100 validate-input m-b-23">
                                 <span class="label-input100">Password</span>
-                                <input class="input100" type="password" name="password" placeholder="Type your password..">
+                                <input class="input100" type="password" name="password" placeholder="Type your password.." v-model="user.password" >
                             </div>
+                            <small class="text-danger" v-if="errors.password"> {{errors.password[0] }} </small> 
+                            <br>
+
                             <div class="wrap-input100 validate-input m-b-23">
                                 <span class="label-input100">Password Again</span>
-                                <input class="input100" type="password" name="password" placeholder="Type your password Again..">
+                                <input class="input100" type="password" name="password_confirmation" placeholder="Type your password Again.." v-model="user.password_confirmation" >
                             </div>
+                            <small class="text-danger" v-if="errors.password_confirmation"> {{errors.password_confirmation[0] }} </small> 
+                            <br>
+
                             <div class="container-login100-form-btn">
                                 <div class="wrap-login100-form-btn">
                                     <div class="login100-form-bgbtn"></div>
-                                    <button class="login100-form-btn">
+                                    <button  @click.prevent="submitForm" class="login100-form-btn">
                                         Login
                                     </button>
                                 </div>
                             </div>
+
                         </form>
                     </div>
                 </div>
@@ -49,6 +63,44 @@
 </template>
 <script>
 export default {
-    name: "RegisterModal"
+    name: "RegisterModal",
+    data(){
+        return{
+            user:{
+                name: '' ,
+                email: '' ,
+                password: '' ,
+                password_confirmation: '' ,
+            },
+            errors: {}
+        }
+    },
+    methods:{
+        submitForm(){
+            axios.post('/api/register' , this.user )
+            .then( 
+                response => {  // if there success request 
+                    console.log( response.data );
+                    if( response.data.status == "error" ){
+                        this.errors = response.data.errors  // equale it with var errors in data
+                    }else{
+                        this.errors = {}    // empty error var
+                        this.user = {}      // empty user var
+                        $("#signUpModal").modal('hide');  // close Model
+                        $(".modal-backdrop.fade.show").remove();
+                        /*======== Sweet Alert ============*/
+                        Vue.swal({
+                            position: 'top-end',
+                            icon: 'success',
+                            text: 'Congratulations Account Created Successfully!',
+                            showConfirmButton: false,
+                            timer: 2500
+                        });
+                    }
+                }
+            )
+            .then( error => console.log(error) )
+        }
+    }
 }
 </script>
