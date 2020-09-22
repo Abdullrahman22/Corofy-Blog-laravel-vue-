@@ -7,7 +7,7 @@ window.Vue = require('vue');
 import router from './router/vue-router'
 
 /*======= VueX =======*/
-import store from './store'
+import store from './store/store'
 
 /*======= pagination =======*/
 Vue.component('pagination', require('laravel-vue-pagination'));

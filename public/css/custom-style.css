@@ -1,15 +1,24 @@
 .comments-header{
     margin-bottom:0px !important;
 }
-header .register-links{
+header .right-section{
     color: #fff !important;
     text-align: right;
 }
-header .register-links a{
+header .right-section a{
     color: #fff !important;
 }
-header .register-links a:hover{
+header .right-section a:hover{
     color: #c8adf5 !important;
+}
+header .right-section img{
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    -ms-border-radius: 50%;
+    -o-border-radius: 50%;
 }
 .icon.fa-search{
     cursor: pointer;

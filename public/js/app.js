@@ -2102,6 +2102,13 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 //
 //
 //
@@ -2164,6 +2171,10 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -2174,6 +2185,10 @@ __webpack_require__.r(__webpack_exports__);
   mounted: function mounted() {
     this.getHeaderInfo();
   },
+  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapGetters"])({
+    authenticated: 'Auth/authenticated',
+    user: 'Auth/user'
+  })),
   methods: {
     getHeaderInfo: function getHeaderInfo() {
       var _this = this;
@@ -2200,6 +2215,13 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 //
 //
 //
@@ -2268,54 +2290,28 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
+
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "LoginModal",
   data: function data() {
     return {
-      user: {
+      form: {
         email: '',
         password: ''
       },
       errors: {}
     };
   },
-  methods: {
+  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapGetters"])({
+    authenticated: 'Auth/authenticated'
+  })),
+  methods: _objectSpread(_objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapActions"])({
+    logIn: 'Auth/logIn'
+  })), {}, {
     submitForm: function submitForm() {
-      var _this = this;
-
-      axios.post('/api/login', this.user).then(function (response) {
-        // if there success request 
-        console.log(response.data);
-
-        if (response.data.status == "error") {
-          _this.errors = response.data.errors; // equale it with var errors in data
-        } else if (response.data.status == "success") {
-          _this.errors = {}; // empty error var
-
-          _this.user = {}; // empty user var
-
-          $("#loginModal").modal('hide'); // close Model
-
-          $(".modal-backdrop.fade.show").remove();
-          /*======== Sweet Alert ============*/
-
-          Vue.swal({
-            position: 'top-end',
-            icon: 'success',
-            title: 'Login Successfully!',
-            showConfirmButton: false,
-            timer: 2500
-          });
-          /*======== Save User In Locastorage ========*/
-
-          localStorage.setItem('token', response.data.token);
-        }
-      }).then(function (error) {
-        return console.log(error);
-      });
+      this.logIn(this.form);
     }
-  }
+  })
 });
 
 /***/ }),
@@ -44591,7 +44587,63 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("header", { attrs: { role: "banner" } }, [
-    _vm._m(0),
+    _c("div", { staticClass: "top-bar" }, [
+      _c("div", { staticClass: "container" }, [
+        _c("div", { staticClass: "row" }, [
+          _vm._m(0),
+          _vm._v(" "),
+          _c(
+            "div",
+            {
+              staticClass: "col-6 right-section",
+              staticStyle: { color: "#fff" }
+            },
+            [
+              _vm.authenticated && _vm.user
+                ? [
+                    _c("img", {
+                      staticClass: "nav-user-image",
+                      attrs: {
+                        src:
+                          "/images/users/" +
+                          [_vm.user.img ? _vm.user.img : "avatar.png"],
+                        alt: "nav-user-image"
+                      }
+                    }),
+                    _vm._v(" "),
+                    _c("span", [_vm._v(" " + _vm._s(_vm.user.name) + " ")])
+                  ]
+                : [
+                    _c(
+                      "a",
+                      {
+                        attrs: {
+                          href: "#",
+                          "data-toggle": "modal",
+                          "data-target": "#loginModal"
+                        }
+                      },
+                      [_vm._v(" Login ")]
+                    ),
+                    _vm._v(" /\n                        "),
+                    _c(
+                      "a",
+                      {
+                        attrs: {
+                          href: "#",
+                          "data-toggle": "modal",
+                          "data-target": "#signUpModal"
+                        }
+                      },
+                      [_vm._v(" SignUp ")]
+                    )
+                  ]
+            ],
+            2
+          )
+        ])
+      ])
+    ]),
     _vm._v(" "),
     _c("div", { staticClass: "container logo-wrap" }, [
       _c("div", { staticClass: "row pt-5" }, [
@@ -44713,68 +44765,29 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "top-bar" }, [
-      _c("div", { staticClass: "container" }, [
-        _c("div", { staticClass: "row" }, [
-          _c("div", { staticClass: "col-6 social" }, [
-            _c("a", { attrs: { href: "#" } }, [
-              _c("span", { staticClass: "fa fa-youtube-play" })
-            ]),
-            _vm._v(" "),
-            _c("a", { attrs: { href: "#" } }, [
-              _c("span", { staticClass: "fa fa-snapchat" })
-            ]),
-            _vm._v(" "),
-            _c("a", { attrs: { href: "#" } }, [
-              _c("span", { staticClass: "fa fa-vimeo" })
-            ]),
-            _vm._v(" "),
-            _c("a", { attrs: { href: "#" } }, [
-              _c("span", { staticClass: "fa fa-twitter" })
-            ]),
-            _vm._v(" "),
-            _c("a", { attrs: { href: "#" } }, [
-              _c("span", { staticClass: "fa fa-facebook" })
-            ]),
-            _vm._v(" "),
-            _c("a", { attrs: { href: "#" } }, [
-              _c("span", { staticClass: "fa fa-instagram" })
-            ])
-          ]),
-          _vm._v(" "),
-          _c(
-            "div",
-            {
-              staticClass: "col-6 register-links",
-              staticStyle: { color: "#fff" }
-            },
-            [
-              _c(
-                "a",
-                {
-                  attrs: {
-                    href: "#",
-                    "data-toggle": "modal",
-                    "data-target": "#loginModal"
-                  }
-                },
-                [_vm._v("Login")]
-              ),
-              _vm._v("\n                    /\n                    "),
-              _c(
-                "a",
-                {
-                  attrs: {
-                    href: "#",
-                    "data-toggle": "modal",
-                    "data-target": "#signUpModal"
-                  }
-                },
-                [_vm._v("SignUp")]
-              )
-            ]
-          )
-        ])
+    return _c("div", { staticClass: "col-6 social" }, [
+      _c("a", { attrs: { href: "#" } }, [
+        _c("span", { staticClass: "fa fa-youtube-play" })
+      ]),
+      _vm._v(" "),
+      _c("a", { attrs: { href: "#" } }, [
+        _c("span", { staticClass: "fa fa-snapchat" })
+      ]),
+      _vm._v(" "),
+      _c("a", { attrs: { href: "#" } }, [
+        _c("span", { staticClass: "fa fa-vimeo" })
+      ]),
+      _vm._v(" "),
+      _c("a", { attrs: { href: "#" } }, [
+        _c("span", { staticClass: "fa fa-twitter" })
+      ]),
+      _vm._v(" "),
+      _c("a", { attrs: { href: "#" } }, [
+        _c("span", { staticClass: "fa fa-facebook" })
+      ]),
+      _vm._v(" "),
+      _c("a", { attrs: { href: "#" } }, [
+        _c("span", { staticClass: "fa fa-instagram" })
       ])
     ])
   },
@@ -44854,8 +44867,8 @@ var render = function() {
                         {
                           name: "model",
                           rawName: "v-model",
-                          value: _vm.user.email,
-                          expression: "user.email"
+                          value: _vm.form.email,
+                          expression: "form.email"
                         }
                       ],
                       staticClass: "input100",
@@ -44865,13 +44878,13 @@ var render = function() {
                         placeholder: "Type your email..",
                         autocomplete: "off"
                       },
-                      domProps: { value: _vm.user.email },
+                      domProps: { value: _vm.form.email },
                       on: {
                         input: function($event) {
                           if ($event.target.composing) {
                             return
                           }
-                          _vm.$set(_vm.user, "email", $event.target.value)
+                          _vm.$set(_vm.form, "email", $event.target.value)
                         }
                       }
                     })
@@ -44899,8 +44912,8 @@ var render = function() {
                         {
                           name: "model",
                           rawName: "v-model",
-                          value: _vm.user.password,
-                          expression: "user.password"
+                          value: _vm.form.password,
+                          expression: "form.password"
                         }
                       ],
                       staticClass: "input100",
@@ -44909,13 +44922,13 @@ var render = function() {
                         name: "password",
                         placeholder: "Type your password.."
                       },
-                      domProps: { value: _vm.user.password },
+                      domProps: { value: _vm.form.password },
                       on: {
                         input: function($event) {
                           if ($event.target.composing) {
                             return
                           }
-                          _vm.$set(_vm.user, "password", $event.target.value)
+                          _vm.$set(_vm.form, "password", $event.target.value)
                         }
                       }
                     })
@@ -65332,7 +65345,7 @@ module.exports = function(module) {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _router_vue_router__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./router/vue-router */ "./resources/js/router/vue-router.js");
-/* harmony import */ var _store__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./store */ "./resources/js/store.js");
+/* harmony import */ var _store_store__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./store/store */ "./resources/js/store/store.js");
 /* harmony import */ var vue_sweetalert2__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! vue-sweetalert2 */ "./node_modules/vue-sweetalert2/dist/index.js");
 /*======= import Vue & Bootstrap =======*/
 __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
@@ -65363,7 +65376,7 @@ Vue.component('login-model', __webpack_require__(/*! ./components/web/LoginModal
 var app = new Vue({
   el: '#app',
   router: _router_vue_router__WEBPACK_IMPORTED_MODULE_0__["default"],
-  store: _store__WEBPACK_IMPORTED_MODULE_1__["default"]
+  store: _store_store__WEBPACK_IMPORTED_MODULE_1__["default"]
 });
 
 /***/ }),
@@ -67124,10 +67137,83 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_0__["default"]({
 
 /***/ }),
 
-/***/ "./resources/js/store.js":
-/*!*******************************!*\
-  !*** ./resources/js/store.js ***!
-  \*******************************/
+/***/ "./resources/js/store/auth.js":
+/*!************************************!*\
+  !*** ./resources/js/store/auth.js ***!
+  \************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+var Auth = {
+  namespaced: true,
+  state: {
+    token: null,
+    user: null
+  },
+  getters: {
+    authenticated: function authenticated(state) {
+      return state.token && state.token; // return true if token not null
+      // if( state.token != null ){
+      //     return true ;
+      // }
+    },
+    user: function user(state) {
+      return state.user;
+    }
+  },
+  mutations: {
+    SET_TOKEN: function SET_TOKEN(state, token) {
+      state.token = token; // change token val in state
+    },
+    SET_USER: function SET_USER(state, user) {
+      state.user = user; // change user val in state
+    }
+  },
+  actions: {
+    logIn: function logIn(_ref, credentials) {
+      var dispatch = _ref.dispatch;
+      axios.post('/api/auth/login', credentials).then(function (response) {
+        // console.log( response.data );
+        dispatch('attempt', response.data.token); // 'dispatch' ==>  to link param with attempt function and call it to run
+      }).then(function (error) {
+        return console.log(error);
+      });
+    },
+    attempt: function attempt(_ref2, token) {
+      var commit = _ref2.commit;
+      commit('SET_TOKEN', token); // 'commit' ==>  to link SET_TOKEN with mutations and call it to run
+
+      /*====== Get Logged User Info By Token ======*/
+
+      try {
+        axios.get('/api/auth/user-Info', {
+          headers: {
+            "Authorization": 'Bearer ' + token
+          }
+        }).then(function (response) {
+          // console.log( response.data );
+          commit('SET_USER', response.data.user); // 'commit' ==>  to link SET_USER with mutations and call it to run
+        }).then(function (error) {
+          return console.log(error);
+        });
+      } catch (error) {
+        commit('SET_TOKEN', null); // call mutations SET_TOKEN with null param
+
+        commit('SET_USER', null); // call mutations SET_USER  with null param
+      }
+    }
+  }
+};
+/* harmony default export */ __webpack_exports__["default"] = (Auth);
+
+/***/ }),
+
+/***/ "./resources/js/store/store.js":
+/*!*************************************!*\
+  !*** ./resources/js/store/store.js ***!
+  \*************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -67136,20 +67222,23 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.js");
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(vue__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
+/* harmony import */ var _auth__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./auth */ "./resources/js/store/auth.js");
 
 
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_1__["default"]);
+
 var store = new vuex__WEBPACK_IMPORTED_MODULE_1__["default"].Store({
   strict: true,
   state: {
-    searchVal: "",
-    loggedIn: false
+    searchVal: ""
   },
-  getters: {},
   mutations: {
     updateSearchVal: function updateSearchVal(state, queryVal) {
       state.searchVal = queryVal;
     }
+  },
+  modules: {
+    Auth: _auth__WEBPACK_IMPORTED_MODULE_2__["default"]
   }
 });
 /* harmony default export */ __webpack_exports__["default"] = (store);

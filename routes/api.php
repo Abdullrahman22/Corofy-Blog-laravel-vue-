@@ -13,15 +13,14 @@ use Illuminate\Support\Facades\Route;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
-});
+
 
 /*================= Register Apis =====================*/
-Route::post('/register', 'AuthAPI\AuthController@register');
-Route::post('/login', 'AuthAPI\AuthController@login');
-
-
+Route::group(['prefix' => 'auth', 'namespace' => 'AuthAPI'], function() {
+    Route::post('register', 'AuthController@register');
+    Route::post('login', 'AuthController@login');
+    Route::get('user-Info', 'AuthController@user_info') -> middleware('auth:api');    
+});
 /*============= Web APIs =============*/
 //  Header & Footer Info  
 Route::get("home-info", "HomeController@index"); 

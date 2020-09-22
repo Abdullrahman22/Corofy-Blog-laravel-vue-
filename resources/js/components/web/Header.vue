@@ -13,10 +13,15 @@
                         <a href="#"><span class="fa fa-facebook"></span></a>
                         <a href="#"><span class="fa fa-instagram"></span></a>
                     </div>
-                    <div class="col-6 register-links" style="color: #fff">
-                        <a href="#" data-toggle="modal" data-target="#loginModal" >Login</a>
-                        /
-                        <a href="#" data-toggle="modal" data-target="#signUpModal" >SignUp</a>
+                    <div class="col-6 right-section" style="color: #fff">
+                        <template v-if=" authenticated && user" >
+                            <img :src=" '/images/users/' + [ user.img ? user.img : 'avatar.png' ] " alt="nav-user-image" class="nav-user-image">
+                            <span> {{ user.name }} </span>
+                        </template>
+                        <template v-else>
+                            <a href="#" data-toggle="modal" data-target="#loginModal" > Login </a> /
+                            <a href="#" data-toggle="modal" data-target="#signUpModal" > SignUp </a>
+                        </template>
                     </div>
                 </div>
             </div>
@@ -26,7 +31,7 @@
             <div class="row pt-5">
                 <div class="col-12 text-center">
                     <a class="absolute-toggle d-block d-md-none" data-toggle="collapse" href="#navbarMenu" role="button" aria-expanded="false" aria-controls="navbarMenu"><span class="burger-lines"></span></a>
-                    <h1 class="site-logo"><router-link to="/">  {{ site_name }}  </router-link></h1>
+                    <h1 class="site-logo"> <router-link to="/">  {{ site_name }}  </router-link> </h1>
                 </div>
             </div>
         </div>
@@ -38,19 +43,17 @@
                         <li class="nav-item">
                             <router-link class="nav-link active" to="/">Home</router-link>
                         </li>
-                        
                         <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="category.html" id="dropdown05" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Categories</a>
-                        <div class="dropdown-menu" aria-labelledby="dropdown05">
-                            <router-link v-for="category in categories" :key="category.id" class="dropdown-item" :to=" '/category/' + category.slug ">  {{ category.title }} </router-link>
-                        </div>
-
+                            <a class="nav-link dropdown-toggle" href="category.html" id="dropdown05" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Categories</a>
+                            <div class="dropdown-menu" aria-labelledby="dropdown05">
+                                <router-link v-for="category in categories" :key="category.id" class="dropdown-item" :to=" '/category/' + category.slug ">  {{ category.title }} </router-link>
+                            </div>
                         </li>
                         <li class="nav-item">
-                        <router-link class="nav-link" to="/about">About</router-link>
+                            <router-link class="nav-link" to="/about">About</router-link>
                         </li>
                         <li class="nav-item">
-                        <router-link class="nav-link" to="/contact">Contact</router-link>
+                            <router-link class="nav-link" to="/contact">Contact</router-link>
                         </li>
                     </ul>
                 </div>
@@ -61,28 +64,35 @@
 </template>
 
 <script>
-export default {
-    data(){
-        return{
-            site_name: '',
-            categories: {}
-        }
-    },
-    mounted(){
-        this.getHeaderInfo();
-    },
-    methods:{
-        getHeaderInfo(){
-            axios.get('/api/home-info')
-            .then( 
-                resquest => {  
-                    // console.log(resquest.data); 
-                    this.site_name = resquest.data.site_name
-                    this.categories = resquest.data.categories
-                }
-            )
-            .catch( error => console.log(error) )
+    import {  mapGetters } from 'vuex'
+    export default {
+        data(){
+            return{
+                site_name: '',
+                categories: {}
+            }
+        },
+        mounted(){
+            this.getHeaderInfo();
+        },
+        computed:{
+            ...mapGetters({
+                authenticated: 'Auth/authenticated' ,
+                user: 'Auth/user'
+            }),  
+        },
+        methods:{
+            getHeaderInfo(){
+                axios.get('/api/home-info')
+                .then( 
+                    resquest => {  
+                        // console.log(resquest.data); 
+                        this.site_name = resquest.data.site_name
+                        this.categories = resquest.data.categories
+                    }
+                )
+                .catch( error => console.log(error) )
+            },
         }
     }
-}
 </script>

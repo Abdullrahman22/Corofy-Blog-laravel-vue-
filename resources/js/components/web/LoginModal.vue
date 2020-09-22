@@ -10,21 +10,20 @@
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-
                 <div class="modal-body">
                     <h2 class="text-center">Login</h2>
                     <div class="login-form">
                         <form>
                             <div class="wrap-input100 validate-input m-b-23">
                                 <span class="label-input100">Email</span>
-                                <input class="input100" type="text" name="email" placeholder="Type your email.." v-model="user.email" autocomplete="off" >
+                                <input class="input100" type="text" name="email" placeholder="Type your email.." v-model="form.email" autocomplete="off" >
                             </div>
                             <small class="text-danger" v-if="errors.email"> {{errors.email[0] }} </small> 
                             <br>
 
                             <div class="wrap-input100 validate-input m-b-23">
                                 <span class="label-input100">Password</span>
-                                <input class="input100" type="password" name="password" placeholder="Type your password.." v-model="user.password"  >
+                                <input class="input100" type="password" name="password" placeholder="Type your password.." v-model="form.password"  >
                             </div>
                             <small class="text-danger" v-if="errors.password"> {{errors.password[0] }} </small> 
                             <br>
@@ -68,45 +67,31 @@
 
 </template>
 <script>
+    import { mapActions , mapGetters } from 'vuex'
+
     export default {
         name: "LoginModal",
         data(){
             return{
-                user:{
+                form:{
                     email: '' ,
                     password: '' ,
                 },
                 errors: {},
             }
         },
+        computed:{
+            ...mapGetters({
+                authenticated: 'Auth/authenticated'
+            }),  
+        },
         methods:{
+            ...mapActions({
+                logIn: 'Auth/logIn'
+            }),
             submitForm(){
-                axios.post('/api/login' , this.user )
-                .then( 
-                    response => {  // if there success request 
-                        console.log( response.data );
-                        if( response.data.status == "error" ){
-                            this.errors = response.data.errors  // equale it with var errors in data
-                        }else if ( response.data.status == "success" ){
-                            this.errors = {}    // empty error var
-                            this.user = {}      // empty user var
-                            $("#loginModal").modal('hide');  // close Model
-                            $(".modal-backdrop.fade.show").remove();
-                            /*======== Sweet Alert ============*/
-                            Vue.swal({
-                                position: 'top-end',
-                                icon: 'success',
-                                title: 'Login Successfully!',
-                                showConfirmButton: false,
-                                timer: 2500
-                            });
-                            /*======== Save User In Locastorage ========*/
-                            localStorage.setItem( 'token' , response.data.token );
-                        }
-                    }
-                )
-                .then( error => console.log(error) )
-            }
+                this.logIn(this.form)
+            },
         }
     }
 </script>

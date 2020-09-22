@@ -94,6 +94,25 @@ class AuthController extends Controller
 
     }
 
+    public function user_info(Request $request)
+    {
+
+        $user = $request -> user();  // get info logged user using 'token'  
+        if( !$user ){
+            return response()-> json([
+                'status' => 'error' ,
+                'msg' => "user not found",
+            ]);
+        }else{
+            return response()-> json([
+                'status' => 'success' ,
+                "msg" => "user found",
+                "user" => $user,
+            ]);
+        }
+
+    }
+
     public function logout (Request $request) {
         $token = $request->user()->token();
         $token->revoke();
