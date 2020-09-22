@@ -3,6 +3,7 @@ const Auth =  {
     state:{
         token: null,
         user: null,
+        errors: null
     },
     getters:{
         authenticated( state  ){
@@ -13,7 +14,10 @@ const Auth =  {
         },
         user( state ){
             return state.user
-        }
+        },
+        errors( state ){
+            return state.errors
+        },
     },
     mutations:{
         SET_TOKEN(state , token){
@@ -22,20 +26,35 @@ const Auth =  {
         SET_USER(state , user){
             state.user = user  // change user val in state
         },
+        SET_ERRORS(state , errors){
+            state.errors = errors  // change errors val in state
+        },
     },
     actions:{
-
-        logIn( { dispatch } , credentials){
+        logIn( context , credentials ){
             axios.post('/api/auth/login' , credentials )
             .then( 
                 response => {  
-                    // console.log( response.data );
-                    dispatch('attempt' , response.data.token ) // 'dispatch' ==>  to link param with attempt function and call it to run
+                    if( response.data.status == "error" ){
+                        context.commit('SET_ERRORS' , response.data.errors )  // 'commit' ==>  to link SET_TOKEN with mutations and call it to run
+                    }else if ( response.data.status == "success" ){
+                        context.commit('SET_ERRORS' , null )    // empty error var
+                        context.dispatch('attempt' , response.data.token ) // 'dispatch' ==>  to link param with attempt function and call it to run
+                        $("#loginModal").modal('hide');  // close Model
+                        $(".modal-backdrop.fade.show").remove();
+                        /*======== Sweet Alert ========*/
+                        Vue.swal({
+                            position: 'top-end',
+                            icon: 'success',
+                            title: 'Login Successfully!',
+                            showConfirmButton: false,
+                            timer: 2500
+                        });
+                    }
                 }
             )
             .then( error => console.log(error) )
         },
-
         attempt( { commit } , token ){  
             commit('SET_TOKEN' , token )  // 'commit' ==>  to link SET_TOKEN with mutations and call it to run
             /*====== Get Logged User Info By Token ======*/
@@ -57,7 +76,6 @@ const Auth =  {
                 commit('SET_USER'  , null ) // call mutations SET_USER  with null param
             }
         }
-
     },
 }
 

@@ -4,7 +4,6 @@
     <div class="modal fade register" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="loginModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
-
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
@@ -18,14 +17,18 @@
                                 <span class="label-input100">Email</span>
                                 <input class="input100" type="text" name="email" placeholder="Type your email.." v-model="form.email" autocomplete="off" >
                             </div>
-                            <small class="text-danger" v-if="errors.email"> {{errors.email[0] }} </small> 
+                            <small class="text-danger" v-if="errors">
+                                <span v-if="errors.email"> {{ errors.email[0] }} </span>
+                            </small> 
                             <br>
 
                             <div class="wrap-input100 validate-input m-b-23">
                                 <span class="label-input100">Password</span>
                                 <input class="input100" type="password" name="password" placeholder="Type your password.." v-model="form.password"  >
                             </div>
-                            <small class="text-danger" v-if="errors.password"> {{errors.password[0] }} </small> 
+                            <small class="text-danger" v-if="errors">
+                                <span v-if="errors.password"> {{ errors.password[0] }} </span>
+                            </small> 
                             <br>
 
                             <div class="container-login100-form-btn">
@@ -77,17 +80,17 @@
                     email: '' ,
                     password: '' ,
                 },
-                errors: {},
             }
         },
         computed:{
             ...mapGetters({
-                authenticated: 'Auth/authenticated'
+                authenticated: 'LoginModule/LogInModule',
+                errors: 'LoginModule/errors',
             }),  
         },
         methods:{
             ...mapActions({
-                logIn: 'Auth/logIn'
+                logIn: 'LoginModule/logIn'
             }),
             submitForm(){
                 this.logIn(this.form)

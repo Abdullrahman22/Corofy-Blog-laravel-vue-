@@ -2,7 +2,7 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 Vue.use(Vuex)
 
-import Auth from './auth'
+import LoginModule from './LoginModule'
 
 const store = new Vuex.Store({
     strict: true,
@@ -15,7 +15,7 @@ const store = new Vuex.Store({
         },
     },
     modules:{
-        Auth
+        LoginModule
     }
 })
 export default store;

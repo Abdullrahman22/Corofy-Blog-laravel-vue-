@@ -77,8 +77,8 @@
         },
         computed:{
             ...mapGetters({
-                authenticated: 'Auth/authenticated' ,
-                user: 'Auth/user'
+                authenticated: 'LoginModule/authenticated' ,
+                user: 'LoginModule/user'
             }),  
         },
         methods:{

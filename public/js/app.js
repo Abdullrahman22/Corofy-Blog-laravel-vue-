@@ -2186,8 +2186,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     this.getHeaderInfo();
   },
   computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapGetters"])({
-    authenticated: 'Auth/authenticated',
-    user: 'Auth/user'
+    authenticated: 'LoginModule/authenticated',
+    user: 'LoginModule/user'
   })),
   methods: {
     getHeaderInfo: function getHeaderInfo() {
@@ -2290,6 +2290,9 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "LoginModal",
@@ -2298,15 +2301,15 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       form: {
         email: '',
         password: ''
-      },
-      errors: {}
+      }
     };
   },
   computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapGetters"])({
-    authenticated: 'Auth/authenticated'
+    authenticated: 'LoginModule/LogInModule',
+    errors: 'LoginModule/errors'
   })),
   methods: _objectSpread(_objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapActions"])({
-    logIn: 'Auth/logIn'
+    logIn: 'LoginModule/logIn'
   })), {}, {
     submitForm: function submitForm() {
       this.logIn(this.form);
@@ -2392,7 +2395,7 @@ __webpack_require__.r(__webpack_exports__);
   name: "RegisterModal",
   data: function data() {
     return {
-      user: {
+      form: {
         name: '',
         email: '',
         password: '',
@@ -2405,10 +2408,9 @@ __webpack_require__.r(__webpack_exports__);
     submitForm: function submitForm() {
       var _this = this;
 
-      axios.post('/api/register', this.user).then(function (response) {
+      axios.post('/api/auth/register', this.form).then(function (response) {
         // if there success request 
-        console.log(response.data);
-
+        // console.log( response.data );
         if (response.data.status == "error") {
           _this.errors = response.data.errors; // equale it with var errors in data
         } else {
@@ -2424,10 +2426,12 @@ __webpack_require__.r(__webpack_exports__);
           Vue.swal({
             position: 'top-end',
             icon: 'success',
-            text: 'Congratulations Account Created Successfully!',
+            title: 'SigIn Now!',
+            text: 'Congratulations Account Created Successfully',
             showConfirmButton: false,
             timer: 2500
           });
+          $('#loginModal').modal('show');
         }
       }).then(function (error) {
         return console.log(error);
@@ -44891,9 +44895,13 @@ var render = function() {
                   ]
                 ),
                 _vm._v(" "),
-                _vm.errors.email
+                _vm.errors
                   ? _c("small", { staticClass: "text-danger" }, [
-                      _vm._v(" " + _vm._s(_vm.errors.email[0]) + " ")
+                      _vm.errors.email
+                        ? _c("span", [
+                            _vm._v(" " + _vm._s(_vm.errors.email[0]) + " ")
+                          ])
+                        : _vm._e()
                     ])
                   : _vm._e(),
                 _vm._v(" "),
@@ -44935,9 +44943,13 @@ var render = function() {
                   ]
                 ),
                 _vm._v(" "),
-                _vm.errors.password
+                _vm.errors
                   ? _c("small", { staticClass: "text-danger" }, [
-                      _vm._v(" " + _vm._s(_vm.errors.password[0]) + " ")
+                      _vm.errors.password
+                        ? _c("span", [
+                            _vm._v(" " + _vm._s(_vm.errors.password[0]) + " ")
+                          ])
+                        : _vm._e()
                     ])
                   : _vm._e(),
                 _vm._v(" "),
@@ -45087,8 +45099,8 @@ var render = function() {
                         {
                           name: "model",
                           rawName: "v-model",
-                          value: _vm.user.name,
-                          expression: "user.name"
+                          value: _vm.form.name,
+                          expression: "form.name"
                         }
                       ],
                       staticClass: "input100",
@@ -45098,13 +45110,13 @@ var render = function() {
                         placeholder: "Type your username..",
                         autocomplete: "off"
                       },
-                      domProps: { value: _vm.user.name },
+                      domProps: { value: _vm.form.name },
                       on: {
                         input: function($event) {
                           if ($event.target.composing) {
                             return
                           }
-                          _vm.$set(_vm.user, "name", $event.target.value)
+                          _vm.$set(_vm.form, "name", $event.target.value)
                         }
                       }
                     })
@@ -45132,8 +45144,8 @@ var render = function() {
                         {
                           name: "model",
                           rawName: "v-model",
-                          value: _vm.user.email,
-                          expression: "user.email"
+                          value: _vm.form.email,
+                          expression: "form.email"
                         }
                       ],
                       staticClass: "input100",
@@ -45143,13 +45155,13 @@ var render = function() {
                         placeholder: "Type your email..",
                         autocomplete: "off"
                       },
-                      domProps: { value: _vm.user.email },
+                      domProps: { value: _vm.form.email },
                       on: {
                         input: function($event) {
                           if ($event.target.composing) {
                             return
                           }
-                          _vm.$set(_vm.user, "email", $event.target.value)
+                          _vm.$set(_vm.form, "email", $event.target.value)
                         }
                       }
                     })
@@ -45177,8 +45189,8 @@ var render = function() {
                         {
                           name: "model",
                           rawName: "v-model",
-                          value: _vm.user.password,
-                          expression: "user.password"
+                          value: _vm.form.password,
+                          expression: "form.password"
                         }
                       ],
                       staticClass: "input100",
@@ -45187,13 +45199,13 @@ var render = function() {
                         name: "password",
                         placeholder: "Type your password.."
                       },
-                      domProps: { value: _vm.user.password },
+                      domProps: { value: _vm.form.password },
                       on: {
                         input: function($event) {
                           if ($event.target.composing) {
                             return
                           }
-                          _vm.$set(_vm.user, "password", $event.target.value)
+                          _vm.$set(_vm.form, "password", $event.target.value)
                         }
                       }
                     })
@@ -45221,8 +45233,8 @@ var render = function() {
                         {
                           name: "model",
                           rawName: "v-model",
-                          value: _vm.user.password_confirmation,
-                          expression: "user.password_confirmation"
+                          value: _vm.form.password_confirmation,
+                          expression: "form.password_confirmation"
                         }
                       ],
                       staticClass: "input100",
@@ -45231,14 +45243,14 @@ var render = function() {
                         name: "password_confirmation",
                         placeholder: "Type your password Again.."
                       },
-                      domProps: { value: _vm.user.password_confirmation },
+                      domProps: { value: _vm.form.password_confirmation },
                       on: {
                         input: function($event) {
                           if ($event.target.composing) {
                             return
                           }
                           _vm.$set(
-                            _vm.user,
+                            _vm.form,
                             "password_confirmation",
                             $event.target.value
                           )
@@ -67137,10 +67149,10 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_0__["default"]({
 
 /***/ }),
 
-/***/ "./resources/js/store/auth.js":
-/*!************************************!*\
-  !*** ./resources/js/store/auth.js ***!
-  \************************************/
+/***/ "./resources/js/store/LoginModule.js":
+/*!*******************************************!*\
+  !*** ./resources/js/store/LoginModule.js ***!
+  \*******************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -67150,7 +67162,8 @@ var Auth = {
   namespaced: true,
   state: {
     token: null,
-    user: null
+    user: null,
+    errors: null
   },
   getters: {
     authenticated: function authenticated(state) {
@@ -67161,6 +67174,9 @@ var Auth = {
     },
     user: function user(state) {
       return state.user;
+    },
+    errors: function errors(state) {
+      return state.errors;
     }
   },
   mutations: {
@@ -67169,20 +67185,40 @@ var Auth = {
     },
     SET_USER: function SET_USER(state, user) {
       state.user = user; // change user val in state
+    },
+    SET_ERRORS: function SET_ERRORS(state, errors) {
+      state.errors = errors; // change errors val in state
     }
   },
   actions: {
-    logIn: function logIn(_ref, credentials) {
-      var dispatch = _ref.dispatch;
+    logIn: function logIn(context, credentials) {
       axios.post('/api/auth/login', credentials).then(function (response) {
-        // console.log( response.data );
-        dispatch('attempt', response.data.token); // 'dispatch' ==>  to link param with attempt function and call it to run
+        if (response.data.status == "error") {
+          context.commit('SET_ERRORS', response.data.errors); // 'commit' ==>  to link SET_TOKEN with mutations and call it to run
+        } else if (response.data.status == "success") {
+          context.commit('SET_ERRORS', null); // empty error var
+
+          context.dispatch('attempt', response.data.token); // 'dispatch' ==>  to link param with attempt function and call it to run
+
+          $("#loginModal").modal('hide'); // close Model
+
+          $(".modal-backdrop.fade.show").remove();
+          /*======== Sweet Alert ========*/
+
+          Vue.swal({
+            position: 'top-end',
+            icon: 'success',
+            title: 'Login Successfully!',
+            showConfirmButton: false,
+            timer: 2500
+          });
+        }
       }).then(function (error) {
         return console.log(error);
       });
     },
-    attempt: function attempt(_ref2, token) {
-      var commit = _ref2.commit;
+    attempt: function attempt(_ref, token) {
+      var commit = _ref.commit;
       commit('SET_TOKEN', token); // 'commit' ==>  to link SET_TOKEN with mutations and call it to run
 
       /*====== Get Logged User Info By Token ======*/
@@ -67222,7 +67258,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.js");
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(vue__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
-/* harmony import */ var _auth__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./auth */ "./resources/js/store/auth.js");
+/* harmony import */ var _LoginModule__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./LoginModule */ "./resources/js/store/LoginModule.js");
 
 
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_1__["default"]);
@@ -67238,7 +67274,7 @@ var store = new vuex__WEBPACK_IMPORTED_MODULE_1__["default"].Store({
     }
   },
   modules: {
-    Auth: _auth__WEBPACK_IMPORTED_MODULE_2__["default"]
+    LoginModule: _LoginModule__WEBPACK_IMPORTED_MODULE_3__["default"]
   }
 });
 /* harmony default export */ __webpack_exports__["default"] = (store);

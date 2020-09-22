@@ -18,28 +18,28 @@
 
                             <div class="wrap-input100 validate-input m-b-23">
                                 <span class="label-input100">Username</span>
-                                <input class="input100" type="text" name="username" placeholder="Type your username.." v-model="user.name" autocomplete="off">
+                                <input class="input100" type="text" name="username" placeholder="Type your username.." v-model="form.name" autocomplete="off">
                             </div>
                             <small class="text-danger" v-if="errors.name"> {{errors.name[0] }} </small> 
                             <br>
 
                             <div class="wrap-input100 validate-input m-b-23">
                                 <span class="label-input100">Email</span>
-                                <input class="input100" type="text" name="email" placeholder="Type your email.." v-model="user.email" autocomplete="off">
+                                <input class="input100" type="text" name="email" placeholder="Type your email.." v-model="form.email" autocomplete="off">
                             </div>
                             <small class="text-danger" v-if="errors.email"> {{errors.email[0] }} </small> 
                             <br>
 
                             <div class="wrap-input100 validate-input m-b-23">
                                 <span class="label-input100">Password</span>
-                                <input class="input100" type="password" name="password" placeholder="Type your password.." v-model="user.password" >
+                                <input class="input100" type="password" name="password" placeholder="Type your password.." v-model="form.password" >
                             </div>
                             <small class="text-danger" v-if="errors.password"> {{errors.password[0] }} </small> 
                             <br>
 
                             <div class="wrap-input100 validate-input m-b-23">
                                 <span class="label-input100">Password Again</span>
-                                <input class="input100" type="password" name="password_confirmation" placeholder="Type your password Again.." v-model="user.password_confirmation" >
+                                <input class="input100" type="password" name="password_confirmation" placeholder="Type your password Again.." v-model="form.password_confirmation" >
                             </div>
                             <small class="text-danger" v-if="errors.password_confirmation"> {{errors.password_confirmation[0] }} </small> 
                             <br>
@@ -66,7 +66,7 @@ export default {
     name: "RegisterModal",
     data(){
         return{
-            user:{
+            form:{
                 name: '' ,
                 email: '' ,
                 password: '' ,
@@ -77,10 +77,10 @@ export default {
     },
     methods:{
         submitForm(){
-            axios.post('/api/register' , this.user )
+            axios.post('/api/auth/register' , this.form )
             .then( 
                 response => {  // if there success request 
-                    console.log( response.data );
+                    // console.log( response.data );
                     if( response.data.status == "error" ){
                         this.errors = response.data.errors  // equale it with var errors in data
                     }else{
@@ -92,10 +92,12 @@ export default {
                         Vue.swal({
                             position: 'top-end',
                             icon: 'success',
-                            text: 'Congratulations Account Created Successfully!',
+                            title: 'SigIn Now!',
+                            text: 'Congratulations Account Created Successfully',
                             showConfirmButton: false,
                             timer: 2500
                         });
+                        $('#loginModal').modal('show');
                     }
                 }
             )
