@@ -12,6 +12,9 @@ import store from './store/store'
 /*======= pagination =======*/
 Vue.component('pagination', require('laravel-vue-pagination'));
 
+/*======= subscriber =======*/
+require("./store/subscriber");
+
 /*======= Sweetalert2 =======*/
 import VueSweetalert2 from 'vue-sweetalert2';
 Vue.use(VueSweetalert2);;

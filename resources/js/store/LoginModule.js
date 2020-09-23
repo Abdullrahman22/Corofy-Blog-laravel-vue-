@@ -55,22 +55,12 @@ const Auth =  {
             )
             .then( error => console.log(error) )
         },
-        attempt( { commit } , token ){  
+        async attempt( { commit } , token ){  
             commit('SET_TOKEN' , token )  // 'commit' ==>  to link SET_TOKEN with mutations and call it to run
             /*====== Get Logged User Info By Token ======*/
             try{         
-                axios.get('/api/auth/user-Info' , {
-                    headers:{
-                        "Authorization" : 'Bearer ' + token
-                    }
-                })
-                .then( 
-                    response => {  
-                        // console.log( response.data );
-                        commit('SET_USER' , response.data.user )  // 'commit' ==>  to link SET_USER with mutations and call it to run
-                    }
-                )
-                .then( error => console.log(error) )
+                let response = await axios.get('/api/auth/user-Info')
+                commit('SET_USER' , response.data.user ) 
             }catch(error){
                 commit('SET_TOKEN' , null ) // call mutations SET_TOKEN with null param
                 commit('SET_USER'  , null ) // call mutations SET_USER  with null param
