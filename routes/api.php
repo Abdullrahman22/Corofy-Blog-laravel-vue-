@@ -35,6 +35,8 @@ Route::get("allCategories", "CategoryController@get_All_Categories");
 Route::get("category/{slug}/posts" , "CategoryController@get_Category_Posts" );
 // Comments
 Route::post("add-comment" , "CommentController@store")-> middleware('auth:api');  
+// Contact Us
+Route::post("add-messege" , "ContactController@store");  
 
 
 

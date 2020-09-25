@@ -55,7 +55,7 @@ class PostController extends Controller
         $comments = $post -> comments;
         foreach( $comments as $comment ){
             $comment -> setAttribute("user" , $comment -> user );
-            $comment -> setAttribute("added_at" , $post -> created_at -> diffForHumans() );
+            $comment -> setAttribute("added_at" , $comment -> created_at -> diffForHumans() );
         }
 
         return response() -> json( $post );

@@ -30,7 +30,7 @@ const routes = [
 
 
     /*================ Web Routes ==================*/
-    { path: '/' , component: HomePage },
+    { path: '/' , component: HomePage , name: 'HomePage'  },
     { path: '/about' , component: AboutPage },
     { path: '/contact' , component: ContactPage },
     { path: '/post/:slug' , component: PostPage },

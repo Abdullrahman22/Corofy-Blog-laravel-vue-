@@ -4567,6 +4567,10 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -4574,9 +4578,51 @@ __webpack_require__.r(__webpack_exports__);
     Sidebar: _components_web_Sidebar__WEBPACK_IMPORTED_MODULE_0__["default"],
     Searching: _components_web_Searching__WEBPACK_IMPORTED_MODULE_1__["default"]
   },
+  data: function data() {
+    return {
+      contact_form: {
+        name: '',
+        phone: '',
+        email: '',
+        messege: ''
+      },
+      errors: {}
+    };
+  },
   computed: {
     searchVal: function searchVal() {
       return this.$store.state.searchVal;
+    }
+  },
+  methods: {
+    submitForm: function submitForm() {
+      var _this = this;
+
+      axios.post("/api/add-messege", this.contact_form).then(function (resquest) {
+        // console.log(resquest.data);
+        if (resquest.data.status == 'error') {
+          _this.errors = resquest.data.errors;
+        } else if (resquest.data.status == 'success') {
+          _this.errors = {}; // empty error var
+
+          _this.$router.push({
+            name: 'HomePage'
+          }); // after successfully sent messege direct to home page 
+
+          /*======== Sweet Alert ============*/
+
+
+          Vue.swal({
+            position: 'top-end',
+            icon: 'success',
+            text: 'Your Messege Sent Successfully ',
+            showConfirmButton: false,
+            timer: 1500
+          });
+        }
+      })["catch"](function (error) {
+        return console.log(error);
+      });
     }
   }
 });
@@ -45277,7 +45323,7 @@ var staticRenderFns = [
         _c("img", {
           staticClass: "img-fluid",
           attrs: {
-            src: "images/person_testimonial_1.jpg",
+            src: "/images/person_testimonial_1.jpg",
             alt: "Image placeholder"
           }
         })
@@ -49111,67 +49157,189 @@ var render = function() {
             : _c("div", { staticClass: "col-md-12 col-lg-8 main-content" }, [
                 _c("h1", [_vm._v("Contact Me")]),
                 _vm._v(" "),
-                _c("form", { attrs: { action: "#", method: "post" } }, [
-                  _c("div", { staticClass: "row" }, [
-                    _c("div", { staticClass: "col-md-12 form-group" }, [
-                      _c("label", { attrs: { for: "name" } }, [_vm._v("Name")]),
+                _c(
+                  "form",
+                  {
+                    attrs: { method: "post" },
+                    on: {
+                      submit: function($event) {
+                        $event.preventDefault()
+                        return _vm.submitForm($event)
+                      }
+                    }
+                  },
+                  [
+                    _c("div", { staticClass: "row" }, [
+                      _c("div", { staticClass: "col-md-12 form-group" }, [
+                        _c("label", { attrs: { for: "name" } }, [
+                          _vm._v("Name")
+                        ]),
+                        _vm._v(" "),
+                        _c("input", {
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model",
+                              value: _vm.contact_form.name,
+                              expression: "contact_form.name"
+                            }
+                          ],
+                          staticClass: "form-control ",
+                          attrs: { type: "text", id: "name" },
+                          domProps: { value: _vm.contact_form.name },
+                          on: {
+                            input: function($event) {
+                              if ($event.target.composing) {
+                                return
+                              }
+                              _vm.$set(
+                                _vm.contact_form,
+                                "name",
+                                $event.target.value
+                              )
+                            }
+                          }
+                        }),
+                        _vm._v(" "),
+                        _vm.errors.name
+                          ? _c("small", { staticClass: "text-danger" }, [
+                              _vm._v(" " + _vm._s(_vm.errors.name[0]) + " ")
+                            ])
+                          : _vm._e()
+                      ]),
                       _vm._v(" "),
-                      _c("input", {
-                        staticClass: "form-control ",
-                        attrs: { type: "text", id: "name" }
-                      })
+                      _c("div", { staticClass: "col-md-12 form-group" }, [
+                        _c("label", { attrs: { for: "phone" } }, [
+                          _vm._v("Phone")
+                        ]),
+                        _vm._v(" "),
+                        _c("input", {
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model",
+                              value: _vm.contact_form.phone,
+                              expression: "contact_form.phone"
+                            }
+                          ],
+                          staticClass: "form-control ",
+                          attrs: { type: "text", id: "phone" },
+                          domProps: { value: _vm.contact_form.phone },
+                          on: {
+                            input: function($event) {
+                              if ($event.target.composing) {
+                                return
+                              }
+                              _vm.$set(
+                                _vm.contact_form,
+                                "phone",
+                                $event.target.value
+                              )
+                            }
+                          }
+                        }),
+                        _vm._v(" "),
+                        _vm.errors.phone
+                          ? _c("small", { staticClass: "text-danger" }, [
+                              _vm._v(" " + _vm._s(_vm.errors.phone[0]) + " ")
+                            ])
+                          : _vm._e()
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "col-md-12 form-group" }, [
+                        _c("label", { attrs: { for: "email" } }, [
+                          _vm._v("Email")
+                        ]),
+                        _vm._v(" "),
+                        _c("input", {
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model",
+                              value: _vm.contact_form.email,
+                              expression: "contact_form.email"
+                            }
+                          ],
+                          staticClass: "form-control ",
+                          attrs: { type: "email", id: "email" },
+                          domProps: { value: _vm.contact_form.email },
+                          on: {
+                            input: function($event) {
+                              if ($event.target.composing) {
+                                return
+                              }
+                              _vm.$set(
+                                _vm.contact_form,
+                                "email",
+                                $event.target.value
+                              )
+                            }
+                          }
+                        }),
+                        _vm._v(" "),
+                        _vm.errors.email
+                          ? _c("small", { staticClass: "text-danger" }, [
+                              _vm._v(" " + _vm._s(_vm.errors.email[0]) + " ")
+                            ])
+                          : _vm._e()
+                      ])
                     ]),
                     _vm._v(" "),
-                    _c("div", { staticClass: "col-md-12 form-group" }, [
-                      _c("label", { attrs: { for: "phone" } }, [
-                        _vm._v("Phone")
-                      ]),
-                      _vm._v(" "),
-                      _c("input", {
-                        staticClass: "form-control ",
-                        attrs: { type: "text", id: "phone" }
-                      })
+                    _c("div", { staticClass: "row" }, [
+                      _c("div", { staticClass: "col-md-12 form-group" }, [
+                        _c("label", { attrs: { for: "message" } }, [
+                          _vm._v("Write Message")
+                        ]),
+                        _vm._v(" "),
+                        _c("textarea", {
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model",
+                              value: _vm.contact_form.messege,
+                              expression: "contact_form.messege"
+                            }
+                          ],
+                          staticClass: "form-control ",
+                          attrs: {
+                            name: "message",
+                            id: "message",
+                            cols: "30",
+                            rows: "8"
+                          },
+                          domProps: { value: _vm.contact_form.messege },
+                          on: {
+                            input: function($event) {
+                              if ($event.target.composing) {
+                                return
+                              }
+                              _vm.$set(
+                                _vm.contact_form,
+                                "messege",
+                                $event.target.value
+                              )
+                            }
+                          }
+                        }),
+                        _vm._v(" "),
+                        _vm.errors.messege
+                          ? _c("small", { staticClass: "text-danger" }, [
+                              _vm._v(" " + _vm._s(_vm.errors.messege[0]) + " ")
+                            ])
+                          : _vm._e()
+                      ])
                     ]),
                     _vm._v(" "),
-                    _c("div", { staticClass: "col-md-12 form-group" }, [
-                      _c("label", { attrs: { for: "email" } }, [
-                        _vm._v("Email")
-                      ]),
-                      _vm._v(" "),
-                      _c("input", {
-                        staticClass: "form-control ",
-                        attrs: { type: "email", id: "email" }
-                      })
+                    _c("div", { staticClass: "row" }, [
+                      _c("div", { staticClass: "col-md-6 form-group" }, [
+                        _c("input", {
+                          staticClass: "btn btn-primary",
+                          attrs: { type: "submit", value: "Send Message" }
+                        })
+                      ])
                     ])
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "row" }, [
-                    _c("div", { staticClass: "col-md-12 form-group" }, [
-                      _c("label", { attrs: { for: "message" } }, [
-                        _vm._v("Write Message")
-                      ]),
-                      _vm._v(" "),
-                      _c("textarea", {
-                        staticClass: "form-control ",
-                        attrs: {
-                          name: "message",
-                          id: "message",
-                          cols: "30",
-                          rows: "8"
-                        }
-                      })
-                    ])
-                  ]),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "row" }, [
-                    _c("div", { staticClass: "col-md-6 form-group" }, [
-                      _c("input", {
-                        staticClass: "btn btn-primary",
-                        attrs: { type: "submit", value: "Send Message" }
-                      })
-                    ])
-                  ])
-                ])
+                  ]
+                )
               ]),
           _vm._v(" "),
           _c("sidebar")
@@ -67899,7 +68067,8 @@ var routes = [
 /*================ Web Routes ==================*/
 {
   path: '/',
-  component: _pages_web_HomePage_vue__WEBPACK_IMPORTED_MODULE_0__["default"]
+  component: _pages_web_HomePage_vue__WEBPACK_IMPORTED_MODULE_0__["default"],
+  name: 'HomePage'
 }, {
   path: '/about',
   component: _pages_web_AboutPage_vue__WEBPACK_IMPORTED_MODULE_1__["default"]
