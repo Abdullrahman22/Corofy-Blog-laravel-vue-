@@ -66127,8 +66127,9 @@ Vue.component('pagination', __webpack_require__(/*! laravel-vue-pagination */ ".
 /*======= subscriber =======*/
 
 __webpack_require__(/*! ./store/subscriber */ "./resources/js/store/subscriber.js");
-/*======= Sweetalert2 =======*/
 
+_store_store__WEBPACK_IMPORTED_MODULE_1__["default"].dispatch("LoginModule/attempt", localStorage.getItem("token"));
+/*======= Sweetalert2 =======*/
 
 
 Vue.use(vue_sweetalert2__WEBPACK_IMPORTED_MODULE_2__["default"]);
@@ -67983,39 +67984,49 @@ var Auth = {
     },
     attempt: function attempt(_ref, token) {
       return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
-        var commit, response;
+        var commit, state, response;
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
-                commit = _ref.commit;
-                commit('SET_TOKEN', token); // 'commit' ==>  to link SET_TOKEN with mutations and call it to run
+                commit = _ref.commit, state = _ref.state;
 
-                /*====== Get Logged User Info By Token ======*/
+                if (token) {
+                  // if token exist from signIn 
+                  commit('SET_TOKEN', token); // 'commit' ==>  to link SET_TOKEN with mutations and call it to run
+                }
 
-                _context.prev = 2;
-                _context.next = 5;
+                if (state.token) {
+                  _context.next = 4;
+                  break;
+                }
+
+                return _context.abrupt("return");
+
+              case 4:
+                _context.prev = 4;
+                _context.next = 7;
                 return axios.get('/api/auth/user-Info');
 
-              case 5:
+              case 7:
                 response = _context.sent;
                 commit('SET_USER', response.data.user);
-                _context.next = 13;
+                _context.next = 15;
                 break;
 
-              case 9:
-                _context.prev = 9;
-                _context.t0 = _context["catch"](2);
+              case 11:
+                _context.prev = 11;
+                _context.t0 = _context["catch"](4);
                 commit('SET_TOKEN', null); // call mutations SET_TOKEN with null param
 
                 commit('SET_USER', null); // call mutations SET_USER  with null param
 
-              case 13:
+              case 15:
               case "end":
                 return _context.stop();
             }
           }
-        }, _callee, null, [[2, 9]]);
+        }, _callee, null, [[4, 11]]);
       }))();
     }
   }
@@ -68080,8 +68091,10 @@ _store__WEBPACK_IMPORTED_MODULE_1__["default"].subscribe(function (mutations) {
     case 'LoginModule/SET_TOKEN':
       if (mutations.payload) {
         axios__WEBPACK_IMPORTED_MODULE_0___default.a.defaults.headers.common["Authorization"] = 'Bearer ' + mutations.payload;
+        localStorage.setItem('token', mutations.payload);
       } else {
         axios__WEBPACK_IMPORTED_MODULE_0___default.a.defaults.headers.common["Authorization"] = null;
+        localStorage.removeItem('token');
       }
 
       break;
@@ -68108,8 +68121,8 @@ _store__WEBPACK_IMPORTED_MODULE_1__["default"].subscribe(function (mutations) {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\Users\AbdullRahman Ismael\Desktop\Corofy Blog\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! C:\Users\AbdullRahman Ismael\Desktop\Corofy Blog\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! C:\Users\AbdullRahman\Desktop\Corofy Blog\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! C:\Users\AbdullRahman\Desktop\Corofy Blog\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

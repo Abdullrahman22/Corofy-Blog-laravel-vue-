@@ -55,8 +55,15 @@ const Auth =  {
             )
             .then( error => console.log(error) )
         },
-        async attempt( { commit } , token ){  
-            commit('SET_TOKEN' , token )  // 'commit' ==>  to link SET_TOKEN with mutations and call it to run
+        async attempt( { commit , state } , token ){  
+
+            if(token){    // if token exist from signIn 
+                commit('SET_TOKEN' , token )  // 'commit' ==>  to link SET_TOKEN with mutations and call it to run
+            }
+            if( !state.token ){
+                return       // continue 
+            }
+            
             /*====== Get Logged User Info By Token ======*/
             try{         
                 let response = await axios.get('/api/auth/user-Info')

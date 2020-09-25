@@ -14,6 +14,7 @@ Vue.component('pagination', require('laravel-vue-pagination'));
 
 /*======= subscriber =======*/
 require("./store/subscriber");
+store.dispatch("LoginModule/attempt" , localStorage.getItem("token")  );
 
 /*======= Sweetalert2 =======*/
 import VueSweetalert2 from 'vue-sweetalert2';
