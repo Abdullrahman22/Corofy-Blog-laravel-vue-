@@ -44,14 +44,14 @@
                             </ul>
                         </div>
                         <!----------------- Type Comment ---------------------->
-                        <div class="comment-form-wrap pt-5">
+                        <div v-if=" authenticated && user" class="comment-form-wrap pt-5">
                             <h3 class="mb-5">Leave a comment</h3>
-                            <form action="#" class="p-5 bg-light">
+                            <form @submit.prevent="AddComment" class="p-5 bg-light">
                                 
-
                                 <div class="form-group">
                                     <label for="message">Comment</label>
-                                    <textarea name="" id="message" cols="30" rows="10" class="form-control"></textarea>
+                                    <textarea name="" id="message" cols="30" rows="5" class="form-control" v-model="comment_form.body"></textarea>
+                                    <small class="text-danger" v-if="errors.body"> {{errors.body[0] }} </small> 
                                 </div>
                                 <div class="form-group">
                                     <input type="submit" value="Post Comment" class="btn btn-primary">
@@ -104,6 +104,7 @@
 
     import Sidebar from './../../components/web/Sidebar'
     import Searching from './../../components/web/Searching'
+    import {  mapGetters } from 'vuex'
 
     export default {
         components:{
@@ -114,10 +115,19 @@
             return{
                 post: {},
                 comments: {},
-                relatedPosts: {}
+                relatedPosts: {},
+                comment_form:{
+                    body: '',
+                    post_id: '',
+                },
+                errors: {}
             }
         },
         computed: {
+            ...mapGetters({
+                authenticated: 'LoginModule/authenticated' ,
+                user: 'LoginModule/user'
+            }), 
             searchVal: function() {
                 return this.$store.state.searchVal;
             }
@@ -139,6 +149,7 @@
                     resquest => {  
                         this.post = resquest.data 
                         this.comments = resquest.data.comments 
+                        this.comment_form.post_id = this.post.id  // get post.id for creating (comment_form)
                     }
                 )
                 .catch( error => {
@@ -153,8 +164,31 @@
                         // console.log(resquest.data);
                     }
                 )
-                .then( error => console.log(error) )
+                .catch( error => console.log(error) )
 
+            },
+            AddComment(){
+                axios.post("/api/add-comment" , this.comment_form )
+                .then( 
+                    resquest => {  
+                        // console.log(resquest.data);
+                        if( resquest.data.status == 'error' ){
+                            this.errors = resquest.data.errors
+                        }else if( resquest.data.status == 'success' ){
+                            this.getPost()  // reload post data and comments
+                            this.errors = {}  // empty error var
+                            /*======== Sweet Alert ============*/
+                            Vue.swal({
+                                position: 'top-end',
+                                icon: 'success',
+                                text: 'Your Comment Added Successfully ',
+                                showConfirmButton: false,
+                                timer: 1500
+                            });  
+                        }
+                    }
+                )
+                .catch( error => console.log(error) )
             }
         }
     }

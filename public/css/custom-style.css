@@ -255,6 +255,7 @@ header .right-section img{
     background: transparent;
 }
 .register small,
-.register.small{
+.register.small,
+.text-danger{
     text-shadow: 1px 1px 10px #ff0018;
 }

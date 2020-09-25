@@ -4721,6 +4721,13 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_web_Sidebar__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./../../components/web/Sidebar */ "./resources/js/components/web/Sidebar.vue");
 /* harmony import */ var _components_web_Searching__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./../../components/web/Searching */ "./resources/js/components/web/Searching.vue");
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 //
 //
 //
@@ -4823,6 +4830,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -4834,14 +4842,22 @@ __webpack_require__.r(__webpack_exports__);
     return {
       post: {},
       comments: {},
-      relatedPosts: {}
+      relatedPosts: {},
+      comment_form: {
+        body: '',
+        post_id: ''
+      },
+      errors: {}
     };
   },
-  computed: {
+  computed: _objectSpread(_objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_2__["mapGetters"])({
+    authenticated: 'LoginModule/authenticated',
+    user: 'LoginModule/user'
+  })), {}, {
     searchVal: function searchVal() {
       return this.$store.state.searchVal;
     }
-  },
+  }),
   watch: {
     $route: function $route() {
       // watch $route if any changes
@@ -4860,6 +4876,7 @@ __webpack_require__.r(__webpack_exports__);
       .then(function (resquest) {
         _this.post = resquest.data;
         _this.comments = resquest.data.comments;
+        _this.comment_form.post_id = _this.post.id; // get post.id for creating (comment_form)
       })["catch"](function (error) {
         _this.$router.push({
           name: 'NotFoundPage'
@@ -4872,7 +4889,34 @@ __webpack_require__.r(__webpack_exports__);
 
       axios.get("/api/category/post/" + this.$route.params.slug).then(function (resquest) {
         _this2.relatedPosts = resquest.data; // console.log(resquest.data);
-      }).then(function (error) {
+      })["catch"](function (error) {
+        return console.log(error);
+      });
+    },
+    AddComment: function AddComment() {
+      var _this3 = this;
+
+      axios.post("/api/add-comment", this.comment_form).then(function (resquest) {
+        // console.log(resquest.data);
+        if (resquest.data.status == 'error') {
+          _this3.errors = resquest.data.errors;
+        } else if (resquest.data.status == 'success') {
+          _this3.getPost(); // reload post data and comments
+
+
+          _this3.errors = {}; // empty error var
+
+          /*======== Sweet Alert ============*/
+
+          Vue.swal({
+            position: 'top-end',
+            icon: 'success',
+            text: 'Your Comment Added Successfully ',
+            showConfirmButton: false,
+            timer: 1500
+          });
+        }
+      })["catch"](function (error) {
         return console.log(error);
       });
     }
@@ -49444,40 +49488,79 @@ var render = function() {
                       ])
                     : _vm._e(),
                   _vm._v(" "),
-                  _c("div", { staticClass: "comment-form-wrap pt-5" }, [
-                    _c("h3", { staticClass: "mb-5" }, [
-                      _vm._v("Leave a comment")
-                    ]),
-                    _vm._v(" "),
-                    _c(
-                      "form",
-                      { staticClass: "p-5 bg-light", attrs: { action: "#" } },
-                      [
-                        _c("div", { staticClass: "form-group" }, [
-                          _c("label", { attrs: { for: "message" } }, [
-                            _vm._v("Comment")
-                          ]),
-                          _vm._v(" "),
-                          _c("textarea", {
-                            staticClass: "form-control",
-                            attrs: {
-                              name: "",
-                              id: "message",
-                              cols: "30",
-                              rows: "10"
-                            }
-                          })
+                  _vm.authenticated && _vm.user
+                    ? _c("div", { staticClass: "comment-form-wrap pt-5" }, [
+                        _c("h3", { staticClass: "mb-5" }, [
+                          _vm._v("Leave a comment")
                         ]),
                         _vm._v(" "),
-                        _c("div", { staticClass: "form-group" }, [
-                          _c("input", {
-                            staticClass: "btn btn-primary",
-                            attrs: { type: "submit", value: "Post Comment" }
-                          })
-                        ])
-                      ]
-                    )
-                  ])
+                        _c(
+                          "form",
+                          {
+                            staticClass: "p-5 bg-light",
+                            on: {
+                              submit: function($event) {
+                                $event.preventDefault()
+                                return _vm.AddComment($event)
+                              }
+                            }
+                          },
+                          [
+                            _c("div", { staticClass: "form-group" }, [
+                              _c("label", { attrs: { for: "message" } }, [
+                                _vm._v("Comment")
+                              ]),
+                              _vm._v(" "),
+                              _c("textarea", {
+                                directives: [
+                                  {
+                                    name: "model",
+                                    rawName: "v-model",
+                                    value: _vm.comment_form.body,
+                                    expression: "comment_form.body"
+                                  }
+                                ],
+                                staticClass: "form-control",
+                                attrs: {
+                                  name: "",
+                                  id: "message",
+                                  cols: "30",
+                                  rows: "5"
+                                },
+                                domProps: { value: _vm.comment_form.body },
+                                on: {
+                                  input: function($event) {
+                                    if ($event.target.composing) {
+                                      return
+                                    }
+                                    _vm.$set(
+                                      _vm.comment_form,
+                                      "body",
+                                      $event.target.value
+                                    )
+                                  }
+                                }
+                              }),
+                              _vm._v(" "),
+                              _vm.errors.body
+                                ? _c("small", { staticClass: "text-danger" }, [
+                                    _vm._v(
+                                      " " + _vm._s(_vm.errors.body[0]) + " "
+                                    )
+                                  ])
+                                : _vm._e()
+                            ]),
+                            _vm._v(" "),
+                            _c("div", { staticClass: "form-group" }, [
+                              _c("input", {
+                                staticClass: "btn btn-primary",
+                                attrs: { type: "submit", value: "Post Comment" }
+                              })
+                            ])
+                          ]
+                        )
+                      ])
+                    : _vm._e()
                 ]),
             _vm._v(" "),
             _c("sidebar")
