@@ -18,10 +18,14 @@
 .table-data3 tbody tr td:last-child {
   text-align: center !important;
 }
-.menu-sidebar div.logo{
-  box-shadow: none !important ;
-  -webkit-box-shadow: none !important; 
-  border-right: 0px !important
+.menu-sidebar .logo-div{
+  height: 75px;
+  line-height: 75px;
+  background-color: #f5f5f5;
+  text-align: center;
+}
+.menu-sidebar .logo-div h2{
+  font-weight: 500;
 }
 .user-img{
   width: 45px;
@@ -157,4 +161,21 @@
   cursor: pointer;
   margin-top: 10px;
   padding-right: 15px;
+}
+/*=======  Fix Clolor ========*/
+.bg-overlay--blue{
+  background: #6610f2
+}
+.text-white{
+  text-align: center;
+}
+.btn-info:not(:disabled):not(.disabled).active,
+.btn-info:not(:disabled):not(.disabled):active,
+.show>.btn-info.dropdown-toggle{
+  background-color: #6610f2;
+    border-color: #6610f2;
+}
+button.save-info{
+  background-color: #6610f2 !important;
+  border-color: #6610f2 !important;
 }
