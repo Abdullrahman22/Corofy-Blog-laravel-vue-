@@ -12,6 +12,7 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         $this->call(UserSeeder::class);      // 10 Users
+        $this->call(AdminSeeder::class);      
         $this->call(CategorySeeder::class);  // 10 Categories
         $this->call(PostSeeder::class);      // 50 Posts
         $this->call(CommentSeeder::class);   // 100 Comments 
