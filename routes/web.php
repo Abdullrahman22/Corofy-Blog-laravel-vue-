@@ -20,9 +20,10 @@ Auth::routes();
 
 /*=========== Login admin =========*/
 
-Route::group(['prefix' => 'auth', 'namespace' => 'AuthAPI'], function() {    
-    Route::get('admin/login', 'AdminAuthController@view') ;
-    Route::post('admin/login', 'AdminAuthController@login') ->name("adminLogin") ;
+Route::group(['prefix' => 'auth/admin', 'namespace' => 'AuthAPI'], function() {    
+    Route::get('login', 'AdminAuthController@viewLoginPage') ;
+    Route::post('login', 'AdminAuthController@login') ->name("adminLogin") ;
+    Route::get('logout', 'AdminAuthController@logout') ->name("adminLogout") ;
 });
 
 

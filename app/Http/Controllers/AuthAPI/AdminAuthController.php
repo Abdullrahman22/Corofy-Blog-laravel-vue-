@@ -13,7 +13,8 @@ class AdminAuthController extends Controller
 {
 
 
-     public function view(){
+     public function viewLoginPage(){
+          $this->middleware('guest')->except('logout');
           return view('auth/adminLogin');
      }
 
@@ -43,6 +44,11 @@ class AdminAuthController extends Controller
           }
 
           
+     }
+
+     public function logout(){
+          Auth::guard('admin')->logout();
+          return redirect('/');
      }
 
 }

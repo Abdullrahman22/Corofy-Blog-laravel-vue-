@@ -64,6 +64,7 @@
 
 <body>
     <div id="app" class="page-wrapper">
+
         <!-- HEADER MOBILE -->
         <header class="header-mobile d-block d-lg-none">
             <div class="header-mobile__bar">
@@ -135,7 +136,10 @@
         <aside class="menu-sidebar d-none d-lg-block">
             <div class="logo-div">
                 <a class="custom-logo" href="../../">
-                    <h2> {{ $site_name }} </h2>
+                    {{-- <h2> {{ $site_name }} </h2> --}}
+                    {{-- <h2> {{ Auth::user()->email }} </h2> --}}
+                    <a href="/auth/admin/logout"> Logout </a>
+                    <h6> {{ Auth::user()->email }} </h6>
                 </a>
             </div>
             <div class="menu-sidebar__content js-scrollbar1">
@@ -188,8 +192,7 @@
             </div>
         </aside>
         <!-- END MENU SIDEBAR-->
-
-   
+        
         <router-view></router-view>
 
     </div>
