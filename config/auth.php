@@ -36,9 +36,14 @@ return [
     */
 
     'guards' => [
-        'web' => [
+        'web' => [  // defulte guard name middleware('auth') OR  middleware('auth:web')
             'driver' => 'session',
             'provider' => 'users',
+        ],
+
+        'admin' => [  // defulte guard name middleware('auth:admin')
+            'driver' => 'session',
+            'provider' => 'admins', // in admins DB 
         ],
 
         'api' => [
@@ -69,6 +74,11 @@ return [
         'users' => [
             'driver' => 'eloquent',
             'model' => App\User::class,
+        ],
+
+        'admins' => [  // in DB table admins
+            'driver' => 'eloquent',
+            'model' => App\Models\Admin::class, // in Admin Model
         ],
 
         // 'users' => [

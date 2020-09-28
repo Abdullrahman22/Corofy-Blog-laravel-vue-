@@ -15,7 +15,11 @@ use Illuminate\Support\Facades\Route;
 */
 
 
-/*================= Register Apis =====================*/
+
+
+
+
+/*================= Web Register Apis =====================*/
 Route::group(['prefix' => 'auth', 'namespace' => 'AuthAPI'], function() {
     Route::post('register', 'AuthController@register');
     Route::post('login', 'AuthController@login');
@@ -37,6 +41,10 @@ Route::get("category/{slug}/posts" , "CategoryController@get_Category_Posts" );
 Route::post("add-comment" , "CommentController@store")-> middleware('auth:api');  
 // Contact Us
 Route::post("add-messege" , "ContactController@store");  
+
+
+
+
 
 
 

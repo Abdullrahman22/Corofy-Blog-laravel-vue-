@@ -18,9 +18,18 @@ use Illuminate\Support\Facades\Auth;
 Auth::routes();
 
 
+/*=========== Login admin =========*/
+
+Route::group(['prefix' => 'auth', 'namespace' => 'AuthAPI'], function() {    
+    Route::get('admin/login', 'AdminAuthController@view') ;
+    Route::post('admin/login', 'AdminAuthController@login') ->name("adminLogin") ;
+});
+
 
 /*=========== admin Routes =========*/
-Route::get("/admin/{any}", "Admin\AdminController@index") -> where([ "any" => ".*" ]); 
+// admin panal
+Route::get("/admin/{any}", "Admin\AdminController@index") -> where([ "any" => ".*" ]) -> middleware('auth:admin');  
+
 
 /*=========== Web Routes ===========*/
 Route::get("/{any}", function(){
