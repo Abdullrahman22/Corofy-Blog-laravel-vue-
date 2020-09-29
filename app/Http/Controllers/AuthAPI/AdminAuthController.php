@@ -14,7 +14,6 @@ class AdminAuthController extends Controller
 
 
      public function viewLoginPage(){
-          $this->middleware('guest')->except('logout');
           return view('auth/adminLogin');
      }
 

@@ -21,7 +21,7 @@ Auth::routes();
 /*=========== Login admin =========*/
 
 Route::group(['prefix' => 'auth/admin', 'namespace' => 'AuthAPI'], function() {    
-    Route::get('login', 'AdminAuthController@viewLoginPage') ;
+    Route::get('login', 'AdminAuthController@viewLoginPage') ->middleware('RedirectIfAdminAuth');
     Route::post('login', 'AdminAuthController@login') ->name("adminLogin") ;
     Route::get('logout', 'AdminAuthController@logout') ->name("adminLogout") ;
 });
