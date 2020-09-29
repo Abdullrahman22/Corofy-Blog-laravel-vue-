@@ -1,11 +1,5 @@
 <template>
     <div id="post-page">
-        
-        <!-- Page Container -->
-        <div class="page-container">
-
-            <!----- Topbar Header ----->
-            <topbar></topbar>
 
             <!----- Main Content ----->
             <div class="main-content">
@@ -71,9 +65,6 @@
             </div>
             <!----- End Main Content ----->
 
-        </div>
-        <!----- End Page Container ----->
-
 
         <!----- Post Model ----->
         <div class="modal fade" id="postModel" tabindex="-1" role="dialog" aria-labelledby="postModelLabel" aria-hidden="true">
@@ -136,12 +127,8 @@
     </div>
 </template>
 <script>
-    import Topbar from './../../../components/admin/Topbar'
 
     export default {
-        components:{
-            Topbar,
-        },
         data(){
             return{
                 categories:{}, // create empty object to insert categories in it to loop 

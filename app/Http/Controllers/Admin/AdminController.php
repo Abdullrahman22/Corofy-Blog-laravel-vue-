@@ -3,17 +3,30 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
 use App\Models\Setting;
+use App\Models\Admin;
 
 class AdminController extends Controller
 {
+
     public function index()
     {
-        /*========== Site Name ============*/
-        $setting = Setting::find(1);
-        $site_name = $setting -> site_name;
-        
-        return view('admin' , compact('site_name') );
+        return view('admin');
     }
+
+    public function getAdminInfo(){
+
+        /*========== Admin Info ============*/
+        $admin = Admin::get()->first();
+
+        /*========== Site Name ============*/
+        $site_name = Setting::find(1)->site_name;
+        
+        return response() ->json([ 
+            'admin_info' => $admin,
+            'site_name' => $site_name,
+        ]);
+
+    }
+    
 }

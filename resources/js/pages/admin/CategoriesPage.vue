@@ -1,12 +1,6 @@
 <template>
     <div id="category-page">
         
-        <!-- Page Container -->
-        <div class="page-container">
-
-            <!----- Topbar Header ----->
-            <topbar></topbar>
-
             <!----- Main Content ----->
             <div class="main-content">
                 <div class="section__content section__content--p30">
@@ -66,9 +60,6 @@
             </div>
             <!----- End Main Content ----->
 
-        </div>
-        <!----- End Page Container ----->
-
 
         <!----- Category Model ----->
         <div class="modal fade" id="categoryModel" tabindex="-1" role="dialog" aria-labelledby="categoryModelLabel" aria-hidden="true">
@@ -106,12 +97,8 @@
     </div>
 </template>
 <script>
-    import Topbar from './../../components/admin/Topbar'
 
     export default {
-        components:{
-            Topbar,
-        },
         data(){
             return{
                 csrf: document.querySelector('meta[name="csrf-token"]').getAttribute('content'),

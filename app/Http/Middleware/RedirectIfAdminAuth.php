@@ -12,7 +12,7 @@ class RedirectIfAdminAuth
      * @param  \Illuminate\Http\Request  $request
      * @param  \Closure  $next
      * @return mixed
-     */
+    */
     public function handle($request, Closure $next)
     {
         if( Auth::guard('admin')->check() ){  // check if there guard admin

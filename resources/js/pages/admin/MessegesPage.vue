@@ -1,12 +1,6 @@
 <template>
     <div class="messeges-page">
         
-        <!-- PAGE CONTAINER-->
-        <div class="page-container">
-
-            <!-- HEADER DESKTOP-->
-            <topbar></topbar>
-
             <!-- MAIN CONTENT-->
             <div class="main-content">
                 <div class="section__content section__content--p30">
@@ -56,8 +50,6 @@
 
             </div>
             <!-- END MAIN CONTENT-->
-        </div>
-        <!-- END PAGE CONTAINER-->
 
 
         <!----- Messege Model ----->
@@ -103,12 +95,9 @@
     </div>
 </template>
 <script>
-    import Topbar from './../../components/admin/Topbar'
 
     export default {
-        components:{
-            Topbar,
-        },
+        
         data(){
             return{
                 messeges:{},

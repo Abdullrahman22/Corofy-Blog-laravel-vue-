@@ -1,12 +1,5 @@
 <template>
     <div id="post-page">
-        
-        <!-- Page Container -->
-        <div class="page-container">
-
-            <!----- Topbar Header ----->
-            <topbar></topbar>
-
             <!----- Main Content ----->
             <div class="main-content container">
                 
@@ -55,20 +48,13 @@
             </div>
             <!----- End Main Content ----->
 
-        </div>
-        <!----- End Page Container ----->
-
 
     </div>
 </template>
 
 <script>
-    import Topbar from './../../../components/admin/Topbar'
 
     export default {
-        components:{
-            Topbar,
-        },
         props: ["id"] ,
         data(){
             return{

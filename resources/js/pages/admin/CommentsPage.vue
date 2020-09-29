@@ -1,11 +1,5 @@
 <template>
     <div class="comment-page">
-        
-        <!-- PAGE CONTAINER-->
-        <div class="page-container">
-
-            <!-- HEADER DESKTOP-->
-            <topbar></topbar>
 
             <!-- MAIN CONTENT-->
             <div class="main-content">
@@ -56,8 +50,6 @@
 
             </div>
             <!-- END MAIN CONTENT-->
-        </div>
-        <!-- END PAGE CONTAINER-->
 
 
         <!----- Comment Model ----->
@@ -98,18 +90,12 @@
 
 
 
-
-
-
     </div>
 </template>
 <script>
-    import Topbar from './../../components/admin/Topbar'
 
     export default {
-        components:{
-            Topbar,
-        },
+        
         data(){
             return{
                 comments:{},

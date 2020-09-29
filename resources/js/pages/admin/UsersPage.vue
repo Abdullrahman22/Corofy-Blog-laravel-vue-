@@ -1,11 +1,4 @@
 <template>
-    <div class="dashboard-page">
-        
-        <!-- PAGE CONTAINER-->
-        <div class="page-container">
-
-            <!-- HEADER DESKTOP-->
-            <topbar></topbar>
 
             <!-- MAIN CONTENT-->
             <div class="main-content">
@@ -61,19 +54,11 @@
                 </div>
 
             </div>
-            <!-- END MAIN CONTENT-->
-            <!-- END PAGE CONTAINER-->
-        </div>
-
-    </div>
+        
 </template>
 <script>
-    import Topbar from './../../components/admin/Topbar'
-
     export default {
-        components:{
-            Topbar,
-        },
+        
         data(){
             return{
                 users:{}

@@ -11,7 +11,7 @@
                                 </div>
                                 <div class="content">
                                     <p> 
-                                        john doe
+                                        {{ admin_info.name }}
                                         <i class="fas fa-chevron-down" ></i>
                                     </p>
                                 </div>
@@ -24,9 +24,9 @@
                                         </div>
                                         <div class="content">
                                             <h5 class="name">
-                                                <span>john doe</span>
+                                                <span>{{ admin_info.name }}</span>
                                             </h5>
-                                            <span class="email">johndoe@example.com</span>
+                                            <span class="email">{{ admin_info.email }}</span>
                                         </div>
                                     </div>
                                     <div class="account-dropdown__body">
@@ -44,7 +44,7 @@
                                         </div>
                                     </div>
                                     <div class="account-dropdown__footer">
-                                        <a href="admin/#">
+                                        <a href="/auth/admin/logout">
                                             <i class="zmdi zmdi-power"></i>
                                             Logout
                                         </a>
@@ -65,12 +65,26 @@
         data(){
             return{
                 dropdownMenu: false ,
+                admin_info: {}
             }
+        },
+        mounted(){
+            this.getAdminPanalInfo();
         },
         methods:{
             addClassDropdownMenu(){
                 this.dropdownMenu =! this.dropdownMenu
             },
+            getAdminPanalInfo(){
+                axios.get("/api/admin/admin-panal-info")
+                .then( 
+                    resquest => {  
+                        console.log(resquest.data);
+                        this.admin_info = resquest.data.admin_info
+                    }
+                )
+            .catch( error => console.log(error) )
+        }
         }
     }
 </script>

@@ -49,24 +49,27 @@ Route::post("add-messege" , "ContactController@store");
 
 
 /*============= Admin APIs =============*/
-Route::namespace("admin")->group( function (){
+Route::group(['prefix' => 'admin', 'namespace' => 'admin'], function() {
     //  Dashboard  
-    Route::get("admin/statistics" , "DashboardController@site_Statistics");
-    Route::get("admin/lasted-comments" , "DashboardController@lasted_Comments");
-    Route::get("admin/lasted-messeges" , "DashboardController@lasted_Messeges");    
+    Route::get("statistics" , "DashboardController@site_Statistics");
+    Route::get("lasted-comments" , "DashboardController@lasted_Comments");
+    Route::get("lasted-messeges" , "DashboardController@lasted_Messeges");    
     //  Users  
-    Route::get("admin/users" , "UserController@index");
+    Route::get("users" , "UserController@index");
     //  Categories  
-    Route::resource("admin/categories","CategoryController")->except("create" , "edit" , "show");
+    Route::resource("categories","CategoryController")->except("create" , "edit" , "show");
     //  Posts  
-    Route::resource("admin/posts","PostController")->except("create" , "edit");
+    Route::resource("posts","PostController")->except("create" , "edit");
     //  Comments  
-    Route::resource("admin/comments","CommentController")->except("create" , "store" , "edit" , "update" );
+    Route::resource("comments","CommentController")->except("create" , "store" , "edit" , "update" );
     //  Messeges  
-    Route::resource("admin/messeges","MessegeController")->except("create" , "store" , "edit" , "update" );
+    Route::resource("messeges","MessegeController")->except("create" , "store" , "edit" , "update" );
     //  Setting  
-    Route::get("admin/setting" , "SettingController@getSiteInfo");    
-    Route::put("admin/setting/update" , "SettingController@update");    
+    Route::get("setting" , "SettingController@getSiteInfo");    
+    Route::put("setting/update" , "SettingController@update");  
+    //  Admin-info 
+    Route::get("admin-panal-info" , "AdminController@getAdminInfo");    
+
 });
 
 
