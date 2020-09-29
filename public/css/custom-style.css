@@ -259,3 +259,28 @@ header .right-section img{
 .text-danger{
     text-shadow: 1px 1px 10px #ff0018;
 }
+/*========== Auth Admin ============*/
+#auth-admin{
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    background-image: linear-gradient(to right, #d810f2, #6610f2 , #b18af1);
+
+}
+#auth-admin form{
+    width: 400px;
+    background-color: #fff;
+    border-radius: 7px;
+    padding: 40px 20px ;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    margin-left: -200px; /*(half of width)*/
+    margin-top: -200px;  /*(half of height)*/
+}
+#auth-admin form button{
+    width: 100%;
+    display: block;
+    border-radius: 20px;
+    margin-top: 40px;
+}
